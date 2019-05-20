@@ -128,11 +128,23 @@ int main()
 	glm::mat4 model_skybox = glm::mat4(1.0f);
 	model_skybox = glm::scale(model_skybox, glm::vec3(skybox_scale, skybox_scale, skybox_scale));
 
-	//unsigned int ubo;
-	//glGenBuffers(1, &ubo);
-	//glBindBuffer(GL_UNIFORM_BUFFER, ubo);
-	//glBufferData(GL_UNIFORM_BUFFER, 150, NULL, GL_STATIC_DRAW);
-	//glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+
+	// here we add the shader data
+	float shader_data[] = {1.0f, 2.0f, 3.0f, 4.0f};
+
+
+
+	unsigned int ubo;
+	glGenBuffers(1, &ubo);
+	glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+	glBufferData(GL_UNIFORM_BUFFER, 150, NULL, GL_STATIC_DRAW);
+	glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+	glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+	GLvoid *p = glMapBuffer(GL_UNIFORM_BUFFER, GL_WRITE_ONLY);
+	memcpy(p, &shader_data, sizeof(shader_data));
+	glUnmapBuffer(GL_UNIFORM_BUFFER);
 
 	while(!glfwWindowShouldClose(window))
 	{
@@ -161,6 +173,11 @@ int main()
 		glUniformMatrix4fv(glGetUniformLocation(skybox_shader.program, "model"), 1, GL_FALSE, glm::value_ptr(model_skybox));
 		glUniformMatrix4fv(glGetUniformLocation(skybox_shader.program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(glGetUniformLocation(skybox_shader.program, "projection"), 1, GL_FALSE, glm::value_ptr(globalsettings.projection_perspective));
+
+
+		unsigned int block_index = glGetUniformBlockIndex(objectshader.program, "shader_index");
+
+
 		glEnable(GL_CULL_FACE); // Enable face culling
 		glCullFace(GL_BACK);
 		glBindVertexArray(skyboxVAO);
