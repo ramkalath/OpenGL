@@ -1,9 +1,9 @@
 /*****************************************************************************
  * Author : Ram
- * Date : 7/August/2018
+ * Date : 29/May/2019
  * Email : ramkalath@gmail.com
- * Breif Description : view and perspective projection
- * Detailed Description : Implements view and perspective matrix together.
+ * Breif Description : Uniform buffers with opengl
+ * Detailed Description : Not completed. Lots of gaps in concept understanding. Yet to read and understand from various other sources
  *****************************************************************************/
 
 #define GLEW_STATIC
@@ -65,56 +65,33 @@ int main()
 	glfwGetFramebufferSize(window, &width, &height);
 	glViewport(0, 0, 800, 600);
 
-	Shader shader1("./shaders/vertex_shader.vert", "./shaders/fragment_shader1.frag");
-	Shader shader2("./shaders/vertex_shader.vert", "./shaders/fragment_shader2.frag");
-	Shader shader3("./shaders/vertex_shader.vert", "./shaders/fragment_shader3.frag");
-	Shader shader4("./shaders/vertex_shader.vert", "./shaders/fragment_shader4.frag");
+	Shader shaderRed("./shaders/vertex_shader.vert", "./shaders/fragment_shader_red.frag");
+	Shader shaderGreen("./shaders/vertex_shader.vert", "./shaders/fragment_shader_green.frag");
+	Shader shaderBlue("./shaders/vertex_shader.vert", "./shaders/fragment_shader_blue.frag");
+	Shader shaderYellow("./shaders/vertex_shader.vert", "./shaders/fragment_shader_yellow.frag");
 	// ================================================================================
 
 	// data - vertices ===================================================================
 	GLfloat vertices[] = 
  	{
-    	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-    	 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-    	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-    	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-    	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-    	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-	
-    	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-    	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-    	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-    	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-    	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-    	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-
-    	-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-    	-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-    	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-    	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-   		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-    	-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-    	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-    	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-    	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-    	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-    	 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-    	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-
-    	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-    	 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-    	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-    	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-    	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-    	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-
-    	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-    	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-    	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-    	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-    	-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-   		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+    	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+    	 0.5f,  0.5f, -0.5f,  1.0f, 1.0f, 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+    	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+    	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+    	 0.5f,  0.5f,  0.5f,  1.0f, 1.0f, 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+    	-0.5f,  0.5f,  0.5f,  0.0f, 1.0f, -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+    	-0.5f,  0.5f,  0.5f,  1.0f, 0.0f, -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+    	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+   		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+    	 0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+    	 0.5f, -0.5f,  0.5f,  0.0f, 0.0f, 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    	-0.5f, -0.5f, -0.5f,  0.0f, 1.0f, 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+    	 0.5f, -0.5f,  0.5f,  1.0f, 0.0f, 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+    	-0.5f, -0.5f,  0.5f,  0.0f, 0.0f, -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+    	-0.5f,  0.5f, -0.5f,  0.0f, 1.0f, 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+    	 0.5f,  0.5f,  0.5f,  1.0f, 0.0f, 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+    	-0.5f,  0.5f,  0.5f,  0.0f, 0.0f, -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 	};
 	
 	// ==================================================================================
@@ -141,28 +118,26 @@ int main()
 										0, 0, -1, 0};
 	projection_perspective = glm::transpose(projection_perspective);
 
-	unsigned int blkidxred = glGetUniformBlockIndex(shader1.program, "Matrices");
-	unsigned int blkidxgreen = glGetUniformBlockIndex(shader2.program, "Matrices");
-	unsigned int blkidxblue = glGetUniformBlockIndex(shader3.program, "Matrices");
-	unsigned int blkidxyellow = glGetUniformBlockIndex(shader4.program, "Matrices");
+	unsigned int uniformBlockIndexRed = glGetUniformBlockIndex(shaderRed.program, "Matrices");
+	unsigned int uniformBlockIndexGreen = glGetUniformBlockIndex(shaderGreen.program, "Matrices");
+	unsigned int uniformBlockIndexBlue = glGetUniformBlockIndex(shaderBlue.program, "Matrices");
+	unsigned int uniformBlockIndexYellow = glGetUniformBlockIndex(shaderYellow.program, "Matrices");
 
-	glUniformBlockBinding(shader1.program, blkidxred, 0);
-	glUniformBlockBinding(shader2.program, blkidxgreen, 0);
-	glUniformBlockBinding(shader3.program, blkidxblue, 0);
-	glUniformBlockBinding(shader4.program, blkidxyellow, 0);
+    glUniformBlockBinding(shaderRed.program, uniformBlockIndexRed, 0);
+    glUniformBlockBinding(shaderGreen.program, uniformBlockIndexGreen, 0);
+    glUniformBlockBinding(shaderBlue.program, uniformBlockIndexBlue, 0);
+    glUniformBlockBinding(shaderYellow.program, uniformBlockIndexYellow, 0);
 
-	unsigned int ubo;
-	glGenBuffers(1, &ubo);
-	glBindBuffer(GL_UNIFORM_BUFFER, ubo);
-	glBufferData(GL_UNIFORM_BUFFER, 2*sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
-	glBindBuffer(GL_UNIFORM_BUFFER, 0);
-	glBindBufferRange(GL_UNIFORM_BUFFER, 0, ubo, 0, 2*sizeof(glm::mat4));
-
-	//glBindBuffer(GL_UNIFORM_BUFFER, ubo);
-	//glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(projection_perspective));
-	//glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(view));
-	//glBindBuffer(GL_UNIFORM_BUFFER, 0);
-	// ==================================================================================
+    unsigned int uboMatrices;
+    glGenBuffers(1, &uboMatrices);
+    glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
+    glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
+    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+    // Define the range of the buffer that links to a uniform binding point
+    glBindBufferRange(GL_UNIFORM_BUFFER, 0, uboMatrices, 0, 2 * sizeof(glm::mat4));
+    glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
+    glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(projection_perspective));
+    glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
 	while(!glfwWindowShouldClose(window))
 	{
@@ -171,18 +146,43 @@ int main()
         glClearColor(0.27f, 0.27f, 0.27f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-        glUseProgram(shader1.program);
-		glUniformMatrix4fv(glGetUniformLocation(shader1.program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		glBindBuffer(GL_UNIFORM_BUFFER, ubo);
-		glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(projection_perspective));
-		glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(view));
-		glBindBuffer(GL_UNIFORM_BUFFER, 0);
-		//glUniformMatrix4fv(glGetUniformLocation(shader1.program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-		//glUniformMatrix4fv(glGetUniformLocation(shader1.program, "projection_perspective"), 1, GL_FALSE, glm::value_ptr(projection_perspective));
+        // Set the view and projection matrix in the uniform block - we only have to do this once per loop iteration
+        glBindBuffer(GL_UNIFORM_BUFFER, uboMatrices);
+        glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(view));
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
+        glBindVertexArray(VAO);
+		
+		// RED
+        glUseProgram(shaderRed.program);
+        glm::mat4 model;
+        model = glm::translate(model, glm::vec3(-1.0f, 1.0f, 0.0f)); // Move top-left
+        glUniformMatrix4fv(glGetUniformLocation(shaderRed.program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        glDrawArrays(GL_TRIANGLES, 0, 36);        
+        // GREEN
+        glUseProgram(shaderGreen.program);
+        model = glm::mat4();
+        model = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f)); // Move top-right
+        glUniformMatrix4fv(glGetUniformLocation(shaderGreen.program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        glDrawArrays(GL_TRIANGLES, 0, 36);        
+        // BLUE
+        glUseProgram(shaderBlue.program);
+        model = glm::mat4();
+        model = glm::translate(model, glm::vec3(-1.0f, -1.0f, 0.0f)); // Move bottom-left
+        glUniformMatrix4fv(glGetUniformLocation(shaderBlue.program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        glDrawArrays(GL_TRIANGLES, 0, 36);        
+        // YELLOW
+        glUseProgram(shaderYellow.program);
+        model = glm::mat4();
+        model = glm::translate(model, glm::vec3(1.0f, -1.0f, 0.0f)); // Move bottom-right
+        glUniformMatrix4fv(glGetUniformLocation(shaderYellow.program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        glDrawArrays(GL_TRIANGLES, 0, 36);        
+
+        glBindVertexArray(0);	
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
+
 		glfwSwapBuffers(window);
 	}
 	glDeleteVertexArrays(1, &VAO);
