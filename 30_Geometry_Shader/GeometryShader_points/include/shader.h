@@ -10,7 +10,7 @@ public:
 	GLuint program;
 
 	// constructor - actual definition of methods in shader.cpp in source directory
-	Shader(const char* vertex_shader_path, const char* fragment_shader_path);
+	Shader(const char* vertex_shader_path, const char* geometric_shader_path, const char* fragment_shader_path);
 	~Shader();
 };
 

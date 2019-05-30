@@ -3,7 +3,7 @@
  * Date : 29/May/2019
  * Email : ramkalath@gmail.com
  * Breif Description : Geometry Shader
- * Detailed Description : yet to complete
+ * Detailed Description : basic geometry shader with points
  *****************************************************************************/
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -64,20 +64,47 @@ int main()
 	glfwGetFramebufferSize(window, &width, &height);
 	glViewport(0, 0, 800, 600);
 
-	Shader our_shader("./shaders/vertex_shader.vert", "./shaders/fragment_shader.frag");
+	Shader our_shader("./shaders/vertex_shader.vert", "./shaders/geometry_shader.geom", "./shaders/fragment_shader.frag");
 	// ================================================================================
 
 	// data - vertices ===================================================================
 	GLfloat vertices[] = {
-    	-0.5f, -0.5f, -0.5f,  0.5f, -0.5f, -0.5f,  0.5f,  0.5f, -0.5f,  0.5f,  0.5f, -0.5f,
-    	-0.5f,  0.5f, -0.5f, -0.5f, -0.5f, -0.5f, -0.5f, -0.5f,  0.5f,  0.5f, -0.5f,  0.5f,
-    	 0.5f,  0.5f,  0.5f,  0.5f,  0.5f,  0.5f, -0.5f,  0.5f,  0.5f, -0.5f, -0.5f,  0.5f,
-    	-0.5f,  0.5f,  0.5f, -0.5f,  0.5f, -0.5f, -0.5f, -0.5f, -0.5f, -0.5f, -0.5f, -0.5f,
-   		-0.5f, -0.5f,  0.5f, -0.5f,  0.5f,  0.5f,  0.5f,  0.5f,  0.5f,  0.5f,  0.5f, -0.5f,
-    	 0.5f, -0.5f, -0.5f,  0.5f, -0.5f, -0.5f,  0.5f, -0.5f,  0.5f,  0.5f,  0.5f,  0.5f,
-    	-0.5f, -0.5f, -0.5f,  0.5f, -0.5f, -0.5f,  0.5f, -0.5f,  0.5f,  0.5f, -0.5f,  0.5f,
-    	-0.5f, -0.5f,  0.5f, -0.5f, -0.5f, -0.5f, -0.5f,  0.5f, -0.5f,  0.5f,  0.5f, -0.5f,
-    	 0.5f,  0.5f,  0.5f,  0.5f,  0.5f,  0.5f, -0.5f,  0.5f,  0.5f, -0.5f,  0.5f, -0.5f };
+    	-0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f, 
+		 0.5f,  0.5f, -0.5f, 
+		 0.5f,  0.5f, -0.5f,
+    	-0.5f,  0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f, 
+		-0.5f, -0.5f,  0.5f,
+		 0.5f, -0.5f,  0.5f,
+    	 0.5f,  0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f,
+		-0.5f, -0.5f,  0.5f,
+    	-0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,
+   		-0.5f, -0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f, 
+		 0.5f,  0.5f, -0.5f,
+    	 0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,
+    	-0.5f, -0.5f, -0.5f, 
+		 0.5f, -0.5f, -0.5f, 
+		 0.5f, -0.5f,  0.5f, 
+		 0.5f, -0.5f,  0.5f,
+    	-0.5f, -0.5f,  0.5f,
+		-0.5f, -0.5f, -0.5f,
+		-0.5f,  0.5f, -0.5f,
+		 0.5f,  0.5f, -0.5f,
+    	 0.5f,  0.5f,  0.5f, 
+		 0.5f,  0.5f,  0.5f, 
+		-0.5f,  0.5f,  0.5f, 
+		-0.5f,  0.5f, -0.5f };
 	
 	// ==================================================================================
 	GLuint VBO, VAO;
@@ -119,7 +146,7 @@ int main()
 		glUniformMatrix4fv(glGetUniformLocation(our_shader.program, "projection_perspective"), 1, GL_FALSE, glm::value_ptr(projection_perspective));
 
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glDrawArrays(GL_POINTS, 0, 36);
 		
 		glBindVertexArray(0);
 
