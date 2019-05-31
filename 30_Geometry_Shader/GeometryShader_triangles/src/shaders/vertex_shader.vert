@@ -6,13 +6,11 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection_perspective;
 
-out VS_OUT {
-	vec3 color;
-} vs_out;
+out vec3 vColor;
 
 void main()
 {
 	gl_Position = projection_perspective * view * model * vec4(position, 1.0);
-	vs_out.color = color;
+	vColor = color;
 }
 
