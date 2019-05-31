@@ -2,9 +2,8 @@
 layout (points) in;
 layout (triangle_strip, max_vertices = 5) out;
 
-in VS_OUT {
-	vec3 color;
-} gs_in;
+in vec3 Color;
+out vec3 color1;
 
 void main()
 {
@@ -22,4 +21,6 @@ void main()
 	EmitVertex();
 
 	EndPrimitive();
+
+	color1 = Color;
 }
