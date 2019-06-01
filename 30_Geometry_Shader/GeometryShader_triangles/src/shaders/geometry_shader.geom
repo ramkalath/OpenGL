@@ -19,6 +19,7 @@ void main()
 	gl_Position = gl_in[0].gl_Position + vec4(0.3, 0.3, 0.0, 0.0); //top right
 	EmitVertex();
 
+	fColor = vec3(1.0f, 1.0f, 1.0f);
 	gl_Position = gl_in[0].gl_Position + vec4(0.0, 0.5, 0.0, 0.0); //top center
 	EmitVertex();
 
