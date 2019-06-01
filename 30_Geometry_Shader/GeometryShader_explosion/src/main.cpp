@@ -66,6 +66,7 @@ int main()
 
 	Modelloader nanosuit("./nanosuit/nanosuit.obj");
 	nanosuit.modelmatrix = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f};
+	nanosuit.modelmatrix = glm::rotate(nanosuit.modelmatrix, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	nanosuit.modelmatrix = glm::translate(nanosuit.modelmatrix, glm::vec3(0.0f, -2.0f, -2.0f));
 	nanosuit.modelmatrix = glm::scale(nanosuit.modelmatrix, glm::vec3(0.3f, 0.3f, 0.3f));
 
@@ -86,7 +87,7 @@ int main()
 		glUniform3f(glGetUniformLocation(objectshader.program, "LightDiffuse"), 1.0f, 1.0f, 1.0f);
 		glUniform3f(glGetUniformLocation(objectshader.program, "LightSpecular"), 1.0f, 1.0f, 1.0f);
 		glUniform3f(glGetUniformLocation(objectshader.program, "CameraPosition"), 0.0f, 0.0f, 0.0f);
-		glUniform1f(glGetUniformLocation(objectshader.program, "time"), glfwGetTime());
+		glUniform1f(glGetUniformLocation(objectshader.program, "time"), glfwGetTime()/5);
 
 		// render nanosuit
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(nanosuit.modelmatrix));
