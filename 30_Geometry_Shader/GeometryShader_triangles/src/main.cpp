@@ -92,7 +92,7 @@ int main()
 	glm::mat4 projection_perspective = {1/(ar*tan(angle/2)), 0, 0, 0, 0, 1/tan(angle/2), 0, 0, 0, 0, -(f+n)/(f-n), -2*f*n/(f-n), 0, 0, -1, 0};
 	projection_perspective = glm::transpose(projection_perspective);
 	glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	glm::mat4 model = glm::mat4(1.0f);
+	//glm::mat4 model = glm::mat4(1.0f);
 
 	while(!glfwWindowShouldClose(window))
 	{
@@ -103,15 +103,15 @@ int main()
 		
         glUseProgram(our_shader.program);
 		
-		//float time = glfwGetTime();
-		//glm::mat4 model = {1.0f, 0.0f, 0.0f, 0.0f,
-									 //0.0f, cos(time), -sin(time), 0.0f,
-									 //0.0f, sin(time),  cos(time), 0.0f,
-									 //0.0f, 0.0f, 0.0f, 1.0f};
+		float time = glfwGetTime();
+		glm::mat4 model = {1.0f, 0.0f, 0.0f, 0.0f,
+									 0.0f, cos(time), -sin(time), 0.0f,
+									 0.0f, sin(time),  cos(time), 0.0f,
+									 0.0f, 0.0f, 0.0f, 1.0f};
 
 		// compounding more rotations just to make it fancy
-		//model = glm::rotate(model, glm::radians(sin(time)*90.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-		//model = glm::rotate(model, glm::radians(sin(time)*90.0f), glm::vec3(1.0f, 1.0f, 1.0f));
+		model = glm::rotate(model, glm::radians(sin(time)*90.0f), glm::vec3(1.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(sin(time)*90.0f), glm::vec3(1.0f, 1.0f, 1.0f));
 
 		glUniformMatrix4fv(glGetUniformLocation(our_shader.program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 		glUniformMatrix4fv(glGetUniformLocation(our_shader.program, "view"), 1, GL_FALSE, glm::value_ptr(view));
