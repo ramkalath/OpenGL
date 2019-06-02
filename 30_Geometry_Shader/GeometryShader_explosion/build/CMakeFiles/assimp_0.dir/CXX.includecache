@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/gamesettings.cpp
+/home/ram/workarea/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/gamesettings.cpp
 glm/glm.hpp
 -
 glm/gtc/matrix_transform.hpp
@@ -18,7 +18,7 @@ iostream
 math.h
 -
 
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/gamesettings.h
+/home/ram/workarea/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/gamesettings.h
 glm/glm.hpp
 -
 glm/gtc/matrix_transform.hpp
@@ -30,7 +30,7 @@ iostream
 math.h
 -
 
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/modelloader.cpp
+/home/ram/workarea/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/modelloader.cpp
 GL/glew.h
 -
 glm/glm.hpp
@@ -52,9 +52,9 @@ iostream
 vector
 -
 ../include/shader.h
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/shader.h
+/home/ram/workarea/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/shader.h
 
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/modelloader.h
+/home/ram/workarea/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/modelloader.h
 GL/glew.h
 -
 glm/glm.hpp
@@ -76,9 +76,9 @@ iostream
 vector
 -
 ../include/shader.h
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/shader.h
+/home/ram/workarea/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/shader.h
 
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/shader.cpp
+/home/ram/workarea/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/shader.cpp
 GL/glew.h
 -
 iostream
@@ -88,15 +88,15 @@ fstream
 cstring
 -
 shader.h
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/shader.h
+/home/ram/workarea/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/shader.h
 sstream
 -
 
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/shader.h
+/home/ram/workarea/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/shader.h
 GL/glew.h
 -
 
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/src/main.cpp
+/home/ram/workarea/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/src/main.cpp
 GL/glew.h
 -
 GLFW/glfw3.h
@@ -110,11 +110,11 @@ glm/gtc/type_ptr.hpp
 iostream
 -
 ../include/shader.h
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/shader.h
+/home/ram/workarea/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/shader.h
 ../include/modelloader.h
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/modelloader.h
+/home/ram/workarea/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/modelloader.h
 ../include/gamesettings.h
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/gamesettings.h
+/home/ram/workarea/advanced_opengl/30_Geometry_Shader/GeometryShader_explosion/include/gamesettings.h
 
 /usr/local/include/GLFW/glfw3.h
 stddef.h
