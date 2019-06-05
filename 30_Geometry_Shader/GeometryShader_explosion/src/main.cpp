@@ -1,9 +1,9 @@
 /*****************************************************************************
  * Author : Ram
- * Date : 21/Feb/2019
+ * Date : 1/June/2019
  * Email : ramkalath@gmail.com
- * Breif Description : nanosuit model loading with assimp.
- * Detailed Description : object loading with assimp with directional light
+ * Breif Description : nanosuit model exploding.
+ * Detailed Description : nanosuit model explosion.
  *****************************************************************************/
 // GLEW and GLFW includes
 #define GLEW_STATIC
