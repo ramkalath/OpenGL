@@ -9,6 +9,7 @@ uniform vec3 LightDiffuse;
 uniform vec3 LightSpecular;
 uniform vec3 CameraPosition;
 
+
 uniform vec3 materialambient;
 uniform vec3 materialdiffuse;
 uniform vec3 materialspecular;
@@ -32,10 +33,10 @@ void main()
 	vec3 diffuse_light = LightDiffuse * diff * vec3(texture(diffuse_texture, TexCoords));
 
     // Specular lighting
-	vec3 reflected_vector = reflect(light_vector, Norm);  
-	vec3 view_vector = normalize(CameraPosition - FragmentPosition);
-	float spec = pow(max(dot(view_vector, reflected_vector), 0.0), Shini);
-	vec3 specular_light = LightSpecular * spec * vec3(texture(specular_texture, TexCoords));
+    vec3 reflected_vector = reflect(light_vector, Norm);  
+    vec3 view_vector = normalize(CameraPosition - FragmentPosition);
+    float spec = pow(max(dot(view_vector, reflected_vector), 0.0), Shini);
+    vec3 specular_light = LightSpecular * spec * vec3(texture(specular_texture, TexCoords));
 
-	color = vec3((ambient_light + diffuse_light + specular_light), 1.0f);
+	color = vec4((ambient_light + diffuse_light + specular_light), 1.0f);
 }

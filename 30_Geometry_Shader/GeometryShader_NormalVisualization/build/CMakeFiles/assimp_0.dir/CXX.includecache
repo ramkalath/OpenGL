@@ -51,10 +51,8 @@ iostream
 -
 vector
 -
-../include/vert_frag_shader.h
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_frag_shader.h
-../include/vert_geom_frag_shader.h
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_geom_frag_shader.h
+../include/shader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.h
 
 /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/modelloader.h
 GL/glew.h
@@ -77,12 +75,10 @@ iostream
 -
 vector
 -
-../include/vert_frag_shader.h
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_frag_shader.h
-../include/vert_geom_frag_shader.h
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_geom_frag_shader.h
+../include/shader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.h
 
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_frag_shader.cpp
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/normalshader.cpp
 GL/glew.h
 -
 iostream
@@ -91,16 +87,16 @@ fstream
 -
 cstring
 -
-vert_frag_shader.h
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_frag_shader.h
+normalshader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/normalshader.h
 sstream
 -
 
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_frag_shader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/normalshader.h
 GL/glew.h
 -
 
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_geom_frag_shader.cpp
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.cpp
 GL/glew.h
 -
 iostream
@@ -109,12 +105,12 @@ fstream
 -
 cstring
 -
-vert_geom_frag_shader.h
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_geom_frag_shader.h
+shader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.h
 sstream
 -
 
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_geom_frag_shader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.h
 GL/glew.h
 -
 
@@ -131,10 +127,10 @@ glm/gtc/type_ptr.hpp
 -
 iostream
 -
-../include/vert_frag_shader.h
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_frag_shader.h
-../include/vert_geom_frag_shader.h
-/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_geom_frag_shader.h
+../include/shader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.h
+../include/normalshader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/normalshader.h
 ../include/modelloader.h
 /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/modelloader.h
 ../include/gamesettings.h

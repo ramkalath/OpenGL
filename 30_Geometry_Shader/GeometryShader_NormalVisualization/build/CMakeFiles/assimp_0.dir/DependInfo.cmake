@@ -6,8 +6,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/gamesettings.cpp" "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o"
   "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/modelloader.cpp" "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles/assimp_0.dir/include/modelloader.cpp.o"
-  "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_frag_shader.cpp" "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o"
-  "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_geom_frag_shader.cpp" "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o"
+  "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/normalshader.cpp" "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles/assimp_0.dir/include/normalshader.cpp.o"
+  "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.cpp" "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles/assimp_0.dir/include/shader.cpp.o"
   "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/src/main.cpp" "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles/assimp_0.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

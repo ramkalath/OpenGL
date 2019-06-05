@@ -105,52 +105,52 @@ CMakeFiles/assimp_0.dir/include/modelloader.cpp.o.provides: CMakeFiles/assimp_0.
 CMakeFiles/assimp_0.dir/include/modelloader.cpp.o.provides.build: CMakeFiles/assimp_0.dir/include/modelloader.cpp.o
 
 
-CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o: CMakeFiles/assimp_0.dir/flags.make
-CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o: ../include/vert_geom_frag_shader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o -c /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_geom_frag_shader.cpp
+CMakeFiles/assimp_0.dir/include/shader.cpp.o: CMakeFiles/assimp_0.dir/flags.make
+CMakeFiles/assimp_0.dir/include/shader.cpp.o: ../include/shader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/assimp_0.dir/include/shader.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/assimp_0.dir/include/shader.cpp.o -c /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.cpp
 
-CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_geom_frag_shader.cpp > CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.i
+CMakeFiles/assimp_0.dir/include/shader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/assimp_0.dir/include/shader.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.cpp > CMakeFiles/assimp_0.dir/include/shader.cpp.i
 
-CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_geom_frag_shader.cpp -o CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.s
+CMakeFiles/assimp_0.dir/include/shader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/assimp_0.dir/include/shader.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.cpp -o CMakeFiles/assimp_0.dir/include/shader.cpp.s
 
-CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o.requires:
+CMakeFiles/assimp_0.dir/include/shader.cpp.o.requires:
 
-.PHONY : CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o.requires
+.PHONY : CMakeFiles/assimp_0.dir/include/shader.cpp.o.requires
 
-CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o.provides: CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o.requires
-	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o.provides.build
-.PHONY : CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o.provides
+CMakeFiles/assimp_0.dir/include/shader.cpp.o.provides: CMakeFiles/assimp_0.dir/include/shader.cpp.o.requires
+	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/shader.cpp.o.provides.build
+.PHONY : CMakeFiles/assimp_0.dir/include/shader.cpp.o.provides
 
-CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o.provides.build: CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o
+CMakeFiles/assimp_0.dir/include/shader.cpp.o.provides.build: CMakeFiles/assimp_0.dir/include/shader.cpp.o
 
 
-CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o: CMakeFiles/assimp_0.dir/flags.make
-CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o: ../include/vert_frag_shader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o -c /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_frag_shader.cpp
+CMakeFiles/assimp_0.dir/include/normalshader.cpp.o: CMakeFiles/assimp_0.dir/flags.make
+CMakeFiles/assimp_0.dir/include/normalshader.cpp.o: ../include/normalshader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/assimp_0.dir/include/normalshader.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/assimp_0.dir/include/normalshader.cpp.o -c /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/normalshader.cpp
 
-CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_frag_shader.cpp > CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.i
+CMakeFiles/assimp_0.dir/include/normalshader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/assimp_0.dir/include/normalshader.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/normalshader.cpp > CMakeFiles/assimp_0.dir/include/normalshader.cpp.i
 
-CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_frag_shader.cpp -o CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.s
+CMakeFiles/assimp_0.dir/include/normalshader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/assimp_0.dir/include/normalshader.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/normalshader.cpp -o CMakeFiles/assimp_0.dir/include/normalshader.cpp.s
 
-CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o.requires:
+CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.requires:
 
-.PHONY : CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o.requires
+.PHONY : CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.requires
 
-CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o.provides: CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o.requires
-	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o.provides.build
-.PHONY : CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o.provides
+CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.provides: CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.requires
+	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.provides.build
+.PHONY : CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.provides
 
-CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o.provides.build: CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o
+CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.provides.build: CMakeFiles/assimp_0.dir/include/normalshader.cpp.o
 
 
 CMakeFiles/assimp_0.dir/src/main.cpp.o: CMakeFiles/assimp_0.dir/flags.make
@@ -181,8 +181,8 @@ CMakeFiles/assimp_0.dir/src/main.cpp.o.provides.build: CMakeFiles/assimp_0.dir/s
 assimp_0_OBJECTS = \
 "CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o" \
 "CMakeFiles/assimp_0.dir/include/modelloader.cpp.o" \
-"CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o" \
-"CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o" \
+"CMakeFiles/assimp_0.dir/include/shader.cpp.o" \
+"CMakeFiles/assimp_0.dir/include/normalshader.cpp.o" \
 "CMakeFiles/assimp_0.dir/src/main.cpp.o"
 
 # External object files for target assimp_0
@@ -190,8 +190,8 @@ assimp_0_EXTERNAL_OBJECTS =
 
 ../bin/assimp_0: CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o
 ../bin/assimp_0: CMakeFiles/assimp_0.dir/include/modelloader.cpp.o
-../bin/assimp_0: CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o
-../bin/assimp_0: CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o
+../bin/assimp_0: CMakeFiles/assimp_0.dir/include/shader.cpp.o
+../bin/assimp_0: CMakeFiles/assimp_0.dir/include/normalshader.cpp.o
 ../bin/assimp_0: CMakeFiles/assimp_0.dir/src/main.cpp.o
 ../bin/assimp_0: CMakeFiles/assimp_0.dir/build.make
 ../bin/assimp_0: CMakeFiles/assimp_0.dir/link.txt
@@ -205,8 +205,8 @@ CMakeFiles/assimp_0.dir/build: ../bin/assimp_0
 
 CMakeFiles/assimp_0.dir/requires: CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o.requires
 CMakeFiles/assimp_0.dir/requires: CMakeFiles/assimp_0.dir/include/modelloader.cpp.o.requires
-CMakeFiles/assimp_0.dir/requires: CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o.requires
-CMakeFiles/assimp_0.dir/requires: CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o.requires
+CMakeFiles/assimp_0.dir/requires: CMakeFiles/assimp_0.dir/include/shader.cpp.o.requires
+CMakeFiles/assimp_0.dir/requires: CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.requires
 CMakeFiles/assimp_0.dir/requires: CMakeFiles/assimp_0.dir/src/main.cpp.o.requires
 
 .PHONY : CMakeFiles/assimp_0.dir/requires

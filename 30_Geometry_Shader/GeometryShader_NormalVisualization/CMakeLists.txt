@@ -10,7 +10,7 @@ set(project_name "assimp_0") # (TODO: add project name)
 project(${project_name})
 
 # here add all the cpp files involved in the project
-add_executable(${project_name} ./include/gamesettings.cpp ./include/modelloader.cpp ./include/vert_geom_frag_shader.cpp ./include/vert_frag_shader.cpp ./src/main.cpp) # (TODO: enter the cpp files after the project name one after the other with the path)
+add_executable(${project_name} ./include/gamesettings.cpp ./include/modelloader.cpp ./include/shader.cpp ./include/normalshader.cpp ./src/main.cpp) # (TODO: enter the cpp files after the project name one after the other with the path)
 
 set(CMAKE_BUILD_TYPE Debug)
 #set(CMAKE_VERBOSE_MAKEFILE ON)

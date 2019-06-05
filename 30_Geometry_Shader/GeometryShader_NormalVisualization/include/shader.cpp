@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
-#include "vert_frag_shader.h"
+#include "shader.h"
 #include <sstream>
 
 GLchar* get_program_from_file(bool* f_fail, const char* file_path)
@@ -96,3 +96,4 @@ Shader::~Shader()
 {
 	glDeleteShader(program);	
 }
+

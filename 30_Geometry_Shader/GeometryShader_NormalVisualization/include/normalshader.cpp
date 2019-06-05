@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
-#include "vert_geom_frag_shader.h"
+#include "normalshader.h"
 #include <sstream>
 
 GLchar* get_program_from_file(bool* f_fail, const char* file_path)
@@ -30,13 +30,13 @@ GLchar* get_program_from_file(bool* f_fail, const char* file_path)
 
 GLuint compile_shader(std::string shader_type, const char* code)
 {
-	unsigned int s = glCreateShader(GL_VERTEX_SHADER); // default we assume its a vertex shader
+	GLuint s = glCreateShader(GL_VERTEX_SHADER); // default we assume its a vertex shader
+
+	if(shader_type == "GEOMETRY") // else its a fragment shader
+		s = glCreateShader(GL_GEOMETRY_SHADER);
 
 	if(shader_type == "FRAGMENT") // else its a fragment shader
 		s = glCreateShader(GL_FRAGMENT_SHADER);
-
-	else if(shader_type == "GEOMETRIC")
-		s = glCreateShader(GL_GEOMETRY_SHADER);
 
 	glShaderSource(s, 1, &code, NULL);
 	glCompileShader(s);
@@ -53,7 +53,7 @@ GLuint compile_shader(std::string shader_type, const char* code)
 }
 
 // constructor --------------------------------------------------------------------------
-Shader::Shader(const char* vs_path, const char* gs_path, const char* fs_path)
+Normalshader::Normalshader(const char* vs_path, const char* gs_path, const char* fs_path)
 {
 	bool s_fail;
 
@@ -61,18 +61,18 @@ Shader::Shader(const char* vs_path, const char* gs_path, const char* fs_path)
 	const GLchar* vs_code = get_program_from_file(&s_fail, vs_path);
 	if(s_fail) std::cerr << "ERROR: VERTEX SHADER FILE COULD NOT BE OPENED" << std::endl;
 
-	// get the vertex shader code
+	// get the geometry shader code
 	const GLchar* gs_code = get_program_from_file(&s_fail, gs_path);
-	if(s_fail) std::cerr << "ERROR: GEOMETRIC SHADER FILE COULD NOT BE OPENED" << std::endl;
+	if(s_fail) std::cerr << "ERROR: GEOMETRY SHADER FILE COULD NOT BE OPENED" << std::endl;
 
 	// get the fragment shader code
 	const GLchar* fs_code = get_program_from_file(&s_fail, fs_path);
 	if(s_fail) std::cerr << "ERROR: FRAGMENT SHADER FILE COULD NOT BE OPENED" << std::endl; 
 
 	 //compile vs and fs --------------------------------------------
-	unsigned int vs = compile_shader("VERTEX", vs_code);
-	unsigned int gs = compile_shader("GEOMETRIC", gs_code);
-	unsigned int fs = compile_shader("FRAGMENT", fs_code);
+	GLuint vs = compile_shader("VERTEX", vs_code);
+	GLuint gs = compile_shader("GEOMETRY", gs_code);
+	GLuint fs = compile_shader("FRAGMENT", fs_code);
 
 	// link the shaders ---------------------------------------------
 	// since linking is not very lengthy lets do it here
@@ -103,7 +103,7 @@ Shader::Shader(const char* vs_path, const char* gs_path, const char* fs_path)
 }
 
 // Destructor for deleting the used program ---------------------------------------------
-Shader::~Shader()
+Normalshader::~Normalshader()
 {
 	glDeleteShader(program);	
 }

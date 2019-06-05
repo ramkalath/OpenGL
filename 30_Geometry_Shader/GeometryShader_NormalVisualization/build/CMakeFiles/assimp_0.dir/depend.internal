@@ -5,18 +5,17 @@ CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o
  /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/gamesettings.cpp
 CMakeFiles/assimp_0.dir/include/modelloader.cpp.o
  /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/modelloader.cpp
- /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_frag_shader.h
- /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_geom_frag_shader.h
-CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o
- /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_frag_shader.cpp
- /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_frag_shader.h
-CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o
- /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_geom_frag_shader.cpp
- /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_geom_frag_shader.h
+ /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.h
+CMakeFiles/assimp_0.dir/include/normalshader.cpp.o
+ /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/normalshader.cpp
+ /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/normalshader.h
+CMakeFiles/assimp_0.dir/include/shader.cpp.o
+ /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.cpp
+ /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.h
 CMakeFiles/assimp_0.dir/src/main.cpp.o
  /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/gamesettings.h
  /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/modelloader.h
- /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_frag_shader.h
- /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/vert_geom_frag_shader.h
+ /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/normalshader.h
+ /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.h
  /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/src/main.cpp
  /usr/local/include/GLFW/glfw3.h

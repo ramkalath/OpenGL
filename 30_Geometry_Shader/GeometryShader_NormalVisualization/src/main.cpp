@@ -1,9 +1,9 @@
 /*****************************************************************************
  * Author : Ram
- * Date : 1/June/2019
+ * Date : 21/Feb/2019
  * Email : ramkalath@gmail.com
- * Breif Description : visualizing normal vectors
- * Detailed Description : yellow spikes as normal vectors on nanosuit model
+ * Breif Description : nanosuit model loading with assimp.
+ * Detailed Description : object loading with assimp with directional light
  *****************************************************************************/
 // GLEW and GLFW includes
 #define GLEW_STATIC
@@ -19,8 +19,8 @@
 #include <iostream>
 
 // User created headers
-#include "../include/vert_frag_shader.h"
-#include "../include/vert_geom_frag_shader.h"
+#include "../include/shader.h"
+#include "../include/normalshader.h"
 #include "../include/modelloader.h"
 #include "../include/gamesettings.h"
 
@@ -63,11 +63,11 @@ int main()
 	glfwGetFramebufferSize(window, &width, &height);
 	glViewport(0, 0, width, height);
 
-	Shader objectshader("./shaders/vertex_shader.vert", "./shaders/geometry_shader.geom", "./shaders/fragment_shader.frag");
+	Shader os("./shaders/vertex_shader.vert", "./shaders/fragment_shader.frag");
+	Normalshader ns("./shaders/vertex_shader.vert", "./shaders/geometry_shader.geom", "./shaders/fragment_shader.frag");
 
-	Modelloader nanosuit("./nanosuit/nanosuit.obj");
+	Modelloader nanosuit("./resources/nanosuit/nanosuit.obj");
 	nanosuit.modelmatrix = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f};
-	nanosuit.modelmatrix = glm::rotate(nanosuit.modelmatrix, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	nanosuit.modelmatrix = glm::translate(nanosuit.modelmatrix, glm::vec3(0.0f, -2.0f, -2.0f));
 	nanosuit.modelmatrix = glm::scale(nanosuit.modelmatrix, glm::vec3(0.3f, 0.3f, 0.3f));
 
@@ -78,21 +78,20 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		 // draw object ---------------------------------------------------------------
-		glUseProgram(objectshader.program);
+		glUseProgram(os.program);
 
 		 // Uniforms
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "view"), 1, GL_FALSE, glm::value_ptr(globalsettings.view));
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(globalsettings.projection_perspective));
-		glUniform3f(glGetUniformLocation(objectshader.program, "LightDirection"), 10.0f, 10.0f, -10.0f);
-		glUniform3f(glGetUniformLocation(objectshader.program, "LightAmbient"), 0.5f, 0.5f, 0.5f);
-		glUniform3f(glGetUniformLocation(objectshader.program, "LightDiffuse"), 1.0f, 1.0f, 1.0f);
-		glUniform3f(glGetUniformLocation(objectshader.program, "LightSpecular"), 1.0f, 1.0f, 1.0f);
-		glUniform3f(glGetUniformLocation(objectshader.program, "CameraPosition"), 0.0f, 0.0f, 0.0f);
-		glUniform1f(glGetUniformLocation(objectshader.program, "time"), glfwGetTime()/5);
+		glUniformMatrix4fv(glGetUniformLocation(os.program, "view"), 1, GL_FALSE, glm::value_ptr(globalsettings.view));
+		glUniformMatrix4fv(glGetUniformLocation(os.program, "projection"), 1, GL_FALSE, glm::value_ptr(globalsettings.projection_perspective));
+		glUniform3f(glGetUniformLocation(os.program, "LightDirection"), 10.0f, 10.0f, -10.0f);
+		glUniform3f(glGetUniformLocation(os.program, "LightAmbient"), 0.5f, 0.5f, 0.5f);
+		glUniform3f(glGetUniformLocation(os.program, "LightDiffuse"), 1.0f, 1.0f, 1.0f);
+		glUniform3f(glGetUniformLocation(os.program, "LightSpecular"), 1.0f, 1.0f, 1.0f);
+		glUniform3f(glGetUniformLocation(os.program, "CameraPosition"), 0.0f, 0.0f, 0.0f);
 
 		// render nanosuit
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(nanosuit.modelmatrix));
-		nanosuit.Draw(objectshader);
+		glUniformMatrix4fv(glGetUniformLocation(os.program, "model"), 1, GL_FALSE, glm::value_ptr(nanosuit.modelmatrix));
+		nanosuit.Draw(os);
 		glfwSwapBuffers(window);
 	}
 

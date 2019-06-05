@@ -25,8 +25,7 @@
 #include <iostream>
 #include <vector>
 
-#include "../include/vert_frag_shader.h"
-#include "../include/vert_geom_frag_shader.h"
+#include "../include/shader.h"
 
 struct Vertex
 {

@@ -177,59 +177,59 @@ include/modelloader.cpp.s:
 	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/modelloader.cpp.s
 .PHONY : include/modelloader.cpp.s
 
-include/vert_frag_shader.o: include/vert_frag_shader.cpp.o
+include/normalshader.o: include/normalshader.cpp.o
 
-.PHONY : include/vert_frag_shader.o
-
-# target to build an object file
-include/vert_frag_shader.cpp.o:
-	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.o
-.PHONY : include/vert_frag_shader.cpp.o
-
-include/vert_frag_shader.i: include/vert_frag_shader.cpp.i
-
-.PHONY : include/vert_frag_shader.i
-
-# target to preprocess a source file
-include/vert_frag_shader.cpp.i:
-	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.i
-.PHONY : include/vert_frag_shader.cpp.i
-
-include/vert_frag_shader.s: include/vert_frag_shader.cpp.s
-
-.PHONY : include/vert_frag_shader.s
-
-# target to generate assembly for a file
-include/vert_frag_shader.cpp.s:
-	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/vert_frag_shader.cpp.s
-.PHONY : include/vert_frag_shader.cpp.s
-
-include/vert_geom_frag_shader.o: include/vert_geom_frag_shader.cpp.o
-
-.PHONY : include/vert_geom_frag_shader.o
+.PHONY : include/normalshader.o
 
 # target to build an object file
-include/vert_geom_frag_shader.cpp.o:
-	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.o
-.PHONY : include/vert_geom_frag_shader.cpp.o
+include/normalshader.cpp.o:
+	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/normalshader.cpp.o
+.PHONY : include/normalshader.cpp.o
 
-include/vert_geom_frag_shader.i: include/vert_geom_frag_shader.cpp.i
+include/normalshader.i: include/normalshader.cpp.i
 
-.PHONY : include/vert_geom_frag_shader.i
+.PHONY : include/normalshader.i
 
 # target to preprocess a source file
-include/vert_geom_frag_shader.cpp.i:
-	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.i
-.PHONY : include/vert_geom_frag_shader.cpp.i
+include/normalshader.cpp.i:
+	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/normalshader.cpp.i
+.PHONY : include/normalshader.cpp.i
 
-include/vert_geom_frag_shader.s: include/vert_geom_frag_shader.cpp.s
+include/normalshader.s: include/normalshader.cpp.s
 
-.PHONY : include/vert_geom_frag_shader.s
+.PHONY : include/normalshader.s
 
 # target to generate assembly for a file
-include/vert_geom_frag_shader.cpp.s:
-	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/vert_geom_frag_shader.cpp.s
-.PHONY : include/vert_geom_frag_shader.cpp.s
+include/normalshader.cpp.s:
+	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/normalshader.cpp.s
+.PHONY : include/normalshader.cpp.s
+
+include/shader.o: include/shader.cpp.o
+
+.PHONY : include/shader.o
+
+# target to build an object file
+include/shader.cpp.o:
+	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/shader.cpp.o
+.PHONY : include/shader.cpp.o
+
+include/shader.i: include/shader.cpp.i
+
+.PHONY : include/shader.i
+
+# target to preprocess a source file
+include/shader.cpp.i:
+	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/shader.cpp.i
+.PHONY : include/shader.cpp.i
+
+include/shader.s: include/shader.cpp.s
+
+.PHONY : include/shader.s
+
+# target to generate assembly for a file
+include/shader.cpp.s:
+	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/shader.cpp.s
+.PHONY : include/shader.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -273,12 +273,12 @@ help:
 	@echo "... include/modelloader.o"
 	@echo "... include/modelloader.i"
 	@echo "... include/modelloader.s"
-	@echo "... include/vert_frag_shader.o"
-	@echo "... include/vert_frag_shader.i"
-	@echo "... include/vert_frag_shader.s"
-	@echo "... include/vert_geom_frag_shader.o"
-	@echo "... include/vert_geom_frag_shader.i"
-	@echo "... include/vert_geom_frag_shader.s"
+	@echo "... include/normalshader.o"
+	@echo "... include/normalshader.i"
+	@echo "... include/normalshader.s"
+	@echo "... include/shader.o"
+	@echo "... include/shader.i"
+	@echo "... include/shader.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
