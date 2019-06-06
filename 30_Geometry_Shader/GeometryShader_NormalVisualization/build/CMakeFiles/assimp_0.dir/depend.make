@@ -6,16 +6,16 @@ CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o: ../include/gamesettings.cpp
 CMakeFiles/assimp_0.dir/include/modelloader.cpp.o: ../include/modelloader.cpp
 CMakeFiles/assimp_0.dir/include/modelloader.cpp.o: ../include/shader.h
 
-CMakeFiles/assimp_0.dir/include/normalshader.cpp.o: ../include/normalshader.cpp
-CMakeFiles/assimp_0.dir/include/normalshader.cpp.o: ../include/normalshader.h
-
 CMakeFiles/assimp_0.dir/include/shader.cpp.o: ../include/shader.cpp
 CMakeFiles/assimp_0.dir/include/shader.cpp.o: ../include/shader.h
 
+CMakeFiles/assimp_0.dir/include/shader2.cpp.o: ../include/shader2.cpp
+CMakeFiles/assimp_0.dir/include/shader2.cpp.o: ../include/shader2.h
+
 CMakeFiles/assimp_0.dir/src/main.cpp.o: ../include/gamesettings.h
 CMakeFiles/assimp_0.dir/src/main.cpp.o: ../include/modelloader.h
-CMakeFiles/assimp_0.dir/src/main.cpp.o: ../include/normalshader.h
 CMakeFiles/assimp_0.dir/src/main.cpp.o: ../include/shader.h
+CMakeFiles/assimp_0.dir/src/main.cpp.o: ../include/shader2.h
 CMakeFiles/assimp_0.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/assimp_0.dir/src/main.cpp.o: /usr/local/include/GLFW/glfw3.h
 

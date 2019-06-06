@@ -14,17 +14,10 @@ uniform mat4 projection;
 
 out VS_OUT {
 	vec3 norm;
-	vec3 fragment_position;
-	float shini;
-	vec2 texCoords;
 } vs_out;
 
 void main()
 {
     gl_Position = projection * view *  model * vec4(position, 1.0f);
-
-	vs_out.fragment_position = vec3(model * vec4(position, 1.0f));
 	vs_out.norm = normalize(vec3(transpose(inverse(model)) * vec4(normal, 1.0f)));
-	vs_out.shini = shininess;
-	vs_out.texCoords = tex_coords;
 }

@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization
+CMAKE_SOURCE_DIR = /home/ram/workarea/test1/4_diffuse_specular_textures
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build
+CMAKE_BINARY_DIR = /home/ram/workarea/test1/4_diffuse_specular_textures/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ram/workarea/test1/4_diffuse_specular_textures/build/CMakeFiles /home/ram/workarea/test1/4_diffuse_specular_textures/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ram/workarea/test1/4_diffuse_specular_textures/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -177,33 +177,6 @@ include/modelloader.cpp.s:
 	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/modelloader.cpp.s
 .PHONY : include/modelloader.cpp.s
 
-include/normalshader.o: include/normalshader.cpp.o
-
-.PHONY : include/normalshader.o
-
-# target to build an object file
-include/normalshader.cpp.o:
-	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/normalshader.cpp.o
-.PHONY : include/normalshader.cpp.o
-
-include/normalshader.i: include/normalshader.cpp.i
-
-.PHONY : include/normalshader.i
-
-# target to preprocess a source file
-include/normalshader.cpp.i:
-	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/normalshader.cpp.i
-.PHONY : include/normalshader.cpp.i
-
-include/normalshader.s: include/normalshader.cpp.s
-
-.PHONY : include/normalshader.s
-
-# target to generate assembly for a file
-include/normalshader.cpp.s:
-	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/normalshader.cpp.s
-.PHONY : include/normalshader.cpp.s
-
 include/shader.o: include/shader.cpp.o
 
 .PHONY : include/shader.o
@@ -230,6 +203,33 @@ include/shader.s: include/shader.cpp.s
 include/shader.cpp.s:
 	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/shader.cpp.s
 .PHONY : include/shader.cpp.s
+
+include/shader2.o: include/shader2.cpp.o
+
+.PHONY : include/shader2.o
+
+# target to build an object file
+include/shader2.cpp.o:
+	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/shader2.cpp.o
+.PHONY : include/shader2.cpp.o
+
+include/shader2.i: include/shader2.cpp.i
+
+.PHONY : include/shader2.i
+
+# target to preprocess a source file
+include/shader2.cpp.i:
+	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/shader2.cpp.i
+.PHONY : include/shader2.cpp.i
+
+include/shader2.s: include/shader2.cpp.s
+
+.PHONY : include/shader2.s
+
+# target to generate assembly for a file
+include/shader2.cpp.s:
+	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/shader2.cpp.s
+.PHONY : include/shader2.cpp.s
 
 src/main.o: src/main.cpp.o
 
@@ -273,12 +273,12 @@ help:
 	@echo "... include/modelloader.o"
 	@echo "... include/modelloader.i"
 	@echo "... include/modelloader.s"
-	@echo "... include/normalshader.o"
-	@echo "... include/normalshader.i"
-	@echo "... include/normalshader.s"
 	@echo "... include/shader.o"
 	@echo "... include/shader.i"
 	@echo "... include/shader.s"
+	@echo "... include/shader2.o"
+	@echo "... include/shader2.i"
+	@echo "... include/shader2.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

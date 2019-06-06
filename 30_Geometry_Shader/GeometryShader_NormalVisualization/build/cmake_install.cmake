@@ -1,4 +1,4 @@
-# Install script for directory: /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization
+# Install script for directory: /home/ram/workarea/test1/4_diffuse_specular_textures
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ram/workarea/test1/4_diffuse_specular_textures/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

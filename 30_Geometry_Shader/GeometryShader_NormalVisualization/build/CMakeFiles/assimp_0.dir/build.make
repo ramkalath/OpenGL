@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization
+CMAKE_SOURCE_DIR = /home/ram/workarea/test1/4_diffuse_specular_textures
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build
+CMAKE_BINARY_DIR = /home/ram/workarea/test1/4_diffuse_specular_textures/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/assimp_0.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/assimp_0.dir/flags.make
 
 CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o: CMakeFiles/assimp_0.dir/flags.make
 CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o: ../include/gamesettings.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o -c /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/gamesettings.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ram/workarea/test1/4_diffuse_specular_textures/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o -c /home/ram/workarea/test1/4_diffuse_specular_textures/include/gamesettings.cpp
 
 CMakeFiles/assimp_0.dir/include/gamesettings.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/assimp_0.dir/include/gamesettings.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/gamesettings.cpp > CMakeFiles/assimp_0.dir/include/gamesettings.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ram/workarea/test1/4_diffuse_specular_textures/include/gamesettings.cpp > CMakeFiles/assimp_0.dir/include/gamesettings.cpp.i
 
 CMakeFiles/assimp_0.dir/include/gamesettings.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/assimp_0.dir/include/gamesettings.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/gamesettings.cpp -o CMakeFiles/assimp_0.dir/include/gamesettings.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ram/workarea/test1/4_diffuse_specular_textures/include/gamesettings.cpp -o CMakeFiles/assimp_0.dir/include/gamesettings.cpp.s
 
 CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o.provides.build: CMakeFiles/as
 
 CMakeFiles/assimp_0.dir/include/modelloader.cpp.o: CMakeFiles/assimp_0.dir/flags.make
 CMakeFiles/assimp_0.dir/include/modelloader.cpp.o: ../include/modelloader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/assimp_0.dir/include/modelloader.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/assimp_0.dir/include/modelloader.cpp.o -c /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/modelloader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ram/workarea/test1/4_diffuse_specular_textures/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/assimp_0.dir/include/modelloader.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/assimp_0.dir/include/modelloader.cpp.o -c /home/ram/workarea/test1/4_diffuse_specular_textures/include/modelloader.cpp
 
 CMakeFiles/assimp_0.dir/include/modelloader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/assimp_0.dir/include/modelloader.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/modelloader.cpp > CMakeFiles/assimp_0.dir/include/modelloader.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ram/workarea/test1/4_diffuse_specular_textures/include/modelloader.cpp > CMakeFiles/assimp_0.dir/include/modelloader.cpp.i
 
 CMakeFiles/assimp_0.dir/include/modelloader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/assimp_0.dir/include/modelloader.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/modelloader.cpp -o CMakeFiles/assimp_0.dir/include/modelloader.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ram/workarea/test1/4_diffuse_specular_textures/include/modelloader.cpp -o CMakeFiles/assimp_0.dir/include/modelloader.cpp.s
 
 CMakeFiles/assimp_0.dir/include/modelloader.cpp.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/assimp_0.dir/include/modelloader.cpp.o.provides.build: CMakeFiles/ass
 
 CMakeFiles/assimp_0.dir/include/shader.cpp.o: CMakeFiles/assimp_0.dir/flags.make
 CMakeFiles/assimp_0.dir/include/shader.cpp.o: ../include/shader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/assimp_0.dir/include/shader.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/assimp_0.dir/include/shader.cpp.o -c /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ram/workarea/test1/4_diffuse_specular_textures/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/assimp_0.dir/include/shader.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/assimp_0.dir/include/shader.cpp.o -c /home/ram/workarea/test1/4_diffuse_specular_textures/include/shader.cpp
 
 CMakeFiles/assimp_0.dir/include/shader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/assimp_0.dir/include/shader.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.cpp > CMakeFiles/assimp_0.dir/include/shader.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ram/workarea/test1/4_diffuse_specular_textures/include/shader.cpp > CMakeFiles/assimp_0.dir/include/shader.cpp.i
 
 CMakeFiles/assimp_0.dir/include/shader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/assimp_0.dir/include/shader.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.cpp -o CMakeFiles/assimp_0.dir/include/shader.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ram/workarea/test1/4_diffuse_specular_textures/include/shader.cpp -o CMakeFiles/assimp_0.dir/include/shader.cpp.s
 
 CMakeFiles/assimp_0.dir/include/shader.cpp.o.requires:
 
@@ -129,42 +129,42 @@ CMakeFiles/assimp_0.dir/include/shader.cpp.o.provides: CMakeFiles/assimp_0.dir/i
 CMakeFiles/assimp_0.dir/include/shader.cpp.o.provides.build: CMakeFiles/assimp_0.dir/include/shader.cpp.o
 
 
-CMakeFiles/assimp_0.dir/include/normalshader.cpp.o: CMakeFiles/assimp_0.dir/flags.make
-CMakeFiles/assimp_0.dir/include/normalshader.cpp.o: ../include/normalshader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/assimp_0.dir/include/normalshader.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/assimp_0.dir/include/normalshader.cpp.o -c /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/normalshader.cpp
+CMakeFiles/assimp_0.dir/include/shader2.cpp.o: CMakeFiles/assimp_0.dir/flags.make
+CMakeFiles/assimp_0.dir/include/shader2.cpp.o: ../include/shader2.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ram/workarea/test1/4_diffuse_specular_textures/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/assimp_0.dir/include/shader2.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/assimp_0.dir/include/shader2.cpp.o -c /home/ram/workarea/test1/4_diffuse_specular_textures/include/shader2.cpp
 
-CMakeFiles/assimp_0.dir/include/normalshader.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/assimp_0.dir/include/normalshader.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/normalshader.cpp > CMakeFiles/assimp_0.dir/include/normalshader.cpp.i
+CMakeFiles/assimp_0.dir/include/shader2.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/assimp_0.dir/include/shader2.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ram/workarea/test1/4_diffuse_specular_textures/include/shader2.cpp > CMakeFiles/assimp_0.dir/include/shader2.cpp.i
 
-CMakeFiles/assimp_0.dir/include/normalshader.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/assimp_0.dir/include/normalshader.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/normalshader.cpp -o CMakeFiles/assimp_0.dir/include/normalshader.cpp.s
+CMakeFiles/assimp_0.dir/include/shader2.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/assimp_0.dir/include/shader2.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ram/workarea/test1/4_diffuse_specular_textures/include/shader2.cpp -o CMakeFiles/assimp_0.dir/include/shader2.cpp.s
 
-CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.requires:
+CMakeFiles/assimp_0.dir/include/shader2.cpp.o.requires:
 
-.PHONY : CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.requires
+.PHONY : CMakeFiles/assimp_0.dir/include/shader2.cpp.o.requires
 
-CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.provides: CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.requires
-	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.provides.build
-.PHONY : CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.provides
+CMakeFiles/assimp_0.dir/include/shader2.cpp.o.provides: CMakeFiles/assimp_0.dir/include/shader2.cpp.o.requires
+	$(MAKE) -f CMakeFiles/assimp_0.dir/build.make CMakeFiles/assimp_0.dir/include/shader2.cpp.o.provides.build
+.PHONY : CMakeFiles/assimp_0.dir/include/shader2.cpp.o.provides
 
-CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.provides.build: CMakeFiles/assimp_0.dir/include/normalshader.cpp.o
+CMakeFiles/assimp_0.dir/include/shader2.cpp.o.provides.build: CMakeFiles/assimp_0.dir/include/shader2.cpp.o
 
 
 CMakeFiles/assimp_0.dir/src/main.cpp.o: CMakeFiles/assimp_0.dir/flags.make
 CMakeFiles/assimp_0.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/assimp_0.dir/src/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/assimp_0.dir/src/main.cpp.o -c /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ram/workarea/test1/4_diffuse_specular_textures/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/assimp_0.dir/src/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/assimp_0.dir/src/main.cpp.o -c /home/ram/workarea/test1/4_diffuse_specular_textures/src/main.cpp
 
 CMakeFiles/assimp_0.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/assimp_0.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/src/main.cpp > CMakeFiles/assimp_0.dir/src/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ram/workarea/test1/4_diffuse_specular_textures/src/main.cpp > CMakeFiles/assimp_0.dir/src/main.cpp.i
 
 CMakeFiles/assimp_0.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/assimp_0.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/src/main.cpp -o CMakeFiles/assimp_0.dir/src/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ram/workarea/test1/4_diffuse_specular_textures/src/main.cpp -o CMakeFiles/assimp_0.dir/src/main.cpp.s
 
 CMakeFiles/assimp_0.dir/src/main.cpp.o.requires:
 
@@ -182,7 +182,7 @@ assimp_0_OBJECTS = \
 "CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o" \
 "CMakeFiles/assimp_0.dir/include/modelloader.cpp.o" \
 "CMakeFiles/assimp_0.dir/include/shader.cpp.o" \
-"CMakeFiles/assimp_0.dir/include/normalshader.cpp.o" \
+"CMakeFiles/assimp_0.dir/include/shader2.cpp.o" \
 "CMakeFiles/assimp_0.dir/src/main.cpp.o"
 
 # External object files for target assimp_0
@@ -191,11 +191,11 @@ assimp_0_EXTERNAL_OBJECTS =
 ../bin/assimp_0: CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o
 ../bin/assimp_0: CMakeFiles/assimp_0.dir/include/modelloader.cpp.o
 ../bin/assimp_0: CMakeFiles/assimp_0.dir/include/shader.cpp.o
-../bin/assimp_0: CMakeFiles/assimp_0.dir/include/normalshader.cpp.o
+../bin/assimp_0: CMakeFiles/assimp_0.dir/include/shader2.cpp.o
 ../bin/assimp_0: CMakeFiles/assimp_0.dir/src/main.cpp.o
 ../bin/assimp_0: CMakeFiles/assimp_0.dir/build.make
 ../bin/assimp_0: CMakeFiles/assimp_0.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable ../bin/assimp_0"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ram/workarea/test1/4_diffuse_specular_textures/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable ../bin/assimp_0"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/assimp_0.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -206,7 +206,7 @@ CMakeFiles/assimp_0.dir/build: ../bin/assimp_0
 CMakeFiles/assimp_0.dir/requires: CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o.requires
 CMakeFiles/assimp_0.dir/requires: CMakeFiles/assimp_0.dir/include/modelloader.cpp.o.requires
 CMakeFiles/assimp_0.dir/requires: CMakeFiles/assimp_0.dir/include/shader.cpp.o.requires
-CMakeFiles/assimp_0.dir/requires: CMakeFiles/assimp_0.dir/include/normalshader.cpp.o.requires
+CMakeFiles/assimp_0.dir/requires: CMakeFiles/assimp_0.dir/include/shader2.cpp.o.requires
 CMakeFiles/assimp_0.dir/requires: CMakeFiles/assimp_0.dir/src/main.cpp.o.requires
 
 .PHONY : CMakeFiles/assimp_0.dir/requires
@@ -216,6 +216,6 @@ CMakeFiles/assimp_0.dir/clean:
 .PHONY : CMakeFiles/assimp_0.dir/clean
 
 CMakeFiles/assimp_0.dir/depend:
-	cd /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build /home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/build/CMakeFiles/assimp_0.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ram/workarea/test1/4_diffuse_specular_textures/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ram/workarea/test1/4_diffuse_specular_textures /home/ram/workarea/test1/4_diffuse_specular_textures /home/ram/workarea/test1/4_diffuse_specular_textures/build /home/ram/workarea/test1/4_diffuse_specular_textures/build /home/ram/workarea/test1/4_diffuse_specular_textures/build/CMakeFiles/assimp_0.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/assimp_0.dir/depend
 

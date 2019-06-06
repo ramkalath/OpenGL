@@ -1,13 +1,14 @@
 #pragma once
+
 #define GLEW_STATIC
 #include <GL/glew.h>
 
-class Shader
+class Normalshader
 {
 public:
 	GLuint program;
 
 	// constructor - actual definition of methods in shader.cpp in source directory
-	Shader(const char* vertex_shader_path, const char* fragment_shader_path);
-	~Shader();
+	Normalshader(const char* vertex_shader_path, const char* geometry_shader_path, const char* fragment_shader_path);
+	~Normalshader();
 };
