@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/gamesettings.cpp
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/gamesettings.cpp
 glm/glm.hpp
 -
 glm/gtc/matrix_transform.hpp
@@ -18,7 +18,7 @@ iostream
 math.h
 -
 
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/gamesettings.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/gamesettings.h
 glm/glm.hpp
 -
 glm/gtc/matrix_transform.hpp
@@ -30,7 +30,7 @@ iostream
 math.h
 -
 
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/modelloader.cpp
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/modelloader.cpp
 GL/glew.h
 -
 glm/glm.hpp
@@ -52,9 +52,9 @@ iostream
 vector
 -
 ../include/shader.h
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/shader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.h
 
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/modelloader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/modelloader.h
 GL/glew.h
 -
 glm/glm.hpp
@@ -76,9 +76,9 @@ iostream
 vector
 -
 ../include/shader.h
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/shader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.h
 
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/shader.cpp
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.cpp
 GL/glew.h
 -
 iostream
@@ -88,15 +88,15 @@ fstream
 cstring
 -
 shader.h
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/shader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.h
 sstream
 -
 
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/shader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.h
 GL/glew.h
 -
 
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/shader2.cpp
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader2.cpp
 GL/glew.h
 -
 iostream
@@ -106,15 +106,15 @@ fstream
 cstring
 -
 shader2.h
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/shader2.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader2.h
 sstream
 -
 
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/shader2.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader2.h
 GL/glew.h
 -
 
-/home/ram/workarea/test1/4_diffuse_specular_textures/src/main.cpp
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/src/main.cpp
 GL/glew.h
 -
 GLFW/glfw3.h
@@ -128,13 +128,13 @@ glm/gtc/type_ptr.hpp
 iostream
 -
 ../include/shader.h
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/shader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader.h
 ../include/shader2.h
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/shader2.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/shader2.h
 ../include/modelloader.h
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/modelloader.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/modelloader.h
 ../include/gamesettings.h
-/home/ram/workarea/test1/4_diffuse_specular_textures/include/gamesettings.h
+/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/include/gamesettings.h
 
 /usr/local/include/GLFW/glfw3.h
 stddef.h

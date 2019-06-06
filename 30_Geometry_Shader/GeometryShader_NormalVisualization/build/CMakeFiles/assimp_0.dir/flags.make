@@ -6,5 +6,5 @@ CXX_FLAGS = -g
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/ram/workarea/test1/4_diffuse_specular_textures/./include -I/usr/local/include 
+CXX_INCLUDES = -I/home/ram/workarea/opengl/advanced_opengl/30_Geometry_Shader/GeometryShader_NormalVisualization/./include -I/usr/local/include 
 

@@ -3,7 +3,7 @@ layout (triangles) in;
 layout (line_strip, max_vertices = 6) out;
 
 in VS_OUT {
-	vec3 normal;
+	vec3 norm;
 } gs_in[];
 
 const float MAGNITUDE = 0.4f;
@@ -13,7 +13,7 @@ void GenerateLine(int index)
 	glPosition = gl_in[index].gl_Position;
 	EmitVertex();
 
-	gl_Position = gl_in[index].gl_Position + vec4(gl_in[index].normal, 0.0f) * MAGNITUDE;
+	gl_Position = gl_in[index].gl_Position + vec4(gs_in[index].norm, 0.0f) * MAGNITUDE;
 	EmitVertex();
 
 	EndPrimitive();
