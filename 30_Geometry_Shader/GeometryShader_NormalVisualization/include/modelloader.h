@@ -54,6 +54,7 @@ public:
 	Modelloader(const std::string path);
 	glm::mat4 modelmatrix;
 	void Draw(Shader);
+	void Draw2();
 
 private:
 	std::string directory;

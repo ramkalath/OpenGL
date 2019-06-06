@@ -6,11 +6,11 @@ in VS_OUT {
 	vec3 norm;
 } gs_in[];
 
-const float MAGNITUDE = 0.4f;
+const float MAGNITUDE = 0.2f;
 
 void GenerateLine(int index)
 {
-	glPosition = gl_in[index].gl_Position;
+	gl_Position = gl_in[index].gl_Position;
 	EmitVertex();
 
 	gl_Position = gl_in[index].gl_Position + vec4(gs_in[index].norm, 0.0f) * MAGNITUDE;

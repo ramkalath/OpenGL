@@ -61,6 +61,7 @@ public:
 	Modelloader(const std::string path);
 	glm::mat4 modelmatrix;
 	void Draw(Shader);
+	void Draw2();
 
 private:
 	std::string directory;
@@ -251,6 +252,17 @@ void Modelloader::Draw(Shader shader)
 			glActiveTexture(GL_TEXTURE0+j+k);
 			glBindTexture(GL_TEXTURE_2D, meshes[i].specularmaps[j].id);
 		}
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glDrawElements(GL_TRIANGLES, meshes[i].indices.size(), GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+	}
+}
+
+void Modelloader::Draw2()
+{
+	for(unsigned int i=0; i<this->meshes.size(); i++)
+	{
+		glBindVertexArray(meshes[i].VAO);
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glDrawElements(GL_TRIANGLES, meshes[i].indices.size(), GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);

@@ -68,9 +68,8 @@ int main()
 
 	Modelloader nanosuit("./resources/nanosuit/nanosuit.obj");
 
-
 	nanosuit.modelmatrix = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f};
-	nanosuit.modelmatrix = glm::translate(nanosuit.modelmatrix, glm::vec3(0.0f, -2.0f, -2.0f));
+	nanosuit.modelmatrix = glm::translate(nanosuit.modelmatrix, glm::vec3(0.0f, -2.0f, 0.0f));
 	nanosuit.modelmatrix = glm::scale(nanosuit.modelmatrix, glm::vec3(0.3f, 0.3f, 0.3f));
 
 	while(!glfwWindowShouldClose(window))
@@ -91,11 +90,11 @@ int main()
 		glUniform3f(glGetUniformLocation(os.program, "CameraPosition"), 0.0f, 0.0f, 0.0f);
 		nanosuit.Draw(os);
 
-		//glUseProgram(ns.program);
-		//glUniformMatrix4fv(glGetUniformLocation(ns.program, "model"), 1, GL_FALSE, glm::value_ptr(nanosuit.modelmatrix));
-		//glUniformMatrix4fv(glGetUniformLocation(ns.program, "view"), 1, GL_FALSE, glm::value_ptr(globalsettings.view));
-		//glUniformMatrix4fv(glGetUniformLocation(ns.program, "projection"), 1, GL_FALSE, glm::value_ptr(globalsettings.projection_perspective));
-		//nanosuit.Draw(ns);
+		glUseProgram(ns.program);
+		glUniformMatrix4fv(glGetUniformLocation(ns.program, "model"), 1, GL_FALSE, glm::value_ptr(nanosuit.modelmatrix));
+		glUniformMatrix4fv(glGetUniformLocation(ns.program, "view"), 1, GL_FALSE, glm::value_ptr(globalsettings.view));
+		glUniformMatrix4fv(glGetUniformLocation(ns.program, "projection"), 1, GL_FALSE, glm::value_ptr(globalsettings.projection_perspective));
+		nanosuit.Draw2();
 
 		glfwSwapBuffers(window);
 	}
