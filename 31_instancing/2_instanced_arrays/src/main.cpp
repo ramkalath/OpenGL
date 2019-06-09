@@ -1,9 +1,9 @@
 /*****************************************************************************
  * Author : Ram
- * Date : 29/May/2019
+ * Date : 8/June/2019
  * Email : ramkalath@gmail.com
- * Breif Description : Geometry Shader
- * Detailed Description : basic geometry shader with points
+ * Breif Description : Instanced arrays
+ * Detailed Description : instanced arrays
  *****************************************************************************/
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -19,6 +19,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <math.h>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -64,35 +66,50 @@ int main()
 	glfwGetFramebufferSize(window, &width, &height);
 	glViewport(0, 0, 800, 600);
 
-	Shader our_shader("./shaders/vertex_shader.vert", "./shaders/geometry_shader.geom", "./shaders/fragment_shader.frag");
+	Shader our_shader("./shaders/vertex_shader.vert", "./shaders/fragment_shader.frag");
 	// ================================================================================
 
 	// data - vertices ===================================================================
 	float vertices[] = {
-		-1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-		-1.0f,  1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
-		 1.0f,  1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 
-		 1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 0.0f
-     };
+		-0.05f,  0.05f, 1.0f, 0.0f, 0.0f,
+		 0.05f, -0.05f, 0.0f, 1.0f, 0.0f,
+		-0.05f, -0.05f, 0.0f, 0.0f, 1.0f,
+
+		-0.05f,  0.05f, 1.0f, 0.0f, 0.0f,
+		 0.05f, -0.05f, 0.0f, 1.0f, 0.0f,
+		 0.05f,  0.05f, 0.0f, 1.0f, 1.0f
+	};
 	
+	glm::vec2 translations[100];
+	int index = 0;
+	float offset = 0.1f;
+	for(int i = -10; i < 10; i+=2) {
+		for(int j = -10; j < 10; j+=2) {
+			glm::vec2 translation;
+			translation.x = (float)i/10.0f + offset;
+			translation.y = (float)j/10.0f + offset;
+			translations[index++]=translation;
+		}
+	}
 	// ==================================================================================
-	GLuint VBO, VAO;
+	unsigned int VBO, VAO, instanceVBO;
 	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
+
 	glBindVertexArray(VAO);
+	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (GLvoid*)0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (GLvoid*)(3*sizeof(float)));
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float), (GLvoid*)0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (GLvoid*)(2*sizeof(float)));
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glBindVertexArray(0); // Unbind VAO
 	
-	float angle = 45.0f, n = 0.1f, f = 100.0f, ar = (float)width/(float)height; // aspect ratio
-	glm::mat4 projection_perspective = {1/(ar*tan(angle/2)), 0, 0, 0, 0, 1/tan(angle/2), 0, 0, 0, 0, -(f+n)/(f-n), -2*f*n/(f-n), 0, 0, -1, 0};
-	projection_perspective = glm::transpose(projection_perspective);
-	glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-	//glm::mat model = glm::mat4(1.0f);
+	glGenBuffers(1, &instanceVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2)*100, &translations[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2*sizeof(float), (GLvoid*)0);
+	glEnableVertexAttribArray(2);
 
 	while(!glfwWindowShouldClose(window))
 	{
@@ -102,24 +119,13 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
         glUseProgram(our_shader.program);
-		
-		float time = glfwGetTime();
-		glm::mat4 model = {1.0f, 0.0f, 0.0f, 0.0f,
-									 0.0f, cos(time), -sin(time), 0.0f,
-									 0.0f, sin(time),  cos(time), 0.0f,
-									 0.0f, 0.0f, 0.0f, 1.0f};
-
-		// compounding more rotations just to make it fancy
-		model = glm::rotate(model, glm::radians(sin(time)*90.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(sin(time)*90.0f), glm::vec3(1.0f, 1.0f, 1.0f));
-
-		glUniformMatrix4fv(glGetUniformLocation(our_shader.program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		glUniformMatrix4fv(glGetUniformLocation(our_shader.program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-		glUniformMatrix4fv(glGetUniformLocation(our_shader.program, "projection_perspective"), 1, GL_FALSE, glm::value_ptr(projection_perspective));
-
+		for(unsigned int i=0; i<100; i++) {
+			std::stringstream index;
+			index << i;
+			glUniform2f(glGetUniformLocation(our_shader.program, ("offsets[" + index.str()+"]").c_str()), translations[i].x, translations[i].y); 
+		}
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_POINTS, 0, 4);
-		
+		glDrawArraysInstanced(GL_TRIANGLES, 0, 6, 100);
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);
