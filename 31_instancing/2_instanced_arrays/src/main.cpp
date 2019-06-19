@@ -96,6 +96,7 @@ int main()
 	glGenVertexArrays(1, &VAO);
 
 	glBindVertexArray(VAO);
+
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -103,13 +104,15 @@ int main()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (GLvoid*)(2*sizeof(float)));
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
-	glBindVertexArray(0); // Unbind VAO
-	
+
 	glGenBuffers(1, &instanceVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec2)*100, &translations[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2*sizeof(float), (GLvoid*)0);
 	glEnableVertexAttribArray(2);
+	glVertexAttribDivisor(2, 1);
+
+	glBindVertexArray(0); // Unbind VAO
 
 	while(!glfwWindowShouldClose(window))
 	{
