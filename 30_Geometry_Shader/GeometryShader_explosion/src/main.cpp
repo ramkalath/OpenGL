@@ -95,6 +95,8 @@ int main()
 		glfwSwapBuffers(window);
 	}
 
+	std::cout << "Amme Sharanam" << std::endl;
+
 	glfwTerminate();
     return 0;
 }
