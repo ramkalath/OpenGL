@@ -122,11 +122,6 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
         glUseProgram(our_shader.program);
-		for(unsigned int i=0; i<100; i++) {
-			std::stringstream index;
-			index << i;
-			glUniform2f(glGetUniformLocation(our_shader.program, ("offsets[" + index.str()+"]").c_str()), translations[i].x, translations[i].y); 
-		}
 		glBindVertexArray(VAO);
 		glDrawArraysInstanced(GL_TRIANGLES, 0, 6, 100);
 		glBindVertexArray(0);
