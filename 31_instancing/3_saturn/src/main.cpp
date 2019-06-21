@@ -64,7 +64,8 @@ int main()
 
 	Shader objectshader("./shaders/vertex_shader.vert", "./shaders/fragment_shader.frag");
 
-	Modelloader saturn("/home/ram/Downloads/3d_models/solarsystem/saturn/13906_Saturn_v1_l3.obj");
+	Modelloader saturn("./resources/saturn/13906_Saturn_v1_l3.obj");
+	//Modelloader saturn("/home/ram/Downloads/3d_models/solarsystem/saturn/13906_Saturn_v1_l3.obj");
 	saturn.modelmatrix = glm::mat4(1.0f);
 	saturn.modelmatrix = glm::translate(saturn.modelmatrix, glm::vec3(2.0f, -1.0f, -2.0f));
 	saturn.modelmatrix = glm::scale(saturn.modelmatrix, glm::vec3(0.005f, 0.005f, 0.005f));
@@ -72,7 +73,7 @@ int main()
 	saturn.modelmatrix = glm::rotate(saturn.modelmatrix, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
 
-	Modelloader asteroid("/home/ram/Downloads/3d_models/solarsystem/asteroid/10464_Asteroid_v1_Iterations-2.obj");
+	Modelloader asteroid("./resources/asteroid/10464_Asteroid_v1_Iterations-2.obj");
 	asteroid.modelmatrix = glm::mat4(1.0f);
 	asteroid.modelmatrix = glm::translate(asteroid.modelmatrix, glm::vec3(-1.0f, -1.0f, -2.0f));
 	asteroid.modelmatrix = glm::scale(asteroid.modelmatrix, glm::vec3(0.0005f, 0.0005f, 0.0005f));
