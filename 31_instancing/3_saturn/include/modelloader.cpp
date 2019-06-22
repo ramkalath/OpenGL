@@ -61,6 +61,7 @@ public:
 	Modelloader(const std::string path);
 	glm::mat4 modelmatrix;
 	void Draw(Shader);
+	void DrawInstanced(Shader, int);
 
 private:
 	std::string directory;
@@ -253,6 +254,29 @@ void Modelloader::Draw(Shader shader)
 		}
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glDrawElements(GL_TRIANGLES, meshes[i].indices.size(), GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+	}
+}
+
+void Modelloader::DrawInstanced(Shader shader, int count)
+{
+	for(unsigned int i=0; i<this->meshes.size(); i++)
+	{
+		glBindVertexArray(meshes[i].VAO);
+		unsigned int k=0;
+		for(unsigned int j=0; j<meshes[i].diffusemaps.size(); j++) {
+			glUniform1i(glGetUniformLocation(shader.program, "diffuse_texture"), j);
+			glActiveTexture(GL_TEXTURE0+j);
+			glBindTexture(GL_TEXTURE_2D, meshes[i].diffusemaps[j].id);
+			k++;
+		}
+		for(unsigned int j=0; j<meshes[i].specularmaps.size(); j++) {
+			glUniform1i(glGetUniformLocation(shader.program, "specular_texture"), j+k);
+			glActiveTexture(GL_TEXTURE0+j+k);
+			glBindTexture(GL_TEXTURE_2D, meshes[i].specularmaps[j].id);
+		}
+		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glDrawElementsInstanced(GL_TRIANGLES, meshes[i].indices.size(), GL_UNSIGNED_INT, 0, count);
 		glBindVertexArray(0);
 	}
 }
