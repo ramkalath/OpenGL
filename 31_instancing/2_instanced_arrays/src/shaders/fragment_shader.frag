@@ -1,10 +1,10 @@
 #version 330 core
 
-in vec3 color2;
-out vec4 color3;
+in vec3 fColor;
+out vec4 color;
 
 void main()
 {
-	color3 = vec4(color2, 1.0f);
+	color = vec4(fColor, 1.0f);
 }
 
