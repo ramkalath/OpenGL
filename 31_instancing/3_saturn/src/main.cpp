@@ -1,9 +1,9 @@
 /*****************************************************************************
  * Author : Ram
- * Date : 21/Feb/2019
+ * Date : 24/June/2019
  * Email : ramkalath@gmail.com
- * Breif Description : saturn model loading with assimp.
- * Detailed Description : object loading with assimp with directional light
+ * Breif Description : saturn + asteroids model loading
+ * Detailed Description : saturn + asteroids model loading with basic instancing; fails beyond rendering about 700 asteroids with Nvidia Geforce 940MX.
  *****************************************************************************/
 // GLEW and GLFW includes
 #define GLEW_STATIC
@@ -51,7 +51,6 @@ int width = 1500, height = 1000;
 
 int main()
 {
-	float counter=0; 
 	GameSettings globalsettings;
 	// glfw stuff ====================================================================
     glfwInit();
@@ -91,9 +90,6 @@ int main()
 	saturn.modelmatrix = glm::rotate(saturn.modelmatrix, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
 	Modelloader asteroid("./resources/stone/stone.obj");
-	asteroid.modelmatrix = glm::mat4(1.0f);
-	float scale = ((float)std::rand()/RAND_MAX);
-	asteroid.modelmatrix = glm::scale(asteroid.modelmatrix, glm::vec3(0.1f*scale, 0.2f*scale, 0.1f*scale));
 
 	glm::vec3 rot_axis[100];
 	for(unsigned int i=0; i<100; i++)
@@ -134,9 +130,6 @@ int main()
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(saturn.modelmatrix));
 		saturn.Draw(objectshader);
 
-
-
-		counter=1;
 		for(unsigned int i=0; i<num_asteroids; i++)
 		{
 			std::stringstream index;
