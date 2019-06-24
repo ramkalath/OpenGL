@@ -99,7 +99,6 @@ int main()
 	for(unsigned int i=0; i<100; i++)
 		rot_axis[i] = glm::vec3(generate_rand_nos(-0.9f, 0.9f), generate_rand_nos(-0.9f, 0.9f), generate_rand_nos(-0.9f, 0.9f));
 
-	// lets use the same random translations as rotation axis
 	unsigned int num_asteroids = 500;
 	glm::mat4 model_asteroid[num_asteroids];
 
@@ -108,10 +107,9 @@ int main()
 		srand(i);
 		float theta = generate_rand_nos(0.1f, 10.0f);
 		float radius = 15.0f;
-		glm::vec3 pos = glm::vec3(radius*cos(theta)+sat_pos_x+5.0f+generate_rand_nos(0.1, 0.9), -1.0f, radius*sin(theta)+sat_pos_z-10.0f+generate_rand_nos(0.1, 0.9));
+		glm::vec3 pos = glm::vec3(radius*cos(theta)+sat_pos_x+-2.0f+generate_rand_nos(-2.0f, 2.0f), -1.0f, radius*sin(theta)+sat_pos_z-10.0f+generate_rand_nos(-2.0f, 2.0f));
 		model_asteroid[i] = glm::translate(model_asteroid[i], pos);
-		model_asteroid[i] = glm::scale(model_asteroid[i], glm::vec3(generate_rand_nos(0.01, 0.1), generate_rand_nos(0.01, 0.1), generate_rand_nos(0.01, 0.1)));
-		//model_asteroid[i] = glm::scale(model_asteroid[i], glm::vec3(0.08f, 0.08f, 0.08f));
+		model_asteroid[i] = glm::scale(model_asteroid[i], glm::vec3(generate_rand_nos(0.01, 0.3), generate_rand_nos(0.01, 0.3), generate_rand_nos(0.01, 0.3)));
 	}
 
 	while(!glfwWindowShouldClose(window))
@@ -146,7 +144,6 @@ int main()
 			model_asteroid[i] = glm::rotate(model_asteroid[i], glm::radians(1.0f), rot_axis[i]);
 			glUniformMatrix4fv(glGetUniformLocation(objectshader.program, ("model[" + index.str()+"]").c_str()), 1, GL_FALSE, glm::value_ptr(model_asteroid[i]));
 		}
-		//glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(asteroid.modelmatrix));
 		asteroid.DrawInstanced(objectshader, 100);
 
 		glfwSwapBuffers(window);
