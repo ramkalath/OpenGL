@@ -28,15 +28,18 @@
 #include "../include/modelloader.h"
 #include "../include/gamesettings.h"
 
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
-{
+void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode) {
 	// When the user presses the escape key, we set the window should close property to true, and close the application.
 	if(key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 }
 
-glm::vec3 calculate_random_position(float radius, float center_x, float center_z)
-{
+float generate_rand_nos(float min, float max) {
+	int precision = 1000; 
+	return min+((max-min)/precision*(std::rand()%precision+1));
+}
+
+glm::vec3 calculate_random_position(float radius, float center_x, float center_z) {
 	int theta = std::rand()%360;
 	float random_x = 1-((float)std::rand()/RAND_MAX)*2;
 	float random_z = 1-((float)std::rand()/RAND_MAX)*2;
@@ -81,25 +84,35 @@ int main()
 
 	Modelloader saturn("./resources/saturn/13906_Saturn_v1_l3.obj");
 	saturn.modelmatrix = glm::mat4(1.0f);
-	saturn.modelmatrix = glm::translate(saturn.modelmatrix, glm::vec3(2.0f, -1.0f, -2.0f));
+	float sat_pos_x = 2.0f, sat_pos_z = -2.0f;
+	saturn.modelmatrix = glm::translate(saturn.modelmatrix, glm::vec3(sat_pos_x, -1.0f, sat_pos_z));
 	saturn.modelmatrix = glm::scale(saturn.modelmatrix, glm::vec3(0.005f, 0.005f, 0.005f));
 	saturn.modelmatrix = glm::rotate(saturn.modelmatrix, glm::radians(-25.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 	saturn.modelmatrix = glm::rotate(saturn.modelmatrix, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
 	Modelloader asteroid("./resources/stone/stone.obj");
 	asteroid.modelmatrix = glm::mat4(1.0f);
-	asteroid.modelmatrix = glm::translate(asteroid.modelmatrix, glm::vec3(-3.0f, -1.0f, -2.0f));
 	float scale = ((float)std::rand()/RAND_MAX);
 	asteroid.modelmatrix = glm::scale(asteroid.modelmatrix, glm::vec3(0.1f*scale, 0.2f*scale, 0.1f*scale));
 
-	glm::vec3 translations[100];
-	float radius = 100.0f;
-	float center_x = 50.0f, center_z = -80.0f;
+	glm::vec3 rot_axis[100];
 	for(unsigned int i=0; i<100; i++)
-		translations[i] = calculate_random_position(radius, center_x, center_z);
+		rot_axis[i] = glm::vec3(generate_rand_nos(-0.9f, 0.9f), generate_rand_nos(-0.9f, 0.9f), generate_rand_nos(-0.9f, 0.9f));
 
-	//for(unsigned int i=0; i<100; i++)
-		//std::cout << translations[i].x << "\t" << translations[i].y << "\t" << translations[i].z << std::endl;
+	// lets use the same random translations as rotation axis
+	unsigned int num_asteroids = 500;
+	glm::mat4 model_asteroid[num_asteroids];
+
+	for(unsigned int i=0; i<num_asteroids; i++) {
+		model_asteroid[i] = glm::mat4(1.0f);
+		srand(i);
+		float theta = generate_rand_nos(0.1f, 10.0f);
+		float radius = 15.0f;
+		glm::vec3 pos = glm::vec3(radius*cos(theta)+sat_pos_x+5.0f+generate_rand_nos(0.1, 0.9), -1.0f, radius*sin(theta)+sat_pos_z-10.0f+generate_rand_nos(0.1, 0.9));
+		model_asteroid[i] = glm::translate(model_asteroid[i], pos);
+		model_asteroid[i] = glm::scale(model_asteroid[i], glm::vec3(generate_rand_nos(0.01, 0.1), generate_rand_nos(0.01, 0.1), generate_rand_nos(0.01, 0.1)));
+		//model_asteroid[i] = glm::scale(model_asteroid[i], glm::vec3(0.08f, 0.08f, 0.08f));
+	}
 
 	while(!glfwWindowShouldClose(window))
 	{
@@ -123,14 +136,17 @@ int main()
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(saturn.modelmatrix));
 		saturn.Draw(objectshader);
 
+
+
 		counter=1;
-		for(unsigned int i=0; i<100; i++)
+		for(unsigned int i=0; i<num_asteroids; i++)
 		{
 			std::stringstream index;
 			index << i;
-			glUniform3f(glGetUniformLocation(objectshader.program, ("offsets[" + index.str()+"]").c_str()), translations[i].x, translations[i].y, translations[i].z); 
+			model_asteroid[i] = glm::rotate(model_asteroid[i], glm::radians(1.0f), rot_axis[i]);
+			glUniformMatrix4fv(glGetUniformLocation(objectshader.program, ("model[" + index.str()+"]").c_str()), 1, GL_FALSE, glm::value_ptr(model_asteroid[i]));
 		}
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(asteroid.modelmatrix));
+		//glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(asteroid.modelmatrix));
 		asteroid.DrawInstanced(objectshader, 100);
 
 		glfwSwapBuffers(window);
