@@ -116,7 +116,7 @@ int main()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*num_specks, &scale[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 1*sizeof(float), (GLvoid*)0);
 	glEnableVertexAttribArray(1);
-	glVertexAttribDivisor(1, 1);
+	glVertexAttribDivisor(1, 1); 
 
 	glGenBuffers(1, &translationsVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, translationsVBO);
