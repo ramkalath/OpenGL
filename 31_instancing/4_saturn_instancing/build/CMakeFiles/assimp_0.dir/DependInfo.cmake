@@ -4,10 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/gamesettings.cpp" "/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/build/CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o"
-  "/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/modelloader.cpp" "/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/build/CMakeFiles/assimp_0.dir/include/modelloader.cpp.o"
-  "/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/shader.cpp" "/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/build/CMakeFiles/assimp_0.dir/include/shader.cpp.o"
-  "/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/src/main.cpp" "/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/build/CMakeFiles/assimp_0.dir/src/main.cpp.o"
+  "/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/gamesettings.cpp" "/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/build/CMakeFiles/assimp_0.dir/include/gamesettings.cpp.o"
+  "/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/modelloader.cpp" "/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/build/CMakeFiles/assimp_0.dir/include/modelloader.cpp.o"
+  "/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/shader.cpp" "/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/build/CMakeFiles/assimp_0.dir/include/shader.cpp.o"
+  "/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/src/main.cpp" "/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/build/CMakeFiles/assimp_0.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

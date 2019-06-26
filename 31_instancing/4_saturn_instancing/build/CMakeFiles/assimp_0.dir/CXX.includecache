@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/gamesettings.cpp
+/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/gamesettings.cpp
 glm/glm.hpp
 -
 glm/gtc/matrix_transform.hpp
@@ -18,7 +18,7 @@ iostream
 math.h
 -
 
-/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/gamesettings.h
+/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/gamesettings.h
 glm/glm.hpp
 -
 glm/gtc/matrix_transform.hpp
@@ -30,7 +30,7 @@ iostream
 math.h
 -
 
-/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/modelloader.cpp
+/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/modelloader.cpp
 GL/glew.h
 -
 glm/glm.hpp
@@ -52,9 +52,9 @@ iostream
 vector
 -
 ../include/shader.h
-/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/shader.h
+/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/shader.h
 
-/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/modelloader.h
+/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/modelloader.h
 GL/glew.h
 -
 glm/glm.hpp
@@ -76,9 +76,9 @@ iostream
 vector
 -
 ../include/shader.h
-/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/shader.h
+/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/shader.h
 
-/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/shader.cpp
+/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/shader.cpp
 GL/glew.h
 -
 iostream
@@ -88,15 +88,15 @@ fstream
 cstring
 -
 shader.h
-/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/shader.h
+/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/shader.h
 sstream
 -
 
-/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/shader.h
+/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/shader.h
 GL/glew.h
 -
 
-/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/src/main.cpp
+/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/src/main.cpp
 GL/glew.h
 -
 GLFW/glfw3.h
@@ -120,11 +120,11 @@ string
 sstream
 -
 ../include/shader.h
-/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/shader.h
+/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/shader.h
 ../include/modelloader.h
-/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/modelloader.h
+/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/modelloader.h
 ../include/gamesettings.h
-/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/include/gamesettings.h
+/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/include/gamesettings.h
 
 /usr/local/include/GLFW/glfw3.h
 stddef.h

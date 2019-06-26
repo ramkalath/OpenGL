@@ -1,4 +1,4 @@
-# Install script for directory: /home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn
+# Install script for directory: /home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

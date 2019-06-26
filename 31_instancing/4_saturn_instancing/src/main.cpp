@@ -2,8 +2,8 @@
  * Author : Ram
  * Date : 24/June/2019
  * Email : ramkalath@gmail.com
- * Breif Description : saturn + asteroid model loading with assimp.
- * Detailed Description : saturn + asteroid model loading with assimp. With proper instancing
+ * Breif Description : uranus + asteroid model loading with assimp.
+ * Detailed Description : uranus + asteroid model loading with assimp. With proper instancing. Model loading is done using recursion which usually creates a lot of vao's and its complicated to work with that. My idea is to use the old serial loading framework with its vao exposed so that we can add rotation (theta and rotation axis) and scaling.
  *****************************************************************************/
 // GLEW and GLFW includes
 #define GLEW_STATIC
@@ -79,31 +79,31 @@ int main()
 	glfwGetFramebufferSize(window, &width, &height);
 	glViewport(0, 0, width, height);
 
-	Shader objectshader("./shaders/vertex_shader.vert", "./shaders/fragment_shader.frag");
+	Shader objectshader("./shaders/object_vertex_shader.vert", "./shaders/object_fragment_shader.frag");
+	Shader dustshader("./shaders/dust_vertex_shader.vert", "./shaders/dust_fragment_shader.frag");
 
-	Modelloader saturn("./resources/saturn/13906_Saturn_v1_l3.obj");
-	saturn.modelmatrix = glm::mat4(1.0f);
-	float sat_pos_x = 2.0f, sat_pos_z = -2.0f;
-	saturn.modelmatrix = glm::translate(saturn.modelmatrix, glm::vec3(sat_pos_x, -1.0f, sat_pos_z));
-	saturn.modelmatrix = glm::scale(saturn.modelmatrix, glm::vec3(0.005f, 0.005f, 0.005f));
-	saturn.modelmatrix = glm::rotate(saturn.modelmatrix, glm::radians(-25.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-	saturn.modelmatrix = glm::rotate(saturn.modelmatrix, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	Modelloader uranus("/home/ram/Downloads/3d_models/solarsystem/Neptune/Neptune_v2_L3.123c6fe2b903-2de3-4b54-836a-dd427a10e972/13908_Neptune_V2_l3.obj");
+	uranus.modelmatrix = glm::mat4(1.0f);
+	float sat_pos_x = 0.0f, sat_pos_z = 0.0f;
+	uranus.modelmatrix = glm::translate(uranus.modelmatrix, glm::vec3(sat_pos_x, 0.0f, sat_pos_z));
+	uranus.modelmatrix = glm::scale(uranus.modelmatrix, glm::vec3(0.004f, 0.004f, 0.004f));
+	uranus.modelmatrix = glm::rotate(uranus.modelmatrix, glm::radians(-25.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	uranus.modelmatrix = glm::rotate(uranus.modelmatrix, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
-	Modelloader asteroid("./resources/stone/stone.obj");
-	glm::vec3 rot_axis[100];
-	for(unsigned int i=0; i<100; i++)
-		rot_axis[i] = glm::vec3(generate_rand_nos(-0.9f, 0.9f), generate_rand_nos(-0.9f, 0.9f), generate_rand_nos(-0.9f, 0.9f));
-	unsigned int num_asteroids = 500;
-	glm::mat4 model_asteroid[num_asteroids];
-	for(unsigned int i=0; i<num_asteroids; i++) {
-		model_asteroid[i] = glm::mat4(1.0f);
-		srand(i);
-		float theta = generate_rand_nos(0.1f, 10.0f);
-		float radius = 15.0f;
-		glm::vec3 pos = glm::vec3(radius*cos(theta)+sat_pos_x+-2.0f+generate_rand_nos(-2.0f, 2.0f), -1.0f, radius*sin(theta)+sat_pos_z-10.0f+generate_rand_nos(-2.0f, 2.0f));
-		model_asteroid[i] = glm::translate(model_asteroid[i], pos);
-		model_asteroid[i] = glm::scale(model_asteroid[i], glm::vec3(generate_rand_nos(0.01, 0.3), generate_rand_nos(0.01, 0.3), generate_rand_nos(0.01, 0.3)));
-	}
+	GLfloat speck[] = {
+		 0.0f,  0.5f, 0.0f,
+		-0.5f, -0.5f, 0.0f,
+		 0.5f, -0.5f, 0.0f
+	};
+	unsigned int VBO, VAO;
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(speck), speck, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);
+	glBindVertexArray(0);
 
 	while(!glfwWindowShouldClose(window))
 	{
@@ -123,19 +123,19 @@ int main()
 		glUniform3f(glGetUniformLocation(objectshader.program, "LightSpecular"), 0.0f, 0.0f, 0.0f);
 		glUniform3f(glGetUniformLocation(objectshader.program, "CameraPosition"), 0.0f, 0.0f, 0.0f);
 
-		// render saturn
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(saturn.modelmatrix));
-		saturn.Draw(objectshader);
+		// render uranus
+		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(uranus.modelmatrix));
+		uranus.Draw(objectshader);
 
-		for(unsigned int i=0; i<num_asteroids; i++)
-		{
-			std::stringstream index;
-			index << i;
-			model_asteroid[i] = glm::rotate(model_asteroid[i], glm::radians(1.0f), rot_axis[i]);
-			glUniformMatrix4fv(glGetUniformLocation(objectshader.program, ("model[" + index.str()+"]").c_str()), 1, GL_FALSE, glm::value_ptr(model_asteroid[i]));
-		}
-		asteroid.DrawInstanced(objectshader, 100);
+		glUseProgram(dustshader.program);
+		glUniformMatrix4fv(glGetUniformLocation(dustshader.program, "model"), 1, GL_FALSE, glm::value_ptr(speck_modelmatrix));
+		glUniformMatrix4fv(glGetUniformLocation(dustshader.program, "view"), 1, GL_FALSE, glm::value_ptr(globalsettings.view));
+		glUniformMatrix4fv(glGetUniformLocation(dustshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(globalsettings.projection_perspective));
+		glBindVertexArray(VAO);
+		glDrawArrays(GL_POINTS, 0, 36);
+		glBindVertexArray(0);
 
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glfwSwapBuffers(window);
 	}
 

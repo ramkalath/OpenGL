@@ -6,5 +6,5 @@ CXX_FLAGS = -g
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/ram/workarea/opengl/advanced_opengl/31_instancing/3_saturn/./include -I/usr/local/include 
+CXX_INCLUDES = -I/home/ram/workarea/opengl/advanced_opengl/31_instancing/4_saturn_instancing/./include -I/usr/local/include 
 
