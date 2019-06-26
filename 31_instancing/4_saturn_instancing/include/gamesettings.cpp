@@ -29,7 +29,7 @@ GameSettings::GameSettings()
 	this->height = 1000;
 
 	// view matrix
-	this->view = glm::lookAt(glm::vec3(0.0f, 0.0f, 8.1f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	this->view = glm::lookAt(glm::vec3(0.0f, 0.0f, 6.1f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	
 	// perspective projection matrix
 	float angle = 45.0f;

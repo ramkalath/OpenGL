@@ -87,15 +87,22 @@ int main()
 	float sat_pos_x = 0.0f, sat_pos_z = 0.0f;
 	uranus.modelmatrix = glm::translate(uranus.modelmatrix, glm::vec3(sat_pos_x, 0.0f, sat_pos_z));
 	uranus.modelmatrix = glm::scale(uranus.modelmatrix, glm::vec3(0.004f, 0.004f, 0.004f));
-	uranus.modelmatrix = glm::rotate(uranus.modelmatrix, glm::radians(-25.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-	uranus.modelmatrix = glm::rotate(uranus.modelmatrix, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
 	GLfloat speck[] = {
 		 0.0f,  0.5f, 0.0f,
 		-0.5f, -0.5f, 0.0f,
 		 0.5f, -0.5f, 0.0f
 	};
-	unsigned int VBO, VAO;
+
+	int num_specks = 100;
+	float scale[num_specks];
+	glm::vec3 translations[num_specks];
+	for(unsigned int i=0; i<num_specks; i++) {
+		scale[i] = generate_rand_nos(0.05f, 0.1f);
+		translations[i] = glm::vec3(generate_rand_nos(-10.0f, 10.0f), generate_rand_nos(-10.0f, 10.0f), -10.0f);
+	}
+
+	unsigned int VBO, VAO, scaleVBO, translationsVBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 	glBindVertexArray(VAO);
@@ -103,6 +110,21 @@ int main()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(speck), speck, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
+
+	glGenBuffers(1, &scaleVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, scaleVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*num_specks, &scale[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 1*sizeof(float), (GLvoid*)0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribDivisor(1, 1);
+
+	glGenBuffers(1, &translationsVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, translationsVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3)*num_specks, &translations[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), (GLvoid*)0);
+	glEnableVertexAttribArray(2);
+	glVertexAttribDivisor(2, 1);
+
 	glBindVertexArray(0);
 
 	while(!glfwWindowShouldClose(window))
@@ -115,8 +137,10 @@ int main()
 		glUseProgram(objectshader.program);
 
 		 // Uniforms
+		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(uranus.modelmatrix));
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "view"), 1, GL_FALSE, glm::value_ptr(globalsettings.view));
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(globalsettings.projection_perspective));
+
 		glUniform3f(glGetUniformLocation(objectshader.program, "LightDirection"), 10.0f, -10.0f, -10.0f);
 		glUniform3f(glGetUniformLocation(objectshader.program, "LightAmbient"), 0.1f, 0.1f, 0.1f);
 		glUniform3f(glGetUniformLocation(objectshader.program, "LightDiffuse"), 0.8f, 0.8f, 0.8f);
@@ -124,18 +148,16 @@ int main()
 		glUniform3f(glGetUniformLocation(objectshader.program, "CameraPosition"), 0.0f, 0.0f, 0.0f);
 
 		// render uranus
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(uranus.modelmatrix));
-		uranus.Draw(objectshader);
+		//uranus.Draw(objectshader);
 
 		glUseProgram(dustshader.program);
-		glUniformMatrix4fv(glGetUniformLocation(dustshader.program, "model"), 1, GL_FALSE, glm::value_ptr(speck_modelmatrix));
 		glUniformMatrix4fv(glGetUniformLocation(dustshader.program, "view"), 1, GL_FALSE, glm::value_ptr(globalsettings.view));
-		glUniformMatrix4fv(glGetUniformLocation(dustshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(globalsettings.projection_perspective));
+		glUniformMatrix4fv(glGetUniformLocation(dustshader.program, "projection_perspective"), 1, GL_FALSE, glm::value_ptr(globalsettings.projection_perspective));
+
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_POINTS, 0, 36);
+		glDrawArraysInstanced(GL_TRIANGLES, 0, 3, num_specks);
 		glBindVertexArray(0);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glfwSwapBuffers(window);
 	}
 
