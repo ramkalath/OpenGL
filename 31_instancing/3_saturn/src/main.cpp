@@ -58,6 +58,7 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+    glfwWindowHint(GLFW_SAMPLES, 4);
 
     GLFWwindow *window = glfwCreateWindow(width, height, "Lighting Properties", nullptr, nullptr);
     glfwMakeContextCurrent(window);
@@ -75,6 +76,7 @@ int main()
 	}
 
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_MULTISAMPLE);
 
 	glfwGetFramebufferSize(window, &width, &height);
 	glViewport(0, 0, width, height);
