@@ -2,8 +2,8 @@
  * Author : Ram
  * Date : 24/June/2019
  * Email : ramkalath@gmail.com
- * Breif Description : uranus + asteroid model loading with assimp.
- * Detailed Description : uranus + asteroid model loading with assimp. With proper instancing. Model loading is done using recursion which usually creates a lot of vao's and its complicated to work with that. My idea is to use the old serial loading framework with its vao exposed so that we can add rotation (theta and rotation axis) and scaling.
+ * Breif Description : saturn + asteroid model loading with assimp.
+ * Detailed Description : saturn + asteroid model loading with assimp. With proper instancing. Model loading is done using recursion which usually creates a lot of vao's and its complicated to work with that. My idea is to use the old serial loading framework with its vao exposed so that we can add rotation (theta and rotation axis) and scaling.
  *****************************************************************************/
 // GLEW and GLFW includes
 #define GLEW_STATIC
@@ -82,11 +82,13 @@ int main()
 	Shader objectshader("./shaders/object_vertex_shader.vert", "./shaders/object_fragment_shader.frag");
 	Shader dustshader("./shaders/dust_vertex_shader.vert", "./shaders/dust_fragment_shader.frag");
 
-	Modelloader uranus("/home/ram/Downloads/3d_models/solarsystem/Neptune/Neptune_v2_L3.123c6fe2b903-2de3-4b54-836a-dd427a10e972/13908_Neptune_V2_l3.obj");
-	uranus.modelmatrix = glm::mat4(1.0f);
+	Modelloader saturn("./resources/saturn/13906_Saturn_v1_l3.obj");
+	saturn.modelmatrix = glm::mat4(1.0f);
 	float sat_pos_x = 0.0f, sat_pos_z = 0.0f;
-	uranus.modelmatrix = glm::translate(uranus.modelmatrix, glm::vec3(sat_pos_x, 0.0f, sat_pos_z));
-	uranus.modelmatrix = glm::scale(uranus.modelmatrix, glm::vec3(0.004f, 0.004f, 0.004f));
+	saturn.modelmatrix = glm::translate(saturn.modelmatrix, glm::vec3(sat_pos_x, 0.0f, sat_pos_z));
+	saturn.modelmatrix = glm::rotate(saturn.modelmatrix, glm::radians(-45.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	saturn.modelmatrix = glm::rotate(saturn.modelmatrix, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	saturn.modelmatrix = glm::scale(saturn.modelmatrix, glm::vec3(0.0045f, 0.0045f, 0.004f));
 
 	GLfloat speck[] = {
 		 0.0f,  0.5f, 0.0f,
@@ -94,18 +96,19 @@ int main()
 		 0.5f, -0.5f, 0.0f
 	};
 
-	int num_specks = 100;
+	int num_specks=1000;
 	float scale[num_specks];
 	glm::vec3 translations[num_specks];
 	for(unsigned int i=0; i<num_specks; i++) {
-		scale[i] = generate_rand_nos(0.05f, 0.1f);
-		translations[i] = glm::vec3(generate_rand_nos(-10.0f, 10.0f), generate_rand_nos(-10.0f, 10.0f), -10.0f);
+		scale[i] = generate_rand_nos(0.01f, 0.05f);
+		translations[i] = glm::vec3(generate_rand_nos(-13.0f, 13.0f), generate_rand_nos(-10.0f, 10.0f), -10.0f);
 	}
 
 	unsigned int VBO, VAO, scaleVBO, translationsVBO;
 	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
 	glBindVertexArray(VAO);
+
+	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(speck), speck, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(GLfloat), (GLvoid*)0);
@@ -114,7 +117,7 @@ int main()
 	glGenBuffers(1, &scaleVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, scaleVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*num_specks, &scale[0], GL_STATIC_DRAW);
-	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 1*sizeof(float), (GLvoid*)0);
+	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(float), (GLvoid*)0);
 	glEnableVertexAttribArray(1);
 	glVertexAttribDivisor(1, 1); 
 
@@ -137,7 +140,7 @@ int main()
 		glUseProgram(objectshader.program);
 
 		 // Uniforms
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(uranus.modelmatrix));
+		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(saturn.modelmatrix));
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "view"), 1, GL_FALSE, glm::value_ptr(globalsettings.view));
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(globalsettings.projection_perspective));
 
@@ -147,8 +150,8 @@ int main()
 		glUniform3f(glGetUniformLocation(objectshader.program, "LightSpecular"), 0.0f, 0.0f, 0.0f);
 		glUniform3f(glGetUniformLocation(objectshader.program, "CameraPosition"), 0.0f, 0.0f, 0.0f);
 
-		// render uranus
-		//uranus.Draw(objectshader);
+		// render saturn
+		saturn.Draw(objectshader);
 
 		glUseProgram(dustshader.program);
 		glUniformMatrix4fv(glGetUniformLocation(dustshader.program, "view"), 1, GL_FALSE, glm::value_ptr(globalsettings.view));
