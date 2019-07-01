@@ -11,7 +11,7 @@ FILENAME1 = main
 FILENAME2 = ../include/shader
 
 all: $(FILENAME2).cpp $(FILENAME1).cpp
-	@$(CC) $(CFLAGS) $(INCLUDE) $(FILENAME2).cpp $(FILENAME1).cpp -o ../bin/$(FILENAME1) $(LIBS)
+	$(CC) $(CFLAGS) $(INCLUDE) $(FILENAME2).cpp $(FILENAME1).cpp -o ../bin/$(FILENAME1) $(LIBS)
 
 run:
 	@../bin/./$(FILENAME1)	
