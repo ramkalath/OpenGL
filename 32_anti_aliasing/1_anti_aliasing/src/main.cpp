@@ -33,20 +33,20 @@ int width = 640, height = 800;
 int main()
 {
 	// glfw stuff ====================================================================
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
-    GLFWwindow *window = glfwCreateWindow(800, 600, "View and perspective projection Matrices", nullptr, nullptr);
-    glfwMakeContextCurrent(window);
-    glfwSetKeyCallback(window, key_callback);
+	GLFWwindow *window = glfwCreateWindow(800, 600, "View and perspective projection Matrices", nullptr, nullptr);
+	glfwMakeContextCurrent(window);
+	glfwSetKeyCallback(window, key_callback);
 
-    if(window == nullptr)
-    {
-    	std::cerr << "Failed to create GLFW window" << std::endl;
+	if(window == nullptr)
+	{
+		std::cerr << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
 		return -1;
     }
@@ -70,29 +70,29 @@ int main()
 
 	// data - vertices ===================================================================
 	float vertices[] = {
-    	-0.5f, -0.5f, -0.5f,  0.5f, -0.5f, -0.5f,
-    	 0.5f,  0.5f, -0.5f,  0.5f,  0.5f, -0.5f,
-    	-0.5f,  0.5f, -0.5f, -0.5f, -0.5f, -0.5f,
-	
-    	-0.5f, -0.5f,  0.5f,  0.5f, -0.5f,  0.5f,
-    	 0.5f,  0.5f,  0.5f,  0.5f,  0.5f,  0.5f,
-    	-0.5f,  0.5f,  0.5f, -0.5f, -0.5f,  0.5f,
+		-0.5f, -0.5f, -0.5f,  0.5f, -0.5f, -0.5f,
+		 0.5f,  0.5f, -0.5f,  0.5f,  0.5f, -0.5f,
+		-0.5f,  0.5f, -0.5f, -0.5f, -0.5f, -0.5f,
 
-    	-0.5f,  0.5f,  0.5f, -0.5f,  0.5f, -0.5f,
-    	-0.5f, -0.5f, -0.5f, -0.5f, -0.5f, -0.5f,
-   		-0.5f, -0.5f,  0.5f, -0.5f,  0.5f,  0.5f,
+		-0.5f, -0.5f,  0.5f,  0.5f, -0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,  0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f, -0.5f, -0.5f,  0.5f,
 
-    	 0.5f,  0.5f,  0.5f,  0.5f,  0.5f, -0.5f,
-    	 0.5f, -0.5f, -0.5f,  0.5f, -0.5f, -0.5f,
-    	 0.5f, -0.5f,  0.5f,  0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f, -0.5f,  0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f, -0.5f, -0.5f, -0.5f,
+		-0.5f, -0.5f,  0.5f, -0.5f,  0.5f,  0.5f,
 
-    	-0.5f, -0.5f, -0.5f,  0.5f, -0.5f, -0.5f,
-    	 0.5f, -0.5f,  0.5f,  0.5f, -0.5f,  0.5f,
-    	-0.5f, -0.5f,  0.5f, -0.5f, -0.5f, -0.5f,
+		 0.5f,  0.5f,  0.5f,  0.5f,  0.5f, -0.5f,
+		 0.5f, -0.5f, -0.5f,  0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f,  0.5f,  0.5f,  0.5f,  0.5f,
 
-    	-0.5f,  0.5f, -0.5f,  0.5f,  0.5f, -0.5f,
-    	 0.5f,  0.5f,  0.5f,  0.5f,  0.5f,  0.5f,
-    	-0.5f,  0.5f,  0.5f, -0.5f,  0.5f, -0.5f
+		-0.5f, -0.5f, -0.5f,  0.5f, -0.5f, -0.5f,
+		 0.5f, -0.5f,  0.5f,  0.5f, -0.5f,  0.5f,
+		-0.5f, -0.5f,  0.5f, -0.5f, -0.5f, -0.5f,
+
+		-0.5f,  0.5f, -0.5f,  0.5f,  0.5f, -0.5f,
+		 0.5f,  0.5f,  0.5f,  0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f, -0.5f,  0.5f, -0.5f
 	};
 	
 	// ==================================================================================
