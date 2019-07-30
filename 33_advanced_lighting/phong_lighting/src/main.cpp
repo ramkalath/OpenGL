@@ -152,7 +152,7 @@ int main()
 			 0.5f,  0.5f,  0.5f, -0.5f,  0.5f,  0.5f, -0.5f, -0.5f,  0.5f,
 			-0.5f,  0.5f,  0.5f, -0.5f,  0.5f, -0.5f, -0.5f, -0.5f, -0.5f,
 			-0.5f, -0.5f, -0.5f, -0.5f, -0.5f,  0.5f, -0.5f,  0.5f,  0.5f,
-			 0.5f,  0.5f,  0.5f,  0.5f,  0.5f, -0.5f,  0.5f, -0.5f, -0.5f,
+			 0.5f,  0.5f,  0.5f,  0.5f,  0.5f, -0.5f,  0.5f, -0.5f, -0.5f, 
 			 0.5f, -0.5f, -0.5f,  0.5f, -0.5f,  0.5f,  0.5f,  0.5f,  0.5f,
 			-0.5f, -0.5f, -0.5f,  0.5f, -0.5f, -0.5f,  0.5f, -0.5f,  0.5f,
 			 0.5f, -0.5f,  0.5f, -0.5f, -0.5f,  0.5f, -0.5f, -0.5f, -0.5f,
@@ -174,14 +174,28 @@ int main()
 	
 	// ================================================================================= 
 	// model view and perspective matrices
+	
+	/*
+	// TODO(ram): have to nail the view and perspective matrices
+	// in my head its spinning the camera around; however, its spinning each object around.
+	// use matrices for this and create a global world where we can define camera and object positions precisely
+	*/
+
+	/*
+	 * TODO(ram): after that do check how far away is the plate from the light
+	 * the light is doing some weird loopy thing that makes it look like magnetic fields
+	 * check if the problem is with the distance field
+	 * somehow busted the code a bit - no lighting is turning up
+	 */
+
 	glm::mat4 model = glm::mat4{1.0f};
 	model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
 	model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	model = glm::scale(model, glm::vec3(2.0f, 2.0f, 0.0f));
-	glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, 4.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
 	glm::mat4 model_lamp = glm::mat4{1.0f};
-	glm::vec3 lamp_pos = glm::vec3(0.0f, -0.5f, 0.8f);
+	glm::vec3 lamp_pos = glm::vec3(0.0f, -0.5f, 2.8f);
 	model_lamp = glm::translate(model_lamp, lamp_pos);
 	model_lamp = glm::rotate(model_lamp, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 1.0f));
 	model_lamp = glm::rotate(model_lamp, glm::radians(45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
@@ -220,7 +234,7 @@ int main()
 		// diffused light
 		glUniform3f(glGetUniformLocation(our_shader.program, "lamp_pos"), lamp_pos.x, lamp_pos.y, lamp_pos.z);
 		glUniform3f(glGetUniformLocation(our_shader.program, "light_color"), 1.0f, 1.0f, 1.0f);
-		glUniform3f(glGetUniformLocation(our_shader.program, "box_color"), 0.5f, 0.5f, 0.5f);
+		glUniform3f(glGetUniformLocation(our_shader.program, "box_color"), 0.1f, 0.5f, 0.5f);
 		glUniform3f(glGetUniformLocation(our_shader.program, "camera_pos"), 0.0f, 0.0f, 0.0f);
 
 		glBindVertexArray(VAO);

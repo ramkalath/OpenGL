@@ -22,9 +22,9 @@ void main()
 	vec3 light_vector = normalize(lamp_pos - fragment_position);
 	vec3 reflected_vector = reflect(light_vector, norm);  
 	vec3 view_vector = normalize(camera_pos - fragment_position);
-	float specular_value = specular_strength * pow(max(dot(view_vector, reflected_vector), 0.0), 16);
+	float specular_value = specular_strength * pow(max(dot(view_vector, reflected_vector), 0.0), 32);
 	vec3 specular_light = specular_value * light_color;  
 		
 	//color = vec4((ambient_light + diffuse_light + specular_light) * box_color, 1.0f);
-	color = vec4((ambient_light + diffuse_light) * box_color, 1.0f);
+	color = vec4((ambient_light + diffuse_light + specular_light) * box_color, 1.0f);
 } 

@@ -22,11 +22,16 @@ void main()
 	gl_Position = projection * view *  model * vec4(position, 1.0f);
 
 	fragment_position = vec3(model * vec4(position, 1.0f));
-	norm = normalize(vec3(model * vec4(normal, 1.0f))); // norm should not be calculated like this if there is non-uniform scaling or translation.
+	norm = normalize(vec3(model * vec4(normal, 1.0f))); // norm should not be calculated like this if there is non-uniform scaling
 
 	// Diffused Lighting
 	vec3 light_vector = normalize(lamp_pos - fragment_position);
 	float dist = distance(fragment_position, lamp_pos);
-	float diffuse_value = 1/pow(dist, 2) * max(dot(norm, light_vector), 0.0f);	
+	float dot_prod = dot(norm, light_vector);
+	float diffuse_value;
+	if(dot_prod >= 0)
+		diffuse_value = 1/pow(dist, 2) * dot(norm, light_vector);
+	else
+		diffuse_value = 1/pow(dist, 2) * -dot(norm, light_vector);
 	diffuse_light = diffuse_value * light_color;
 } 
