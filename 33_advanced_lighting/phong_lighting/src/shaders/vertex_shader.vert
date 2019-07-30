@@ -29,9 +29,10 @@ void main()
 	float dist = distance(fragment_position, lamp_pos);
 	float dot_prod = dot(norm, light_vector);
 	float diffuse_value;
-	if(dot_prod >= 0)
-		diffuse_value = 1/pow(dist, 2) * dot(norm, light_vector);
-	else
-		diffuse_value = 1/pow(dist, 2) * -dot(norm, light_vector);
+	diffuse_value = 1/pow(dist, 2) * max(dot(norm, light_vector), 0.0);
+	//if(dot_prod >= 0)
+		//diffuse_value = 1/pow(dist, 2) * dot(norm, light_vector);
+	//else
+		//diffuse_value = 1/pow(dist, 2) * -dot(norm, light_vector);
 	diffuse_light = diffuse_value * light_color;
 } 
