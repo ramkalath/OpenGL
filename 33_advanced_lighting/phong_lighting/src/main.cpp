@@ -3,7 +3,7 @@
  * Date : 30/07/2019
  * Email : ramkalath@gmail.com
  * Breif Description : phong lighting
- * Detailed Description : lighting is working fine, dunno what is wrong with phong and why blinn phong is necessary. Read more on that
+ * Detailed Description : notice exactly at this setting the phong specular reflection gives way and there is a sharp cut off which is inaccurate.
  *****************************************************************************/
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -174,8 +174,8 @@ int main()
 	
 	// ================================================================================= 
 	// model view and perspective matrices
-	glm::mat4 model_plate = glm::mat4(2.0f, 0.0f, 0.0f, 0.0f,
-									  0.0f, 2.0f, 0.0f, 0.0f,
+	glm::mat4 model_plate = glm::mat4(3.0f, 0.0f, 0.0f, 0.0f,
+									  0.0f, 3.0f, 0.0f, 0.0f,
 									  0.0f, 0.0f, 1.0f, 0.0f,
 									  0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -219,9 +219,9 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		float theta = glm::radians((fmod(glfwGetTime(), 10.0)/10)*360);
-		//theta = glm::radians(3.0f);
+		theta = glm::radians(0.4f);
 		float distance = 6.0;
-		glm::vec3 view_pos = glm::vec3(distance*cos(theta), 0.0f, distance*sin(theta));
+		glm::vec3 view_pos = glm::vec3(distance*cos(theta), 1.0f, distance*sin(theta));
 		view_plate = glm::lookAt(view_pos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		view_lamp = glm::lookAt(view_pos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		

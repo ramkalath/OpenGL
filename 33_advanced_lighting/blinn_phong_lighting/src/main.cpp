@@ -1,9 +1,9 @@
 /*****************************************************************************
  * Author : Ram
- * Date : 4/September/2018
+ * Date : 30/07/2019
  * Email : ramkalath@gmail.com
- * Breif Description : specular lighting
- * Detailed Description : ambient+diffused+specular lighting. Causes a marked improvement in visual appeal.
+ * Breif Description : phong lighting
+ * Detailed Description : something is screwing up in blinn phong specular reflections
  *****************************************************************************/
 #define GLEW_STATIC
 #include <GL/glew.h>
@@ -152,7 +152,7 @@ int main()
 			 0.5f,  0.5f,  0.5f, -0.5f,  0.5f,  0.5f, -0.5f, -0.5f,  0.5f,
 			-0.5f,  0.5f,  0.5f, -0.5f,  0.5f, -0.5f, -0.5f, -0.5f, -0.5f,
 			-0.5f, -0.5f, -0.5f, -0.5f, -0.5f,  0.5f, -0.5f,  0.5f,  0.5f,
-			 0.5f,  0.5f,  0.5f,  0.5f,  0.5f, -0.5f,  0.5f, -0.5f, -0.5f,
+			 0.5f,  0.5f,  0.5f,  0.5f,  0.5f, -0.5f,  0.5f, -0.5f, -0.5f, 
 			 0.5f, -0.5f, -0.5f,  0.5f, -0.5f,  0.5f,  0.5f,  0.5f,  0.5f,
 			-0.5f, -0.5f, -0.5f,  0.5f, -0.5f, -0.5f,  0.5f, -0.5f,  0.5f,
 			 0.5f, -0.5f,  0.5f, -0.5f, -0.5f,  0.5f, -0.5f, -0.5f, -0.5f,
@@ -174,24 +174,35 @@ int main()
 	
 	// ================================================================================= 
 	// model view and perspective matrices
-	glm::mat4 model = glm::mat4{1.0f};
-	model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
-	model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-	model = glm::scale(model, glm::vec3(2.0f, 2.0f, 0.0f));
-	glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	glm::mat4 model_plate = glm::mat4(3.0f, 0.0f, 0.0f, 0.0f,
+									  0.0f, 3.0f, 0.0f, 0.0f,
+									  0.0f, 0.0f, 1.0f, 0.0f,
+									  0.0f, 0.0f, 0.0f, 1.0f);
 
-	glm::mat4 model_lamp = glm::mat4{1.0f};
-	glm::vec3 lamp_pos = glm::vec3(0.0f, -0.5f, 0.8f);
-	model_lamp = glm::translate(model_lamp, lamp_pos);
-	model_lamp = glm::rotate(model_lamp, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 1.0f));
-	model_lamp = glm::rotate(model_lamp, glm::radians(45.0f), glm::vec3(1.0f, 1.0f, 0.0f));
-	model_lamp = glm::scale(model_lamp, glm::vec3(0.5f, 0.5f, 0.5f));
-	glm::mat4 view_lamp = glm::lookAt(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	float rot_angle_x = glm::radians(80.0f);
+	glm::mat4 rotation_x = glm::mat4(1.0f, 0.0f,        0.0f,       0.0f,
+									 0.0f, cos(rot_angle_x), -sin(rot_angle_x), 0.0f,
+									 0.0f, sin(rot_angle_x),  cos(rot_angle_x), 0.0f,
+									 0.0f, 0.0f,        0.0f,       1.0f);
 
-	float angle = 45.0f;
-	float n = 0.1f, f = 100.0f;
-	float ar = (float)width/(float)height;
-	glm::mat4 projection_perspective = {1/(ar*tan(angle/2)), 0, 0, 0, 0, 1/tan(angle/2), 0, 0, 0, 0, -(f+n)/(f-n), -2*f*n/(f-n), 0, 0, -1, 0};
+	model_plate =  rotation_x * model_plate;
+
+	glm::vec3 lamp_pos = glm::vec3(0.0f, 0.8f, -2.0f);
+	glm::mat4 model_lamp = glm::mat4(0.2f, 0.0f, 0.0f, 0.0f,
+									 0.0f, 0.2f, 0.0f, 0.0f,
+									 0.0f, 0.0f, 0.2f, 0.0f,
+									 lamp_pos.x, lamp_pos.y, lamp_pos.z, 1.0f);
+
+	// View matrices declared now but will be defined later
+	glm::mat4 view_plate = glm::mat4(1.0f);
+	glm::mat4 view_lamp = glm::mat4(1.0f);
+
+	// defining perspective projection
+	float angle = 45.0f, n = 0.1f, f = 100.0f, ar = (float)width/(float)height;
+	glm::mat4 projection_perspective = {1/(ar*tan(angle/2)), 0, 0, 0, 
+										0, 1/tan(angle/2), 0, 0, 
+										0, 0, -(f+n)/(f-n), -2*f*n/(f-n), 
+										0, 0, -1, 0};
 	projection_perspective = glm::transpose(projection_perspective);
 
 	// ================================================================================= 
@@ -207,11 +218,18 @@ int main()
         glClearColor(0.27f, 0.27f, 0.27f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
+		float theta = glm::radians((fmod(glfwGetTime(), 10.0)/10)*360);
+		theta = glm::radians(0.4f);
+		float distance = 6.0;
+		glm::vec3 view_pos = glm::vec3(distance*cos(theta), 1.0f, distance*sin(theta));
+		view_plate = glm::lookAt(view_pos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		view_lamp = glm::lookAt(view_pos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		
 		// draw object ---------------------------------------------------------------
         glUseProgram(our_shader.program);
 
-		glUniformMatrix4fv(glGetUniformLocation(our_shader.program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		glUniformMatrix4fv(glGetUniformLocation(our_shader.program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+		glUniformMatrix4fv(glGetUniformLocation(our_shader.program, "model"), 1, GL_FALSE, glm::value_ptr(model_plate));
+		glUniformMatrix4fv(glGetUniformLocation(our_shader.program, "view"), 1, GL_FALSE, glm::value_ptr(view_plate));
 		glUniformMatrix4fv(glGetUniformLocation(our_shader.program, "projection"), 1, GL_FALSE, glm::value_ptr(projection_perspective));
 
 		// ambient light
@@ -220,8 +238,8 @@ int main()
 		// diffused light
 		glUniform3f(glGetUniformLocation(our_shader.program, "lamp_pos"), lamp_pos.x, lamp_pos.y, lamp_pos.z);
 		glUniform3f(glGetUniformLocation(our_shader.program, "light_color"), 1.0f, 1.0f, 1.0f);
-		glUniform3f(glGetUniformLocation(our_shader.program, "box_color"), 0.7f, 0.3f, 0.3f);
-		glUniform3f(glGetUniformLocation(our_shader.program, "camera_pos"), 0.0f, 0.0f, 0.0f);
+		glUniform3f(glGetUniformLocation(our_shader.program, "plate_color"), 0.1f, 0.5f, 0.5f);
+		glUniform3f(glGetUniformLocation(our_shader.program, "camera_pos"), view_pos.x, view_pos.y, view_pos.z);
 
 		glBindVertexArray(VAO);
 		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
