@@ -1,0 +1,3 @@
+/home/ram/workarea/opengl/advanced_opengl/34_gamma_correction/build/CMakeFiles/rebuild_cache.dir
+/home/ram/workarea/opengl/advanced_opengl/34_gamma_correction/build/CMakeFiles/34_gamma_correction.dir
+/home/ram/workarea/opengl/advanced_opengl/34_gamma_correction/build/CMakeFiles/edit_cache.dir
