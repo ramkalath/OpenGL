@@ -2,8 +2,8 @@
  * Author : Ram
  * Date : 30/07/2019
  * Email : ramkalath@gmail.com
- * Breif Description : phong lighting
- * Detailed Description : something is screwing up in blinn phong specular reflections
+ * Breif Description : blinn-phong lighting
+ * Detailed Description : blinn-phong lighting
  *****************************************************************************/
 #define GLEW_STATIC
 #include <GL/glew.h>
