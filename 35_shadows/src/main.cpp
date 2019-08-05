@@ -7,17 +7,19 @@
  *****************************************************************************/
 #define GLEW_STATIC
 #include <GL/glew.h>
-
-// GLFW
 #include <GLFW/glfw3.h>
-
-#include <iostream>
-#include <SOIL/SOIL.h>
-#include "../include/shader.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+#include <iostream>
+
+#include <SOIL/SOIL.h>
+#include "../include/shader.h"
+#include "../include/modelloader.h"
+#include "../include/gamesettings.h"
+
 #include <math.h>
 #include <vector>
 

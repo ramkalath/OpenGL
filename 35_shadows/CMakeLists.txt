@@ -7,7 +7,8 @@ project(${project_name})
 # here add all the cpp files involved in the project
 add_executable(${project_name} ./src/main.cpp
 								./include/shader.cpp
-								./include/modelloader.cpp) # (TODO: enter the cpp files after the project name one after the other with the path)
+								./include/modelloader.cpp
+								./include/gamesettings.cpp) # (TODO: enter the cpp files after the project name one after the other with the path)
 
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_VERBOSE_MAKEFILE ON)

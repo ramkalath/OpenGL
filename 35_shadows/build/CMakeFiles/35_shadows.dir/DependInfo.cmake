@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/ram/workarea/opengl/advanced_opengl/35_shadows/include/gamesettings.cpp" "/home/ram/workarea/opengl/advanced_opengl/35_shadows/build/CMakeFiles/35_shadows.dir/include/gamesettings.cpp.o"
   "/home/ram/workarea/opengl/advanced_opengl/35_shadows/include/modelloader.cpp" "/home/ram/workarea/opengl/advanced_opengl/35_shadows/build/CMakeFiles/35_shadows.dir/include/modelloader.cpp.o"
   "/home/ram/workarea/opengl/advanced_opengl/35_shadows/include/shader.cpp" "/home/ram/workarea/opengl/advanced_opengl/35_shadows/build/CMakeFiles/35_shadows.dir/include/shader.cpp.o"
   "/home/ram/workarea/opengl/advanced_opengl/35_shadows/src/main.cpp" "/home/ram/workarea/opengl/advanced_opengl/35_shadows/build/CMakeFiles/35_shadows.dir/src/main.cpp.o"

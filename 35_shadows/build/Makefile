@@ -126,6 +126,33 @@ depend:
 	$(MAKE) -f CMakeFiles/35_shadows.dir/build.make CMakeFiles/35_shadows.dir/build
 .PHONY : 35_shadows/fast
 
+include/gamesettings.o: include/gamesettings.cpp.o
+
+.PHONY : include/gamesettings.o
+
+# target to build an object file
+include/gamesettings.cpp.o:
+	$(MAKE) -f CMakeFiles/35_shadows.dir/build.make CMakeFiles/35_shadows.dir/include/gamesettings.cpp.o
+.PHONY : include/gamesettings.cpp.o
+
+include/gamesettings.i: include/gamesettings.cpp.i
+
+.PHONY : include/gamesettings.i
+
+# target to preprocess a source file
+include/gamesettings.cpp.i:
+	$(MAKE) -f CMakeFiles/35_shadows.dir/build.make CMakeFiles/35_shadows.dir/include/gamesettings.cpp.i
+.PHONY : include/gamesettings.cpp.i
+
+include/gamesettings.s: include/gamesettings.cpp.s
+
+.PHONY : include/gamesettings.s
+
+# target to generate assembly for a file
+include/gamesettings.cpp.s:
+	$(MAKE) -f CMakeFiles/35_shadows.dir/build.make CMakeFiles/35_shadows.dir/include/gamesettings.cpp.s
+.PHONY : include/gamesettings.cpp.s
+
 include/modelloader.o: include/modelloader.cpp.o
 
 .PHONY : include/modelloader.o
@@ -216,6 +243,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... 35_shadows"
 	@echo "... edit_cache"
+	@echo "... include/gamesettings.o"
+	@echo "... include/gamesettings.i"
+	@echo "... include/gamesettings.s"
 	@echo "... include/modelloader.o"
 	@echo "... include/modelloader.i"
 	@echo "... include/modelloader.s"
