@@ -3,8 +3,9 @@
  * Date : 5/Aug/2019
  * Email : ramkalath@gmail.com
  * Breif Description : shadows
- * Detailed Description : Task 1) create a template for shadows
+ * Detailed Description : Create a template for shadows. Create a common lighting scheme.
  *****************************************************************************/
+
 // GLEW and GLFW includes
 #define GLEW_STATIC
 #include <GL/glew.h>
