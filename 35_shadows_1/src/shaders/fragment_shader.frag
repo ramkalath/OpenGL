@@ -3,7 +3,7 @@
 uniform sampler2D diffuse_texture;
 uniform sampler2D specular_texture;
 
-uniform vec3 LightDirection;
+uniform vec3 lamp_pos;
 uniform vec3 LightAmbient;
 uniform vec3 LightDiffuse;
 uniform vec3 LightSpecular;
@@ -28,7 +28,7 @@ void main()
 	vec3 ambient_light = LightAmbient * vec3(texture(diffuse_texture, TexCoords));
 
 	// Diffused Lighting
-	vec3 light_vector = normalize(-LightDirection);
+	vec3 light_vector = normalize(lamp_pos - FragmentPosition);
 	float diff = max(dot(Norm, light_vector), 0.0f);	
 	vec3 diffuse_light = LightDiffuse * diff * vec3(texture(diffuse_texture, TexCoords));
 

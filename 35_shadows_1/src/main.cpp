@@ -90,20 +90,23 @@ int main()
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0);
 
-	glm::vec3 lamp_pos = glm::vec3(0.0f, 2.8f, -2.0f);
+	glm::vec3 lamp_pos = glm::vec3(0.0f, 1.0f, 0.0f);
 	glm::mat4 model_lamp = glm::mat4(0.2f, 0.0f, 0.0f, 0.0f,
 									 0.0f, 0.2f, 0.0f, 0.0f,
 									 0.0f, 0.0f, 0.2f, 0.0f,
 									 lamp_pos.x, lamp_pos.y, lamp_pos.z, 1.0f);
 
 	// ==================================================================================================
-	
 
 	Shader objectshader("./shaders/vertex_shader.vert", "./shaders/fragment_shader.frag");
+	Shader lampshader("./shaders/lamp_vertex_shader.vert", "./shaders/lamp_fragment_shader.frag");
 
 	// load box and some presets
 	Modelloader box("./resources/multisample_cube/multisample_cube.obj");
-	box.modelmatrix = {1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f};
+	box.modelmatrix = { 1.0f, 0.0f, 0.0f, 0.0f,
+						0.0f, 1.0f, 0.0f, 0.0f, 
+						0.0f, 0.0f, 1.0f, 0.0f, 
+						0.0f, 1.0f, 0.0f, 1.0f};
 	box.modelmatrix = glm::translate(box.modelmatrix, glm::vec3(0.0f, -1.0f, 0.0f));
 	box.modelmatrix = glm::scale(box.modelmatrix, glm::vec3(0.3f, 0.3f, 0.3f));
 
@@ -125,7 +128,7 @@ int main()
 		 // Uniforms
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "view"), 1, GL_FALSE, glm::value_ptr(globalsettings.view));
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(globalsettings.projection_perspective));
-		glUniform3f(glGetUniformLocation(objectshader.program, "LightDirection"), 10.0f, 10.0f, -10.0f);
+		glUniform3f(glGetUniformLocation(objectshader.program, "lamp_pos"), lamp_pos.x, lamp_pos.y, lamp_pos.z);
 		glUniform3f(glGetUniformLocation(objectshader.program, "LightAmbient"), 0.5f, 0.5f, 0.5f);
 		glUniform3f(glGetUniformLocation(objectshader.program, "LightDiffuse"), 1.0f, 1.0f, 1.0f);
 		glUniform3f(glGetUniformLocation(objectshader.program, "LightSpecular"), 1.0f, 1.0f, 1.0f);
@@ -135,8 +138,18 @@ int main()
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(box.modelmatrix));
 		box.Draw(objectshader);
 
+		// render floor
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(floor.modelmatrix));
 		floor.Draw(objectshader);
+
+		// render lamp
+		glUseProgram(lampshader.program);
+		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(model_lamp));
+		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "view"), 1, GL_FALSE, glm::value_ptr(globalsettings.view));
+		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(globalsettings.projection_perspective));
+		glBindVertexArray(VAO_lamp);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);
 	}
