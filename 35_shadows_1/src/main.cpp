@@ -116,6 +116,19 @@ int main()
 	floor.modelmatrix = glm::rotate(floor.modelmatrix, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	floor.modelmatrix = glm::scale(floor.modelmatrix, glm::vec3(5.0f, 5.0f, 5.0f));
 
+	unsigned int depthMapFBO;
+	glGenFramebuffers(1, &depthMapFBO);
+	const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+
+	unsigned int depthMap;
+	glGenTextures(1, &depthMap);
+	glBindTexture(GL_TEXTURE_2D, depthMap);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
 	while(!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
