@@ -6,7 +6,7 @@
  * Detailed Description : Create a template for shadows. Create a common lighting scheme.
  *****************************************************************************/
 
-// GLEW and GLFW includes
+// Use this for ycm autocompletion
 #define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -31,7 +31,7 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 		glfwSetWindowShouldClose(window, GL_TRUE);
 }
 
-int width = 640, height = 800;
+int WIDTH = 640, HEIGHT = 800;
 
 int main()
 {
@@ -43,7 +43,7 @@ int main()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-    GLFWwindow *window = glfwCreateWindow(width, height, "Lighting Properties", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(WIDTH, HEIGHT, "Lighting Properties", nullptr, nullptr);
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, key_callback);
 
@@ -60,8 +60,8 @@ int main()
 
 	glEnable(GL_DEPTH_TEST);
 
-	glfwGetFramebufferSize(window, &width, &height);
-	glViewport(0, 0, width, height);
+	glfwGetFramebufferSize(window, &WIDTH, &HEIGHT);
+	glViewport(0, 0, WIDTH, HEIGHT);
 
 	// ==================================================================================================
 	// Lamp
@@ -116,18 +116,34 @@ int main()
 	floor.modelmatrix = glm::rotate(floor.modelmatrix, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	floor.modelmatrix = glm::scale(floor.modelmatrix, glm::vec3(5.0f, 5.0f, 5.0f));
 
+	// --------------------------------------------------------------------------------------------------
 	unsigned int depthMapFBO;
 	glGenFramebuffers(1, &depthMapFBO);
-	const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+	const unsigned int SHADOW_WIDTH=1024, SHADOW_HEIGHT=1024;
 
 	unsigned int depthMap;
 	glGenTextures(1, &depthMap);
 	glBindTexture(GL_TEXTURE_2D, depthMap);
+
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+	glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+		glClear(GL_DEPTH_BUFFER_BIT);
+		configureShaderAndMatrices();
+		RenderScene();
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+	glViewport(0, 0, WIDTH, HEIGHT);
+		ConfigureShaderAndMatrices();
+		glBindTexture(GL_TEXTURE_2D, depthMap);
+		RenderScene();
+	// --------------------------------------------------------------------------------------------------
+
 
 	while(!glfwWindowShouldClose(window))
 	{
