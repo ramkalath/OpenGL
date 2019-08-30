@@ -7,8 +7,14 @@
  *****************************************************************************/
 
 // Use this for ycm autocompletion
-#define GLEW_STATIC
-#include <GL/glew.h>
+#ifdef USE_GLEW
+	#define GLEW_STATIC
+    #include <GL/glew.h>
+#else
+    #define GL_GLEXT_PROTOTYPES
+    #include <GL/gl.h>
+    #include <GL/glext.h>
+#endif
 #include <GLFW/glfw3.h>
 
 // glm includes
@@ -117,39 +123,49 @@ int main()
 	floor.modelmatrix = glm::scale(floor.modelmatrix, glm::vec3(5.0f, 5.0f, 5.0f));
 
 	// --------------------------------------------------------------------------------------------------
+	// generating a framebuffer
 	unsigned int depthMapFBO;
 	glGenFramebuffers(1, &depthMapFBO);
-	const unsigned int SHADOW_WIDTH=1024, SHADOW_HEIGHT=1024;
 
+	// generating a depth map texture
 	unsigned int depthMap;
+	unsigned int SHADOW_WIDTH, SHADOW_HEIGHT;
 	glGenTextures(1, &depthMap);
 	glBindTexture(GL_TEXTURE_2D, depthMap);
-
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+	// Attaching depthMap to the framebuffer
 	glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-		glClear(GL_DEPTH_BUFFER_BIT);
-		configureShaderAndMatrices();
-		RenderScene();
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
+	glDrawBuffer(GL_NONE);
+	glReadBuffer(GL_NONE);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-	glViewport(0, 0, WIDTH, HEIGHT);
-		ConfigureShaderAndMatrices();
-		glBindTexture(GL_TEXTURE_2D, depthMap);
-		RenderScene();
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	// --------------------------------------------------------------------------------------------------
-
 
 	while(!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		glViewport(0, 0, 1024, 1024);
+		glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+		glClear(GL_DEPTH_BUFFER_BIT);
+			ConfigureShaderAndMatrices();
+		RenderScene();
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+		glViewport(0, 0, WIDTH, HEIGHT); 
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		ConfigureShaderAndMatrices();
+		glBindTexture(GL_TEXTURE_2D, depthMap);
+		RenderScene();
 
 		 // draw object ---------------------------------------------------------------
 		glUseProgram(objectshader.program);
