@@ -1,13 +1,12 @@
 /*****************************************************************************
  * Author : Ram
- * Date : 31/Aug/2019
+ * Date : 5/Aug/2019
  * Email : ramkalath@gmail.com
  * Breif Description : shadows
  * Detailed Description : Create a template for shadows. Create a common lighting scheme.
  *****************************************************************************/
 
 // Use this for ycm autocompletion
-#include "use_glew.h" // insert #define USE_GLEW in use_glew.h
 #ifdef USE_GLEW
 	#define GLEW_STATIC
     #include <GL/glew.h>
@@ -142,19 +141,11 @@ int main()
 	// Attaching depthMap to the framebuffer
 	glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
-	glDrawBuffer(GL_NONE); // framebuffer needs a color buffer; these statements override that
-	glReadBuffer(GL_NONE);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+
 
 	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	// --------------------------------------------------------------------------------------------------
-
-	glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.0f, 10.0f);
-	//TODO(ram): we have to fix this to ensure the shadow gets projected at the right place
-	// find out where the camera is
-	// Also find out where the center of the object is
-	glm::mat4 lightView = glm::lookAt(lamp_pos, glm::vec3(0.0f), glm::vec3(1.0f));
-	glm::mat4 lightSpaceMatrix = lightProjection * lightView;
 
 	while(!glfwWindowShouldClose(window))
 	{
@@ -169,12 +160,12 @@ int main()
 		RenderScene();
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-
 		glViewport(0, 0, WIDTH, HEIGHT); 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// Light space transform
 		float near_plane = 1.0f, far_plane = 10.0f;
+
 		ConfigureShaderAndMatrices();
 		glBindTexture(GL_TEXTURE_2D, depthMap);
 		RenderScene();

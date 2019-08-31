@@ -2,7 +2,9 @@
 PROJECT_NAME = assimp_0
 
 all:
+	echo "#define USE_GLEW" > use_glew.h
 	cd ../build && cmake .. && make
+	rm use_glew.h && touch use_glew.h
 	@echo "\033[92m ------------- Compilation Successful ------------------- \033[0m" 
 
 run:

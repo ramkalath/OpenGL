@@ -13,5 +13,6 @@ CMakeFiles/assimp_0.dir/src/main.cpp.o: ../include/gamesettings.h
 CMakeFiles/assimp_0.dir/src/main.cpp.o: ../include/modelloader.h
 CMakeFiles/assimp_0.dir/src/main.cpp.o: ../include/shader.h
 CMakeFiles/assimp_0.dir/src/main.cpp.o: ../src/main.cpp
+CMakeFiles/assimp_0.dir/src/main.cpp.o: ../src/use_glew.h
 CMakeFiles/assimp_0.dir/src/main.cpp.o: /usr/local/include/GLFW/glfw3.h
 

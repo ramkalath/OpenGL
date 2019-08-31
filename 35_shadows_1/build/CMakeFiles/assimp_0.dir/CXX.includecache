@@ -97,7 +97,13 @@ GL/glew.h
 -
 
 /home/ram/workarea/opengl/advanced_opengl/35_shadows_1/src/main.cpp
+use_glew.h
+/home/ram/workarea/opengl/advanced_opengl/35_shadows_1/src/use_glew.h
 GL/glew.h
+-
+GL/gl.h
+-
+GL/glext.h
 -
 GLFW/glfw3.h
 -
@@ -115,6 +121,8 @@ iostream
 /home/ram/workarea/opengl/advanced_opengl/35_shadows_1/include/modelloader.h
 ../include/gamesettings.h
 /home/ram/workarea/opengl/advanced_opengl/35_shadows_1/include/gamesettings.h
+
+/home/ram/workarea/opengl/advanced_opengl/35_shadows_1/src/use_glew.h
 
 /usr/local/include/GLFW/glfw3.h
 stddef.h
