@@ -107,6 +107,7 @@ int main()
 
 	Shader objectshader("./shaders/vertex_shader.vert", "./shaders/fragment_shader.frag");
 	Shader lampshader("./shaders/lamp_vertex_shader.vert", "./shaders/lamp_fragment_shader.frag");
+	Shader depthshader("./shaders/vertex_depthshader.vert", "./shaders/fragment_depthshader.frag");
 
 	// load box and some presets
 	Modelloader box("./resources/multisample_cube/multisample_cube.obj");
@@ -165,8 +166,6 @@ int main()
 		glViewport(0, 0, 1024, 1024);
 		glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
 		glClear(GL_DEPTH_BUFFER_BIT);
-		ConfigureShaderAndMatrices();
-		RenderScene();
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 
@@ -179,7 +178,7 @@ int main()
 		glBindTexture(GL_TEXTURE_2D, depthMap);
 		RenderScene();
 
-		 // draw object ---------------------------------------------------------------
+		// draw object ---------------------------------------------------------------
 		glUseProgram(objectshader.program);
 
 		 // Uniforms
