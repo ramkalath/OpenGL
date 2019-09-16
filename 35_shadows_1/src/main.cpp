@@ -151,6 +151,7 @@ int main()
 	// --------------------------------------------------------------------------------------------------
 
 	glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, 1.0f, 10.0f);
+
 	//TODO(ram): we have to fix this to ensure the shadow gets projected at the right place
 	// find out where the camera is
 	// Also find out where the center of the object is
