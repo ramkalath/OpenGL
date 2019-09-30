@@ -1,3 +1,0 @@
-/home/ram/workarea/opengl/advanced_opengl/35_shadows_1/build/CMakeFiles/rebuild_cache.dir
-/home/ram/workarea/opengl/advanced_opengl/35_shadows_1/build/CMakeFiles/assimp_0.dir
-/home/ram/workarea/opengl/advanced_opengl/35_shadows_1/build/CMakeFiles/edit_cache.dir
