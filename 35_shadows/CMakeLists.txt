@@ -5,7 +5,9 @@ set(project_name "35_shadows")
 project(${project_name})
 
 # here add all the cpp files involved in the project
-add_executable(${project_name} ./src/main.cpp) # (TODO: enter the cpp files after the project name one after the other with the path)
+add_executable(${project_name}  ./src/main.cpp
+								./include/gamesettings.cpp
+								./include/shader.cpp) # (TODO: enter the cpp files after the project name one after the other with the path)
 
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_VERBOSE_MAKEFILE ON)

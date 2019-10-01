@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/35_shadows.dir/src/main.cpp.o"
+  "CMakeFiles/35_shadows.dir/include/gamesettings.cpp.o"
+  "CMakeFiles/35_shadows.dir/include/shader.cpp.o"
   "../bin/35_shadows.pdb"
   "../bin/35_shadows"
 )
