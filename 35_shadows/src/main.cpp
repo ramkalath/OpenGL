@@ -29,6 +29,7 @@
 
 // Other popular includes
 #include <iostream>
+#include <vector>
 
 // User created headers
 #include "../include/shader.h"
@@ -42,6 +43,22 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 		glfwSetWindowShouldClose(window, GL_TRUE);
 }
 
+std::vector<float> populate_vertices(unsigned int height, unsigned int width)
+{
+	std::vector<float> v;
+	for(unsigned int h=0; h<height; h++) 
+		for(unsigned int w=0; w<width; w++) {
+			v.push_back(w); v.push_back(h); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w); v.push_back(h);
+			v.push_back(w+1); v.push_back(h); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w+1); v.push_back(h);
+			v.push_back(w); v.push_back(h+1); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w); v.push_back(h+1);
+
+			v.push_back(w+1); v.push_back(h); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w+1); v.push_back(h);
+			v.push_back(w+1); v.push_back(h+1); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w+1); v.push_back(h);
+			v.push_back(w); v.push_back(h+1); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w); v.push_back(h+1);
+		}
+	return v;
+}
+
 int width = 640, height = 800;
 
 int main()
@@ -53,7 +70,6 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-
     GLFWwindow *window = glfwCreateWindow(800, 600, "specular_lighting", nullptr, nullptr);
     glfwMakeContextCurrent(window);
     glfwSetKeyCallback(window, key_callback);
@@ -78,16 +94,52 @@ int main()
 	glViewport(0, 0, width, height);
 
 	Shader objectshader("./shaders/vertex_shader.vert", "./shaders/fragment_shader.frag");
+	Shader shadowshader("./shaders/depth_vertex_shader.vert", "./shaders/depth_fragment_shader.frag");
 
-	Modelloader table("./resources/table.obj");
-	table.modelmatrix = glm::mat4{1.0f};
-	table.modelmatrix = glm::translate(table.modelmatrix, glm::vec3(0.0f, -2.0f, 0.0f));
-	table.modelmatrix = glm::scale(table.modelmatrix, glm::vec3(0.3f, 0.3f, 0.3f));
+	// lets define table and plate on our own
+	unsigned int height = 10;
+	unsigned int width = 10;
+	std::vector<float> floor = populate_vertices(10, 10);
+	float *floor_vertices = &floor[0];
+	int no_floor_floats = 6 * height * width * 8;
 
-	Modelloader plate("./resources/plastic_top.obj");
-	plate.modelmatrix = glm::mat4{1.0f};
-	plate.modelmatrix = glm::translate(plate.modelmatrix, glm::vec3(0.0f, -1.0f, 0.0f));
-	plate.modelmatrix = glm::scale(plate.modelmatrix, glm::vec3(0.3f, 0.3f, 0.3f));
+	GLuint VBO_floor, VAO_floor;
+	glGenVertexArrays(1, &VAO_floor);
+	glGenBuffers(1, &VBO_floor);
+	glBindVertexArray(VAO_floor);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO_floor);
+	glBufferData(GL_ARRAY_BUFFER, no_floor_floats*sizeof(float), floor_vertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8*sizeof(GLfloat), (GLvoid*)0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8*sizeof(GLfloat), (GLvoid*)(3*sizeof(GLfloat)));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8*sizeof(GLfloat), (GLvoid*)(2*sizeof(GLfloat)));
+	glEnableVertexAttribArray(0);
+	//glEnableVertexAttribArray(1);
+	//glEnableVertexAttribArray(2);
+	glBindVertexArray(0);
+	glm::mat4 floor_model_matrix = glm::mat4{1.0f};
+
+
+	// Lets define a depth texture for the shadows
+	unsigned int FramebufferName = 0;
+	glGenFramebuffers(1, &FramebufferName);
+	glBindFramebuffer(GL_FRAMEBUFFER, FramebufferName);
+
+	unsigned depthTexture;
+	glGenTextures(1, &depthTexture);
+	glBindTexture(GL_TEXTURE_2D, depthTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, 1024, 1024, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthTexture, 0);
+
+	glDrawBuffer(GL_NONE);
+
+	if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		return 0;
 
 	while(!glfwWindowShouldClose(window))
 	{
@@ -96,24 +148,15 @@ int main()
         glClearColor(0.27f, 0.27f, 0.27f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-		glUseProgram(objectshader.program);
+		glUseProgram(shadowshader.program);
 
 		// Uniforms
+		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(floor_model_matrix));
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "view"), 1, GL_FALSE, glm::value_ptr(globalsettings.view));
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(globalsettings.projection_perspective));
-		glUniform3f(glGetUniformLocation(objectshader.program, "LightDirection"), 0.0f, 5.0f, 0.0f);
-		glUniform3f(glGetUniformLocation(objectshader.program, "LightAmbient"), 0.5f, 0.5f, 0.5f);
-		glUniform3f(glGetUniformLocation(objectshader.program, "LightDiffuse"), 1.0f, 1.0f, 1.0f);
-		glUniform3f(glGetUniformLocation(objectshader.program, "LightSpecular"), 1.0f, 1.0f, 1.0f);
-		glUniform3f(glGetUniformLocation(objectshader.program, "CameraPosition"), 0.0f, 0.0f, 0.0f);
 
-		// render table
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(table.modelmatrix));
-		table.Draw(objectshader);
-
-		// render plate
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(plate.modelmatrix));
-		plate.Draw(objectshader);
+		// Draw the item
+		glDrawArrays(GL_TRIANGLES, 0, no_floor_floats);
 
 		glfwSwapBuffers(window);
 	}
