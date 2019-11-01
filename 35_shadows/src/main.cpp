@@ -57,13 +57,13 @@ std::vector<float> populate_vertices(int no_of_tiles_width, int no_of_tiles_heig
 		for(int w=0; w<no_of_tiles_height; w++) 
 		{
 			//------------ positions ----------------------- | ---------------- normals ---------------------------- | ----- tex coords ---------------- |
-			v.push_back(w*sfw); v.push_back(h*sfw); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w); v.push_back(h);
-			v.push_back((w+1)*sfw); v.push_back(h*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w+1); v.push_back(h);
-			v.push_back(w*sfw); v.push_back((h+1)*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w); v.push_back(h+1);
+			v.push_back(w*sfw); v.push_back(h*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w+sfw); v.push_back(h+sfh);
+			v.push_back((w+1)*sfw); v.push_back(h*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back((w+1)*sfw); v.push_back(h*sfh);
+			v.push_back(w*sfw); v.push_back((h+1)*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w*sfw); v.push_back((h+1)*sfh);
 
-			v.push_back((w+1)*sfw); v.push_back(h*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w+1); v.push_back(h);
-			v.push_back((w+1)*sfw); v.push_back((h+1)*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w+1); v.push_back(h);
-			v.push_back(w*sfw); v.push_back((h+1)*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w); v.push_back(h+1);
+			v.push_back((w+1)*sfw); v.push_back(h*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back((w+1)*sfw); v.push_back(h*sfh);
+			v.push_back((w+1)*sfw); v.push_back((h+1)*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back((w+1)*sfw); v.push_back(h*sfh);
+			v.push_back(w*sfw); v.push_back((h+1)*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w*sfw); v.push_back((h+1)*sfh);
 		}
 	return v;
 }
@@ -136,21 +136,37 @@ int main()
 										0, 0, -1, 0};
 	projection_perspective = glm::transpose(projection_perspective);
 
-	// floor texture
-	unsigned int my_tex;
-	glGenTextures(1, &my_tex);
-	glBindTexture(GL_TEXTURE_2D, my_tex);
+	unsigned int texture1;
+	glGenTextures(1, &texture1);
+	glBindTexture(GL_TEXTURE_2D, texture1);
+	
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	int width_texture, height_texture;
-	unsigned char* image1 = SOIL_load_image("./resources/brick_texture.jpg", &width_texture, &height_texture, 0, SOIL_LOAD_RGB);
+	unsigned char* image1 = SOIL_load_image("./resources/wood.jpg", &width_texture, &height_texture, 0, SOIL_LOAD_RGB);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_texture, height_texture, 0, GL_RGB, GL_UNSIGNED_BYTE, image1);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	SOIL_free_image_data(image1);
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	// floor texture
+	//unsigned int my_tex;
+	//glGenTextures(1, &my_tex);
+	//glBindTexture(GL_TEXTURE_2D, my_tex);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	//int width_texture, height_texture;
+	//unsigned char* image1 = SOIL_load_image("./resources/table_wood_texture.jpg", &width_texture, &height_texture, 0, SOIL_LOAD_RGB);
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_texture, height_texture, 0, GL_RGB, GL_UNSIGNED_BYTE, image1);
+	//glGenerateMipmap(GL_TEXTURE_2D);
+	//SOIL_free_image_data(image1);
+	//glBindTexture(GL_TEXTURE_2D, 0);
 
 	while(!glfwWindowShouldClose(window))
 	{
@@ -161,8 +177,9 @@ int main()
 		
 		glUseProgram(objectshader.program);
 
+		// Activate Texture
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, my_tex);
+		glBindTexture(GL_TEXTURE_2D, texture1);
 		glUniform1i(glGetUniformLocation(objectshader.program, "my_texture"), 0);
 
 		// Upload Geometric Uniforms
@@ -171,8 +188,10 @@ int main()
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "view"), 1, GL_FALSE, glm::value_ptr(view_matrix));
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(projection_perspective));
 
-		glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // Draw wireframe
+		// Draw call
+		//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // Draw wireframe
 		glDrawArrays(GL_TRIANGLES, 0, no_floor_floats); // draw call
+
 		glBindVertexArray(0);
 
 		glfwSwapBuffers(window);
