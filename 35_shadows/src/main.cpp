@@ -4,10 +4,8 @@
 * Author : Ram
 * Email : ramkalath@gmail.com
 * Breif Description : Shadows
-* Detailed Description : 1) TODO(ram): Render a floor and also another plate like object hovering above the floor.
-*										DONE: rendering vertices of the floor. Yet to fix the texture coords. Thats easy
-*										TODO(ram): yet to fix the textures
-*										TODO(ram): yet to create the second object
+* Detailed Description : 1) TODO(ram): Render floor with proper texturing.
+*								TODO(ram): yet to create the second object
 * 						 2) TODO(ram): first pass for shadowing.
 * 						 3) TODO(ram): second pass for shadowing.
 *****************************************************************************/
@@ -34,6 +32,7 @@
 // Other popular includes
 #include <vector>
 #include <iostream>
+#include <math.h>
 
 // User created headers
 #include "../include/shader.h"
@@ -57,12 +56,12 @@ std::vector<float> populate_vertices(int no_of_tiles_width, int no_of_tiles_heig
 		for(int w=0; w<no_of_tiles_height; w++) 
 		{
 			//------------ positions ----------------------- | ---------------- normals ---------------------------- | ----- tex coords ---------------- |
-			v.push_back(w*sfw); v.push_back(h*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w+sfw); v.push_back(h+sfh);
+			v.push_back(w*sfw); v.push_back(h*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w*sfw); v.push_back(h*sfh);
 			v.push_back((w+1)*sfw); v.push_back(h*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back((w+1)*sfw); v.push_back(h*sfh);
-			v.push_back(w*sfw); v.push_back((h+1)*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w*sfw); v.push_back((h+1)*sfh);
+			v.push_back((w+1)*sfw); v.push_back((h+1)*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back((w+1)*sfw); v.push_back((h+1)*sfh);
 
-			v.push_back((w+1)*sfw); v.push_back(h*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back((w+1)*sfw); v.push_back(h*sfh);
-			v.push_back((w+1)*sfw); v.push_back((h+1)*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back((w+1)*sfw); v.push_back(h*sfh);
+			v.push_back(w*sfw); v.push_back(h*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w*sfw); v.push_back(h*sfh);
+			v.push_back((w+1)*sfw); v.push_back((h+1)*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back((w+1)*sfw); v.push_back((h+1)*sfh);
 			v.push_back(w*sfw); v.push_back((h+1)*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w*sfw); v.push_back((h+1)*sfh);
 		}
 	return v;
@@ -74,21 +73,21 @@ int main()
 {
 	GameSettings globalsettings;
 	// glfw stuff ====================================================================
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-    GLFWwindow *window = glfwCreateWindow(width_window, height_window, "specular_lighting", nullptr, nullptr);
-    glfwMakeContextCurrent(window);
-    glfwSetKeyCallback(window, key_callback);
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+	GLFWwindow *window = glfwCreateWindow(width_window, height_window, "specular_lighting", nullptr, nullptr);
+	glfwMakeContextCurrent(window);
+	glfwSetKeyCallback(window, key_callback);
 
-    if(window == nullptr)
-    {
-    	std::cerr << "Failed to create GLFW window" << std::endl;
+	if(window == nullptr)
+	{
+		std::cerr << "Failed to create GLFW window" << std::endl;
 		glfwTerminate();
 		return -1;
-    }
+	}
 	glewExperimental = GL_TRUE;
 
 	if(glewInit() != GLEW_OK)
@@ -102,7 +101,7 @@ int main()
 	glfwGetFramebufferSize(window, &width_window, &height_window);
 	glViewport(0, 0, width_window, height_window);
 
-	Shader objectshader("./shaders/vertex_shader.vert", "./shaders/fragment_shader.frag"); // TODO(ram): check if the shaders are programmed correctly
+	Shader objectshader("./shaders/vertex_shader.vert", "./shaders/fragment_shader.frag");
 
 	// defining floor vertices
 	int no_of_tiles_width = 10, no_of_tiles_height = 10;
@@ -118,17 +117,18 @@ int main()
 	glBufferData(GL_ARRAY_BUFFER, no_floor_floats*sizeof(float), floor_vertices, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8*sizeof(GLfloat), (GLvoid*)0); // positions
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8*sizeof(GLfloat), (GLvoid*)(3*sizeof(GLfloat))); // normals
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8*sizeof(GLfloat), (GLvoid*)(6*sizeof(GLfloat))); // textures
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
 	glBindVertexArray(0);
-	glm::mat4 floor_model_matrix = glm::mat4{1.0f, 0.0f, 0.0f, 0.0f,
-											0.0f, 1.0f, 0.0f, 0.0f,
-											0.0f, 0.0f, 1.0f, 0.0f,
+	float theta = glm::radians(45.0f);
+	glm::mat4 floor_model_matrix = glm::mat4{1.0f,  0.0f, 0.0f, 0.0f,
+											 0.0f,  cos(theta), sin(theta), 0.0f,
+											 0.0f,  -sin(theta), cos(theta), 0.0f,
 											-0.5f, -0.5f, 0.0f, 1.0f}; // model matrix
-	glm::mat4 view_matrix = glm::lookAt(glm::vec3(0.0f, 0.0f, 80.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
-	GLfloat near = 0.1f, far = 100.0f;
+	GLfloat near = 0.1f, far = 300.0f;
 	GLfloat ar = (GLfloat)width_window/(GLfloat)height_window; // aspect ratio
 	glm::mat4 projection_perspective = {1/(ar*tan(45/2)), 0, 0, 0,
 										0, 1/tan(45/2), 0, 0,
@@ -136,50 +136,42 @@ int main()
 										0, 0, -1, 0};
 	projection_perspective = glm::transpose(projection_perspective);
 
-	unsigned int texture1;
-	glGenTextures(1, &texture1);
-	glBindTexture(GL_TEXTURE_2D, texture1);
+	unsigned int texture;
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
 	
+	int width_texture, height_texture;
+	unsigned char* image = SOIL_load_image("./resources/brick_texture.jpg", &width_texture, &height_texture, 0, SOIL_LOAD_RGB);
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	int width_texture, height_texture;
-	unsigned char* image1 = SOIL_load_image("./resources/wood.jpg", &width_texture, &height_texture, 0, SOIL_LOAD_RGB);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_texture, height_texture, 0, GL_RGB, GL_UNSIGNED_BYTE, image1);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_texture, height_texture, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
-	SOIL_free_image_data(image1);
+	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	// floor texture
-	//unsigned int my_tex;
-	//glGenTextures(1, &my_tex);
-	//glBindTexture(GL_TEXTURE_2D, my_tex);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	//int width_texture, height_texture;
-	//unsigned char* image1 = SOIL_load_image("./resources/table_wood_texture.jpg", &width_texture, &height_texture, 0, SOIL_LOAD_RGB);
-	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_texture, height_texture, 0, GL_RGB, GL_UNSIGNED_BYTE, image1);
-	//glGenerateMipmap(GL_TEXTURE_2D);
-	//SOIL_free_image_data(image1);
-	//glBindTexture(GL_TEXTURE_2D, 0);
 
 	while(!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
 
-        glClearColor(0.27f, 0.27f, 0.27f, 1.0f);
+		glClearColor(0.27f, 0.27f, 0.27f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
+
+		float time = sin(glfwGetTime()) * 10.0f;
+		//std::cout << time << std::endl;
+		glm::mat4 view_matrix = glm::lookAt(glm::vec3(0.0f, 30.0f, 80.0f), 
+											glm::vec3(0.0f, 0.0f, 0.0f), 
+											glm::vec3(0.0f, 1.0f, 0.0f));
+
 		glUseProgram(objectshader.program);
 
 		// Activate Texture
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture1);
+		glBindTexture(GL_TEXTURE_2D, texture);
 		glUniform1i(glGetUniformLocation(objectshader.program, "my_texture"), 0);
 
 		// Upload Geometric Uniforms
