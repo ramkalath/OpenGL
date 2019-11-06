@@ -122,19 +122,17 @@ int main()
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
 	glBindVertexArray(0);
-	float theta = glm::radians(45.0f);
-	glm::mat4 floor_model_matrix = glm::mat4{1.0f,  0.0f, 0.0f, 0.0f,
-											 0.0f,  cos(theta), sin(theta), 0.0f,
-											 0.0f,  -sin(theta), cos(theta), 0.0f,
-											-0.5f, -0.5f, 0.0f, 1.0f}; // model matrix
 
-	GLfloat near = 0.1f, far = 300.0f;
-	GLfloat ar = (GLfloat)width_window/(GLfloat)height_window; // aspect ratio
-	glm::mat4 projection_perspective = {1/(ar*tan(45/2)), 0, 0, 0,
-										0, 1/tan(45/2), 0, 0,
-										0, 0, -(far+near)/(far-near), -2*far*near/(far-near),
-										0, 0, -1, 0};
-	projection_perspective = glm::transpose(projection_perspective);
+	glm::mat4 floor_model_matrix = glm::mat4{1.0f};
+	floor_model_matrix = glm::rotate(floor_model_matrix, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	floor_model_matrix = glm::translate(floor_model_matrix, glm::vec3(-1.0f, -1.0f, 0.0f));
+	floor_model_matrix = glm::scale(floor_model_matrix, glm::vec3(2.0f, 2.0f, 0.0f));
+
+	glm::mat4 view_matrix = glm::lookAt(glm::vec3(0.0f, 1.0f, 2.0f), // camera location
+										glm::vec3(0.0f, 0.0f, 0.0f), // look towards
+										glm::vec3(0.0f, 1.0f, 0.0f)); // Up vector
+
+	glm::mat4 projection_perspective = glm::perspective(45.0f, (float)width_window/height_window, 0.1f, 100.0f);//fov, aspect ratio, near, far
 
 	unsigned int texture;
 	glGenTextures(1, &texture);
@@ -153,19 +151,12 @@ int main()
 	SOIL_free_image_data(image);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-
 	while(!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
 
 		glClearColor(0.27f, 0.27f, 0.27f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		float time = sin(glfwGetTime()) * 10.0f;
-		//std::cout << time << std::endl;
-		glm::mat4 view_matrix = glm::lookAt(glm::vec3(0.0f, 30.0f, 80.0f), 
-											glm::vec3(0.0f, 0.0f, 0.0f), 
-											glm::vec3(0.0f, 1.0f, 0.0f));
 
 		glUseProgram(objectshader.program);
 
