@@ -4,10 +4,11 @@
 * Author : Ram
 * Email : ramkalath@gmail.com
 * Breif Description : Shadows
-* Detailed Description : 1) TODO(ram): Render floor with proper texturing.
-*								TODO(ram): yet to create the second object
-* 						 2) TODO(ram): first pass for shadowing.
-* 						 3) TODO(ram): second pass for shadowing.
+* Detailed Description : 1) DONE: Render floor with proper texturing.
+*								DONE: yet to create the second object
+* 						 2) TODO(ram): basic directional lighting
+* 						 3) TODO(ram): first pass for shadowing.
+* 						 4) TODO(ram): second pass for shadowing.
 *****************************************************************************/
 
 // GLEW and GLFW includes
@@ -48,22 +49,25 @@ void key_callback(GLFWwindow *window, int key, int scancode, int action, int mod
 
 std::vector<float> populate_vertices(int no_of_tiles_width, int no_of_tiles_height) // segment floor width; segment floor height
 {
-	// TODO(ram): yet to fix the tex coordinates; copy the coordinates from positions
-	float sfw = 1.0/no_of_tiles_width;
-	float sfh = 1.0/no_of_tiles_height;
-	std::vector<float> v;
-	for(int h=0; h<no_of_tiles_width; h++) 
-		for(int w=0; w<no_of_tiles_height; w++) 
-		{
-			//------------ positions ----------------------- | ---------------- normals ---------------------------- | ----- tex coords ---------------- |
-			v.push_back(w*sfw); v.push_back(h*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w*sfw); v.push_back(h*sfh);
-			v.push_back((w+1)*sfw); v.push_back(h*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back((w+1)*sfw); v.push_back(h*sfh);
-			v.push_back((w+1)*sfw); v.push_back((h+1)*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back((w+1)*sfw); v.push_back((h+1)*sfh);
 
-			v.push_back(w*sfw); v.push_back(h*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w*sfw); v.push_back(h*sfh);
-			v.push_back((w+1)*sfw); v.push_back((h+1)*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back((w+1)*sfw); v.push_back((h+1)*sfh);
-			v.push_back(w*sfw); v.push_back((h+1)*sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w*sfw); v.push_back((h+1)*sfh);
+	std::vector<float> v;
+
+	float sfh = 1/(float)no_of_tiles_height;
+	float sfw = 1/(float)no_of_tiles_width;
+
+	for(double h=-0.5; h<0.5;){ 
+		for(double w=-0.5; w<0.5;){
+			//------------ positions ----------------------- | ---------------- normals ---------------------------- | ----- tex coords ---------------- |
+			v.push_back(w); v.push_back(h); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w); v.push_back(h);
+			v.push_back(w+sfw); v.push_back(h); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w+sfw); v.push_back(h);
+			v.push_back(w+sfw); v.push_back(h+sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w+sfw); v.push_back(h+sfh);
+			v.push_back(w); v.push_back(h); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w); v.push_back(h);
+			v.push_back(w+sfw); v.push_back(h+sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w+sfw); v.push_back(h+sfh);
+			v.push_back(w); v.push_back(h+sfh); v.push_back(0.0f); v.push_back(0.0f); v.push_back(0.0f); v.push_back(1.0f); v.push_back(w); v.push_back(h+sfh);
+			w=w+sfw;
 		}
+		h=h+sfh;
+	}
 	return v;
 }
 
@@ -103,6 +107,7 @@ int main()
 
 	Shader objectshader("./shaders/vertex_shader.vert", "./shaders/fragment_shader.frag");
 
+	// ---------------------------------------------------------------------------------------------------------
 	// defining floor vertices
 	int no_of_tiles_width = 10, no_of_tiles_height = 10;
 	std::vector<float> floor = populate_vertices(no_of_tiles_width, no_of_tiles_height);
@@ -124,35 +129,79 @@ int main()
 	glBindVertexArray(0);
 
 	glm::mat4 floor_model_matrix = glm::mat4{1.0f};
+	floor_model_matrix = glm::translate(floor_model_matrix, glm::vec3(0.0f, -0.3f, 0.0f));
 	floor_model_matrix = glm::rotate(floor_model_matrix, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-	floor_model_matrix = glm::translate(floor_model_matrix, glm::vec3(-1.0f, -1.0f, 0.0f));
-	floor_model_matrix = glm::scale(floor_model_matrix, glm::vec3(2.0f, 2.0f, 0.0f));
+	floor_model_matrix = glm::scale(floor_model_matrix, glm::vec3(3.0f, 3.0f, 0.0f));
 
-	glm::mat4 view_matrix = glm::lookAt(glm::vec3(0.0f, 1.0f, 2.0f), // camera location
-										glm::vec3(0.0f, 0.0f, 0.0f), // look towards
-										glm::vec3(0.0f, 1.0f, 0.0f)); // Up vector
+	// ---------------------------------------------------------------------------------------------------------
+	// defining plate vertices
+	int no_plate_width = 5, no_plate_height = 5;
+	std::vector<float> plate = populate_vertices(no_plate_width, no_plate_height);
+	float *plate_vertices = &plate[0];
+	int no_plate_floats = 6 * no_plate_width * no_plate_height * 8; // TODO(ram): what does that 6 do?
 
-	glm::mat4 projection_perspective = glm::perspective(45.0f, (float)width_window/height_window, 0.1f, 100.0f);//fov, aspect ratio, near, far
+	unsigned int VBO_plate, VAO_plate;
+	glGenVertexArrays(1, &VAO_plate);
+	glGenBuffers(1, &VBO_plate);
+	glBindVertexArray(VAO_plate);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO_plate);
+	glBufferData(GL_ARRAY_BUFFER, no_plate_floats*sizeof(float), plate_vertices, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8*sizeof(GLfloat), (GLvoid*)0); // positions
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8*sizeof(GLfloat), (GLvoid*)(3*sizeof(GLfloat))); // normals
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8*sizeof(GLfloat), (GLvoid*)(6*sizeof(GLfloat))); // textures
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
+	glBindVertexArray(0);
 
-	unsigned int texture;
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glm::mat4 plate_model_matrix = glm::mat4{1.0f};
+	plate_model_matrix = glm::translate(plate_model_matrix, glm::vec3(0.0f, 0.3f, 0.0f));
+	plate_model_matrix = glm::rotate(plate_model_matrix, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	plate_model_matrix = glm::scale(plate_model_matrix, glm::vec3(0.5f, 0.5f, 0.0f));
+
+	// ---------------------------------------------------------------------------------------------------------
+	/* Textures */
+	unsigned int floor_texture;
+	glGenTextures(1, &floor_texture);
+	glBindTexture(GL_TEXTURE_2D, floor_texture);
 	
 	int width_texture, height_texture;
-	unsigned char* image = SOIL_load_image("./resources/brick_texture.jpg", &width_texture, &height_texture, 0, SOIL_LOAD_RGB);
+	unsigned char* image1 = SOIL_load_image("./resources/floor_texture.png", &width_texture, &height_texture, 0, SOIL_LOAD_RGB);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_texture, height_texture, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_texture, height_texture, 0, GL_RGB, GL_UNSIGNED_BYTE, image1);
 	glGenerateMipmap(GL_TEXTURE_2D);
-	SOIL_free_image_data(image);
+	SOIL_free_image_data(image1);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	while(!glfwWindowShouldClose(window))
-	{
+	unsigned int plate_texture;
+	glGenTextures(1, &plate_texture);
+	glBindTexture(GL_TEXTURE_2D, plate_texture);
+
+	unsigned char* image2 = SOIL_load_image("./resources/pebbles.png", &width_texture, &height_texture, 0, SOIL_LOAD_RGB);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_texture, height_texture, 0, GL_RGB, GL_UNSIGNED_BYTE, image2);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	SOIL_free_image_data(image2);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	// ---------------------------------------------------------------------------------------------------------
+
+	glm::mat4 view_matrix = glm::lookAt(glm::vec3(0.0f, 2.0f, 2.0f), // camera location
+										glm::vec3(0.0f, 0.0f, 0.0f), // look towards
+										glm::vec3(0.0f, 1.0f, 0.0f)); // Up vector
+
+	glm::mat4 projection_perspective = glm::perspective(45.0f, (float)width_window/height_window, 0.1f, 100.0f);//fov, aspect ratio, near, far
+
+	while(!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
 
 		glClearColor(0.27f, 0.27f, 0.27f, 1.0f);
@@ -160,23 +209,37 @@ int main()
 
 		glUseProgram(objectshader.program);
 
-		// Activate Texture
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture);
-		glUniform1i(glGetUniformLocation(objectshader.program, "my_texture"), 0);
-
-		// Upload Geometric Uniforms
+		// ---------------------------------------------------------------------------------------------------------
+		/* Floor object */
 		glBindVertexArray(VAO_floor);
+		// Activate floor texture
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, floor_texture);
+		// Upload uniforms
+		glUniform1i(glGetUniformLocation(objectshader.program, "my_texture"), 0);
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(floor_model_matrix));
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "view"), 1, GL_FALSE, glm::value_ptr(view_matrix));
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(projection_perspective));
-
-		// Draw call
+		// Draw
 		//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // Draw wireframe
 		glDrawArrays(GL_TRIANGLES, 0, no_floor_floats); // draw call
+		// ---------------------------------------------------------------------------------------------------------
+		/* plate object */
+		glBindVertexArray(VAO_plate);
+		// Activate plate texture
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, plate_texture);
+		// Upload uniforms
+		glUniform1i(glGetUniformLocation(objectshader.program, "my_texture"), 1);
+		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(plate_model_matrix));
+		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "view"), 1, GL_FALSE, glm::value_ptr(view_matrix));
+		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(projection_perspective));
+		// Draw
+		//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // Draw wireframe
+		glDrawArrays(GL_TRIANGLES, 0, no_plate_floats); // draw call
+		// ---------------------------------------------------------------------------------------------------------
 
 		glBindVertexArray(0);
-
 		glfwSwapBuffers(window);
 	}
 	glfwTerminate();
