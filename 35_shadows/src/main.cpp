@@ -6,7 +6,7 @@
 * Breif Description : Shadows
 * Detailed Description : 1) DONE: Render floor with proper texturing.
 *								DONE: yet to create the second object
-* 						 2) TODO(ram): basic directional lighting
+* 						 2) TODO(ram): basic directional lighting; fix specular lighting
 * 						 3) TODO(ram): first pass for shadowing.
 * 						 4) TODO(ram): second pass for shadowing.
 *****************************************************************************/
@@ -195,7 +195,8 @@ int main()
 	glBindTexture(GL_TEXTURE_2D, 0);
 	// ---------------------------------------------------------------------------------------------------------
 
-	glm::mat4 view_matrix = glm::lookAt(glm::vec3(0.0f, 2.0f, 2.0f), // camera location
+	glm::vec3 camera_pos = glm::vec3(0.0f, 2.0f, 2.0f);
+	glm::mat4 view_matrix = glm::lookAt(camera_pos, // camera location
 										glm::vec3(0.0f, 0.0f, 0.0f), // look towards
 										glm::vec3(0.0f, 1.0f, 0.0f)); // Up vector
 
@@ -220,6 +221,17 @@ int main()
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(floor_model_matrix));
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "view"), 1, GL_FALSE, glm::value_ptr(view_matrix));
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(projection_perspective));
+
+		glUniform3f(glGetUniformLocation(objectshader.program, "materialambient"), 0.0f, 10.0f, 0.0f);
+		glUniform3f(glGetUniformLocation(objectshader.program, "materialdiffuse"), 0.5f, 0.5f, 0.5f);
+		glUniform3f(glGetUniformLocation(objectshader.program, "materialspecular"), 1.0f, 1.0f, 1.0f);
+		glUniform1f(glGetUniformLocation(objectshader.program, "materialspecular"), 128.0f);
+
+		glUniform3f(glGetUniformLocation(objectshader.program, "LightDirection"), 0.0f, 10.0f, 0.0f);
+		glUniform3f(glGetUniformLocation(objectshader.program, "LightAmbient"), 1.0f, 1.0f, 1.0f);
+		glUniform3f(glGetUniformLocation(objectshader.program, "LightDiffuse"), 1.0f, 1.0f, 1.0f);
+		glUniform3f(glGetUniformLocation(objectshader.program, "LightSpecular"), 1.0f, 1.0f, 1.0f);
+		glUniform3f(glGetUniformLocation(objectshader.program, "CameraPosition"), camera_pos.x, camera_pos.y, camera_pos.z);
 		// Draw
 		//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // Draw wireframe
 		glDrawArrays(GL_TRIANGLES, 0, no_floor_floats); // draw call
@@ -232,8 +244,6 @@ int main()
 		// Upload uniforms
 		glUniform1i(glGetUniformLocation(objectshader.program, "my_texture"), 1);
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(plate_model_matrix));
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "view"), 1, GL_FALSE, glm::value_ptr(view_matrix));
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(projection_perspective));
 		// Draw
 		//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // Draw wireframe
 		glDrawArrays(GL_TRIANGLES, 0, no_plate_floats); // draw call

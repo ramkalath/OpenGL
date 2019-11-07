@@ -8,10 +8,16 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
+out vec3 Norm;
+out vec3 FragmentPosition;
 out vec2 TexCoord;
 
 void main()
 {
 	gl_Position = projection * view * model * vec4(position, 1.0f);
+
+	FragmentPosition = vec3(model * vec4(position, 1.0f));
+	Norm = normalize(vec3(transpose(inverse(model)) * vec4(normal, 1.0f)));
+
 	TexCoord = texcoord;
 }
