@@ -12,13 +12,13 @@ class GameSettings
 {
 public:
 	// window settings
-	float width, height;
+	int width, height;
 
 	// matrices
 	glm::mat4 projection_perspective;
 	glm::mat4 view;
 
-	GameSettings();
+	GameSettings(int, int, glm::vec3);
 
 private:
 };

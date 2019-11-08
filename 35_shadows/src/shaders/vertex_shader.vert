@@ -17,7 +17,8 @@ void main()
 	gl_Position = projection * view * model * vec4(position, 1.0f);
 
 	FragmentPosition = vec3(model * vec4(position, 1.0f));
-	Norm = normalize(vec3(transpose(inverse(model)) * vec4(normal, 1.0f)));
+	Norm = -normalize(vec3(model * vec4(normal, 1.0f)));
+	//Norm = normal;
 
 	TexCoord = texcoord;
 }

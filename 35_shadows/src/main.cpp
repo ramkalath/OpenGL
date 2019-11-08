@@ -6,7 +6,8 @@
 * Breif Description : Shadows
 * Detailed Description : 1) DONE: Render floor with proper texturing.
 *								DONE: yet to create the second object
-* 						 2) TODO(ram): basic directional lighting; fix specular lighting
+* 						 2) TODO(ram): lighting is all screwed up. Create a proper library for lighting
+								TODO(ram): test if each component of lighting works well.
 * 						 3) TODO(ram): first pass for shadowing.
 * 						 4) TODO(ram): second pass for shadowing.
 *****************************************************************************/
@@ -71,18 +72,19 @@ std::vector<float> populate_vertices(int no_of_tiles_width, int no_of_tiles_heig
 	return v;
 }
 
-int height_window = 640, width_window = 800;
-
 int main()
 {
-	GameSettings globalsettings;
+	// global settings
+	glm::vec3 camera_pos = glm::vec3(0.0f, 0.0f, 5.0f);
+	GameSettings gs(1200, 800, camera_pos);
+
 	// glfw stuff ====================================================================
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	GLFWwindow *window = glfwCreateWindow(width_window, height_window, "specular_lighting", nullptr, nullptr);
+	GLFWwindow *window = glfwCreateWindow(gs.width, gs.height, "specular_lighting", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
 	glfwSetKeyCallback(window, key_callback);
 
@@ -102,8 +104,8 @@ int main()
 
 	glEnable(GL_DEPTH_TEST);
 
-	glfwGetFramebufferSize(window, &width_window, &height_window);
-	glViewport(0, 0, width_window, height_window);
+	glfwGetFramebufferSize(window, &gs.width, &gs.height);
+	glViewport(0, 0, gs.width, gs.height);
 
 	Shader objectshader("./shaders/vertex_shader.vert", "./shaders/fragment_shader.frag");
 
@@ -155,9 +157,9 @@ int main()
 	glBindVertexArray(0);
 
 	glm::mat4 plate_model_matrix = glm::mat4{1.0f};
-	plate_model_matrix = glm::translate(plate_model_matrix, glm::vec3(0.0f, 0.3f, 0.0f));
-	plate_model_matrix = glm::rotate(plate_model_matrix, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-	plate_model_matrix = glm::scale(plate_model_matrix, glm::vec3(0.5f, 0.5f, 0.0f));
+	plate_model_matrix = glm::translate(plate_model_matrix, glm::vec3(0.0f, 0.0f, -2.0f));
+	//plate_model_matrix = glm::rotate(plate_model_matrix, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	//plate_model_matrix = glm::scale(plate_model_matrix, glm::vec3(0.5f, 0.5f, 0.0f));
 
 	// ---------------------------------------------------------------------------------------------------------
 	/* Textures */
@@ -195,12 +197,24 @@ int main()
 	glBindTexture(GL_TEXTURE_2D, 0);
 	// ---------------------------------------------------------------------------------------------------------
 
-	glm::vec3 camera_pos = glm::vec3(0.0f, 2.0f, 2.0f);
-	glm::mat4 view_matrix = glm::lookAt(camera_pos, // camera location
-										glm::vec3(0.0f, 0.0f, 0.0f), // look towards
-										glm::vec3(0.0f, 1.0f, 0.0f)); // Up vector
+	//glm::vec3 light_vector = normalize(glm::vec3(10.0f, 10.0f, 0.0f));
+	////std::cout << light_vector.x << "\t" << light_vector.y << "\t" << light_vector.z << std::endl;
+	//glm::vec3 Norm = glm::vec3(0.0f, 1.0f, 0.0f);
+	////Norm = normalize(glm::vec3(transpose(inverse(floor_model_matrix)) * glm::vec4(Norm, 1.0f)));
+	//std::cout << Norm.x << "\t" << Norm.y << "\t" << Norm.z << std::endl;
+	//float diff = glm::max(dot(Norm, light_vector), 0.0f);
+	//std::cout << diff << std::endl;
 
-	glm::mat4 projection_perspective = glm::perspective(45.0f, (float)width_window/height_window, 0.1f, 100.0f);//fov, aspect ratio, near, far
+	std::cout << floor_model_matrix[0][0] << "\t" << floor_model_matrix[0][1] << "\t" << floor_model_matrix[0][2] << "\t" << plate_model_matrix[0][3] << std::endl;
+	std::cout << floor_model_matrix[1][0] << "\t" << floor_model_matrix[1][1] << "\t" << floor_model_matrix[1][2] << "\t" << plate_model_matrix[1][3] << std::endl;
+	std::cout << floor_model_matrix[2][0] << "\t" << floor_model_matrix[2][1] << "\t" << floor_model_matrix[2][2] << "\t" << plate_model_matrix[2][3] << std::endl;
+	std::cout << floor_model_matrix[3][0] << "\t" << floor_model_matrix[3][1] << "\t" << floor_model_matrix[3][2] << "\t" << plate_model_matrix[3][3] << std::endl;
+	std::cout << std::endl;
+	std::cout << plate_model_matrix[0][0] << "\t" << plate_model_matrix[0][1] << "\t" << plate_model_matrix[0][2] << "\t" << plate_model_matrix[0][3] << std::endl;
+	std::cout << plate_model_matrix[1][0] << "\t" << plate_model_matrix[1][1] << "\t" << plate_model_matrix[1][2] << "\t" << plate_model_matrix[1][3] << std::endl;
+	std::cout << plate_model_matrix[2][0] << "\t" << plate_model_matrix[2][1] << "\t" << plate_model_matrix[2][2] << "\t" << plate_model_matrix[2][3] << std::endl;
+	std::cout << plate_model_matrix[3][0] << "\t" << plate_model_matrix[3][1] << "\t" << plate_model_matrix[3][2] << "\t" << plate_model_matrix[3][3] << std::endl;
+	std::cout << std::endl;
 
 	while(!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
@@ -219,18 +233,18 @@ int main()
 		// Upload uniforms
 		glUniform1i(glGetUniformLocation(objectshader.program, "my_texture"), 0);
 		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "model"), 1, GL_FALSE, glm::value_ptr(floor_model_matrix));
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "view"), 1, GL_FALSE, glm::value_ptr(view_matrix));
-		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(projection_perspective));
+		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "view"), 1, GL_FALSE, glm::value_ptr(gs.view));
+		glUniformMatrix4fv(glGetUniformLocation(objectshader.program, "projection"), 1, GL_FALSE, glm::value_ptr(gs.projection_perspective));
 
-		glUniform3f(glGetUniformLocation(objectshader.program, "materialambient"), 0.0f, 10.0f, 0.0f);
+		glUniform3f(glGetUniformLocation(objectshader.program, "materialambient"), 1.0f, 1.0f, 1.0f);
 		glUniform3f(glGetUniformLocation(objectshader.program, "materialdiffuse"), 0.5f, 0.5f, 0.5f);
 		glUniform3f(glGetUniformLocation(objectshader.program, "materialspecular"), 1.0f, 1.0f, 1.0f);
-		glUniform1f(glGetUniformLocation(objectshader.program, "materialspecular"), 128.0f);
+		glUniform1f(glGetUniformLocation(objectshader.program, "materialspecular"), 16.0f);
 
-		glUniform3f(glGetUniformLocation(objectshader.program, "LightDirection"), 0.0f, 10.0f, 0.0f);
-		glUniform3f(glGetUniformLocation(objectshader.program, "LightAmbient"), 1.0f, 1.0f, 1.0f);
-		glUniform3f(glGetUniformLocation(objectshader.program, "LightDiffuse"), 1.0f, 1.0f, 1.0f);
-		glUniform3f(glGetUniformLocation(objectshader.program, "LightSpecular"), 1.0f, 1.0f, 1.0f);
+		glUniform3f(glGetUniformLocation(objectshader.program, "LightDirection"), 0.0f, 3.0f, 3.0f);
+		glUniform3f(glGetUniformLocation(objectshader.program, "LightAmbient"), 0.5f, 0.5f, 0.5f);
+		glUniform3f(glGetUniformLocation(objectshader.program, "LightDiffuse"), 0.1f, 0.1f, 0.1f);
+		glUniform3f(glGetUniformLocation(objectshader.program, "LightSpecular"), 0.2f, 0.2f, 0.2f);
 		glUniform3f(glGetUniformLocation(objectshader.program, "CameraPosition"), camera_pos.x, camera_pos.y, camera_pos.z);
 		// Draw
 		//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // Draw wireframe
