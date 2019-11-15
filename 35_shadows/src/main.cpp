@@ -75,7 +75,7 @@ std::vector<float> populate_vertices(int no_of_tiles_width, int no_of_tiles_heig
 int main()
 {
 	// global settings
-	glm::vec3 camera_pos = glm::vec3(0.0f, 0.0f, 5.0f);
+	glm::vec3 camera_pos = glm::vec3(0.0f, 5.0f, 5.0f);
 	GameSettings gs(1200, 800, camera_pos);
 
 	// glfw stuff ====================================================================
@@ -157,8 +157,8 @@ int main()
 	glBindVertexArray(0);
 
 	glm::mat4 plate_model_matrix = glm::mat4{1.0f};
-	plate_model_matrix = glm::translate(plate_model_matrix, glm::vec3(0.0f, 0.0f, -2.0f));
-	//plate_model_matrix = glm::rotate(plate_model_matrix, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	//plate_model_matrix = glm::translate(plate_model_matrix, glm::vec3(0.0f, 0.0f, -2.0f));
+	plate_model_matrix = glm::rotate(plate_model_matrix, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	//plate_model_matrix = glm::scale(plate_model_matrix, glm::vec3(0.5f, 0.5f, 0.0f));
 
 	// ---------------------------------------------------------------------------------------------------------
@@ -205,16 +205,16 @@ int main()
 	//float diff = glm::max(dot(Norm, light_vector), 0.0f);
 	//std::cout << diff << std::endl;
 
-	std::cout << floor_model_matrix[0][0] << "\t" << floor_model_matrix[0][1] << "\t" << floor_model_matrix[0][2] << "\t" << plate_model_matrix[0][3] << std::endl;
-	std::cout << floor_model_matrix[1][0] << "\t" << floor_model_matrix[1][1] << "\t" << floor_model_matrix[1][2] << "\t" << plate_model_matrix[1][3] << std::endl;
-	std::cout << floor_model_matrix[2][0] << "\t" << floor_model_matrix[2][1] << "\t" << floor_model_matrix[2][2] << "\t" << plate_model_matrix[2][3] << std::endl;
-	std::cout << floor_model_matrix[3][0] << "\t" << floor_model_matrix[3][1] << "\t" << floor_model_matrix[3][2] << "\t" << plate_model_matrix[3][3] << std::endl;
-	std::cout << std::endl;
-	std::cout << plate_model_matrix[0][0] << "\t" << plate_model_matrix[0][1] << "\t" << plate_model_matrix[0][2] << "\t" << plate_model_matrix[0][3] << std::endl;
-	std::cout << plate_model_matrix[1][0] << "\t" << plate_model_matrix[1][1] << "\t" << plate_model_matrix[1][2] << "\t" << plate_model_matrix[1][3] << std::endl;
-	std::cout << plate_model_matrix[2][0] << "\t" << plate_model_matrix[2][1] << "\t" << plate_model_matrix[2][2] << "\t" << plate_model_matrix[2][3] << std::endl;
-	std::cout << plate_model_matrix[3][0] << "\t" << plate_model_matrix[3][1] << "\t" << plate_model_matrix[3][2] << "\t" << plate_model_matrix[3][3] << std::endl;
-	std::cout << std::endl;
+	//std::cout << floor_model_matrix[0][0] << "\t" << floor_model_matrix[0][1] << "\t" << floor_model_matrix[0][2] << "\t" << plate_model_matrix[0][3] << std::endl;
+	//std::cout << floor_model_matrix[1][0] << "\t" << floor_model_matrix[1][1] << "\t" << floor_model_matrix[1][2] << "\t" << plate_model_matrix[1][3] << std::endl;
+	//std::cout << floor_model_matrix[2][0] << "\t" << floor_model_matrix[2][1] << "\t" << floor_model_matrix[2][2] << "\t" << plate_model_matrix[2][3] << std::endl;
+	//std::cout << floor_model_matrix[3][0] << "\t" << floor_model_matrix[3][1] << "\t" << floor_model_matrix[3][2] << "\t" << plate_model_matrix[3][3] << std::endl;
+	//std::cout << std::endl;
+	//std::cout << plate_model_matrix[0][0] << "\t" << plate_model_matrix[0][1] << "\t" << plate_model_matrix[0][2] << "\t" << plate_model_matrix[0][3] << std::endl;
+	//std::cout << plate_model_matrix[1][0] << "\t" << plate_model_matrix[1][1] << "\t" << plate_model_matrix[1][2] << "\t" << plate_model_matrix[1][3] << std::endl;
+	//std::cout << plate_model_matrix[2][0] << "\t" << plate_model_matrix[2][1] << "\t" << plate_model_matrix[2][2] << "\t" << plate_model_matrix[2][3] << std::endl;
+	//std::cout << plate_model_matrix[3][0] << "\t" << plate_model_matrix[3][1] << "\t" << plate_model_matrix[3][2] << "\t" << plate_model_matrix[3][3] << std::endl;
+	//std::cout << std::endl;
 
 	while(!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
@@ -241,7 +241,7 @@ int main()
 		glUniform3f(glGetUniformLocation(objectshader.program, "materialspecular"), 1.0f, 1.0f, 1.0f);
 		glUniform1f(glGetUniformLocation(objectshader.program, "materialspecular"), 16.0f);
 
-		glUniform3f(glGetUniformLocation(objectshader.program, "LightDirection"), 0.0f, 3.0f, 3.0f);
+		glUniform3f(glGetUniformLocation(objectshader.program, "LightDirection"), 0.0f, 0.0f, -100.0f);
 		glUniform3f(glGetUniformLocation(objectshader.program, "LightAmbient"), 0.5f, 0.5f, 0.5f);
 		glUniform3f(glGetUniformLocation(objectshader.program, "LightDiffuse"), 0.1f, 0.1f, 0.1f);
 		glUniform3f(glGetUniformLocation(objectshader.program, "LightSpecular"), 0.2f, 0.2f, 0.2f);
