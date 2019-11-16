@@ -36,6 +36,5 @@ void main()
 	float spec = pow(max(dot(view_vector, reflected_vector), 0.0), materialshininess);
 	vec3 specular_light = LightSpecular * spec * vec3(texture(my_texture, TexCoord));
 
-	//color = vec4((diffuse_light), 1.0f);
 	color = vec4((ambient_light + diffuse_light + specular_light), 1.0f);
 }

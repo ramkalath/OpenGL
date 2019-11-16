@@ -108,7 +108,6 @@ int main()
 	glViewport(0, 0, gs.width, gs.height);
 
 	Shader objectshader("./shaders/vertex_shader.vert", "./shaders/fragment_shader.frag");
-	Shader depthshader("./shaders/depthmodel_vertex_shader.vert", "./shaders/depthmodel_fragment_shader.frag");
 
 	// ---------------------------------------------------------------------------------------------------------
 	// defining floor vertices
@@ -193,33 +192,24 @@ int main()
 	glBindTexture(GL_TEXTURE_2D, 0);
 	// ---------------------------------------------------------------------------------------------------------
 
-	float fbo_vertices[] = {-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 
-						 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-						 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
-						-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-						 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
-						-1.0f,  1.0f, 0.0f, 0.0f, 1.0f};
+	// Depth map fbo
+	//unsigned int FramebufferName=0;
+	//glGenFramebuffers(1, &FramebufferName);
+	//glBindFramebuffer(GL_FRAMEBUFFER, FramebufferName);
 
-	unsigned int VBOfbo, VAOfbo;
-	glGenVertexArrays(1, &VAOfbo);
-	glGenBuffers(1, &VBOfbo);
-	glBindVertexArray(VAOfbo);
-	glBindBuffer(GL_ARRAY_BUFFER, VBOfbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(fbo_vertices), fbo_vertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (GLvoid*)0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float), (GLvoid*)(3*sizeof(float)));
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glBindVertexArray(0);
+	//unsigned int depthTexture;
+	//glGenTextures(1, &depthTexture);
+	//glBindTexture(GL_TEXTURE_2D, depthTexture);
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, 1024, 1024, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	//glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthTexture, 0);
+	//glDrawBuffer(GL_NONE);
 
-	unsigned int fbo;
-	glGenFramebuffers(1, &fbo);
-	glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-
-	unsigned int texColorBuffer;
-	glGenTextures(1, &texColorBuffer);
-	glBindTexture(GL_TEXTURE_2D, texColorBuffer);
-	glTexImage2d(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+		//return 0;
 
 	while(!glfwWindowShouldClose(window)) {
 		glfwPollEvents();
@@ -229,14 +219,8 @@ int main()
 
 		glUseProgram(objectshader.program);
 
-		//glUseProgram(depthshader.program);
-		//glUniformMatrix4fv(glGetUniformLocation(depthshader.program, "depthMVP"), 1, GL_FALSE, &depthMVP[0][0]);
-
-		/*
-		glUseProgram(objectshader.program);
-
 		// -----------------------------------------------------------------------------------------------------
-		// Floor object
+		/* Floor object */
 		glBindVertexArray(VAO_floor);
 		// Activate floor texture
 		glActiveTexture(GL_TEXTURE0);
@@ -260,7 +244,7 @@ int main()
 		//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // Draw wireframe
 		glDrawArrays(GL_TRIANGLES, 0, no_floor_floats); // draw call
 		// -----------------------------------------------------------------------------------------------------
-		// plate object
+		/* plate object */
 		glBindVertexArray(VAO_plate);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, plate_texture);
@@ -269,7 +253,6 @@ int main()
 		//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); // Draw wireframe
 		glDrawArrays(GL_TRIANGLES, 0, no_plate_floats); // draw call
 		// -----------------------------------------------------------------------------------------------------
-		*/
 
 		glBindVertexArray(0);
 		glfwSwapBuffers(window);
