@@ -6,5 +6,5 @@ CXX_FLAGS = -g
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/ram/workarea/opengl/advanced_opengl/34_gamma_correction/./include -I/usr/local/include 
+CXX_INCLUDES = -I/home/ram/workarea/graphics_work/OpenGL/34_gamma_correction/./include -I/usr/local/include 
 

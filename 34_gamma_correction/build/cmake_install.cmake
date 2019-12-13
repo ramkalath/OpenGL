@@ -1,4 +1,4 @@
-# Install script for directory: /home/ram/workarea/opengl/advanced_opengl/34_gamma_correction
+# Install script for directory: /home/ram/workarea/graphics_work/OpenGL/34_gamma_correction
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/ram/workarea/opengl/advanced_opengl/34_gamma_correction/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ram/workarea/graphics_work/OpenGL/34_gamma_correction/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -2,7 +2,7 @@
 PROJECT_NAME = 34_gamma_correction
 
 all:
-	cd ../build && make
+	cd ../build && cmake .. && make
 	@echo "\033[92m ------------- Compilation Successful ------------------- \033[0m" 
 
 run:

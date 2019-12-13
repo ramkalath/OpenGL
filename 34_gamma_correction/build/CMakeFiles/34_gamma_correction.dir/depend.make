@@ -13,5 +13,4 @@ CMakeFiles/34_gamma_correction.dir/src/main.cpp.o: ../include/gamesettings.h
 CMakeFiles/34_gamma_correction.dir/src/main.cpp.o: ../include/modelloader.h
 CMakeFiles/34_gamma_correction.dir/src/main.cpp.o: ../include/shader.h
 CMakeFiles/34_gamma_correction.dir/src/main.cpp.o: ../src/main.cpp
-CMakeFiles/34_gamma_correction.dir/src/main.cpp.o: /usr/local/include/GLFW/glfw3.h
 
