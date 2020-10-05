@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ram/workarea/advanced_opengl/opengl/animation/include/modelloader.cpp
+GL/glew.h
+-
+glm/glm.hpp
+-
+glm/gtc/matrix_transform.hpp
+-
+glm/gtc/type_ptr.hpp
+-
+assimp/Importer.hpp
+-
+assimp/scene.h
+-
+assimp/postprocess.h
+-
+iostream
+-
+vector
+-
+

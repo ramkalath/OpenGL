@@ -1,0 +1,3 @@
+/home/ram/workarea/advanced_opengl/opengl/animation/build/CMakeFiles/rebuild_cache.dir
+/home/ram/workarea/advanced_opengl/opengl/animation/build/CMakeFiles/animation.dir
+/home/ram/workarea/advanced_opengl/opengl/animation/build/CMakeFiles/edit_cache.dir

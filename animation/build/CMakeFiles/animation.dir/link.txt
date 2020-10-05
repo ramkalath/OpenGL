@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/animation.dir/include/modelloader.cpp.o CMakeFiles/animation.dir/include/shader.cpp.o CMakeFiles/animation.dir/include/gamesettings.cpp.o CMakeFiles/animation.dir/src/main.cpp.o  -o ../bin/animation  -lglfw3 -lGLEW -lGL -lGLU -lSOIL -ldl -lXinerama -lXrandr -lXi -lXcursor -lX11 -lXxf86vm -lpthread -lassimp 

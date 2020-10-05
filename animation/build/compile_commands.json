@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/ram/workarea/advanced_opengl/opengl/animation/build",
+  "command": "/usr/bin/c++   -I/home/ram/workarea/advanced_opengl/opengl/animation/./include  -g   -o CMakeFiles/animation.dir/include/modelloader.cpp.o -c /home/ram/workarea/advanced_opengl/opengl/animation/include/modelloader.cpp",
+  "file": "/home/ram/workarea/advanced_opengl/opengl/animation/include/modelloader.cpp"
+},
+{
+  "directory": "/home/ram/workarea/advanced_opengl/opengl/animation/build",
+  "command": "/usr/bin/c++   -I/home/ram/workarea/advanced_opengl/opengl/animation/./include  -g   -o CMakeFiles/animation.dir/include/shader.cpp.o -c /home/ram/workarea/advanced_opengl/opengl/animation/include/shader.cpp",
+  "file": "/home/ram/workarea/advanced_opengl/opengl/animation/include/shader.cpp"
+},
+{
+  "directory": "/home/ram/workarea/advanced_opengl/opengl/animation/build",
+  "command": "/usr/bin/c++   -I/home/ram/workarea/advanced_opengl/opengl/animation/./include  -g   -o CMakeFiles/animation.dir/include/gamesettings.cpp.o -c /home/ram/workarea/advanced_opengl/opengl/animation/include/gamesettings.cpp",
+  "file": "/home/ram/workarea/advanced_opengl/opengl/animation/include/gamesettings.cpp"
+},
+{
+  "directory": "/home/ram/workarea/advanced_opengl/opengl/animation/build",
+  "command": "/usr/bin/c++   -I/home/ram/workarea/advanced_opengl/opengl/animation/./include  -g   -o CMakeFiles/animation.dir/src/main.cpp.o -c /home/ram/workarea/advanced_opengl/opengl/animation/src/main.cpp",
+  "file": "/home/ram/workarea/advanced_opengl/opengl/animation/src/main.cpp"
+}
+]
